@@ -1,0 +1,6 @@
+E:\csharp\Maze1\Maze1\bin\Debug\Maze1.exe.config
+E:\csharp\Maze1\Maze1\bin\Debug\MazeDocumentation.XML
+E:\csharp\Maze1\Maze1\bin\Debug\Maze1.exe
+E:\csharp\Maze1\Maze1\bin\Debug\Maze1.pdb
+E:\csharp\Maze1\Maze1\obj\Debug\Maze1.exe
+E:\csharp\Maze1\Maze1\obj\Debug\Maze1.pdb
