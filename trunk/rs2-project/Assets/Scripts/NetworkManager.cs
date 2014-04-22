@@ -43,5 +43,19 @@ public class NetworkManager : Photon.MonoBehaviour
 				((MonoBehaviour)player.GetComponent ("FPSInputController")).enabled = true;
 				((MonoBehaviour)player.GetComponent ("MouseLook")).enabled = true;
 				player.transform.FindChild ("MainCamera").gameObject.camera.enabled = true;
+
+                // movement setup
+                var motor = player.GetComponent<CharacterMotor>();
+
+                if (motor != null)
+                {
+                    motor.jumping.enabled = ConfigManager.canJump;  
+                }
+                else
+                {
+                    Debug.Log("Failed to get component CharacterMotor.");
+                }
+
+               
 		}
 }
