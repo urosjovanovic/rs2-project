@@ -30,10 +30,9 @@ GameObject:
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400000}
   - 82: {fileID: 8200000}
-  - 114: {fileID: 11400008}
-  - 114: {fileID: 11400006}
   - 114: {fileID: 11400010}
   - 114: {fileID: 11400014}
+  - 114: {fileID: 11400016}
   m_Layer: 0
   m_Name: PlayerController
   m_TagString: Untagged
@@ -450,7 +449,7 @@ MonoBehaviour:
   canControl: 1
   useFixedUpdate: 1
   movement:
-    maxForwardSpeed: 2
+    maxForwardSpeed: 1.5
     maxSidewaysSpeed: 1
     maxBackwardsSpeed: 1
     slopeSpeedMultiplier:
@@ -509,37 +508,6 @@ MonoBehaviour:
   maximumX: 360
   minimumY: 0
   maximumY: 0
---- !u!114 &11400006
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100002}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14770a087f3653a4c954444996c75545, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  forwardFootstep: {fileID: 0}
-  footstepDelayForward: .5
-  footstepDelayBackward: .800000012
-  footstepDelaySide: .800000012
---- !u!114 &11400008
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100002}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 601d54ebafe03954b9d48d27b07ff654, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  soundClips:
-  - {fileID: 8300000, guid: e9a68fcd215ba6040a4f94270d19764d, type: 3}
-  - {fileID: 8300000, guid: 5924253ab672b184fad8f6467bc24b71, type: 3}
-  - {fileID: 8300000, guid: 5924253ab672b184fad8f6467bc24b71, type: 3}
-  - {fileID: 8300000, guid: e54be2d63a6e94b41ab5f06911f161a0, type: 3}
 --- !u!114 &11400010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -590,6 +558,18 @@ MonoBehaviour:
   onSerializeTransformOption: 3
   onSerializeRigidBodyOption: 2
   instantiationId: -1
+--- !u!114 &11400016
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7206d8c00cd3f6a479508904916b4f2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprintSpeed: 2.5
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1

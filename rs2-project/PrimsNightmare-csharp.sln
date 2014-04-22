@@ -5,6 +5,8 @@ Project("{CB5F34F7-532F-A87B-0CCF-EEE0A578D77C}") = "PrimsNightmare", "Assembly-
 EndProject
 Project("{CB5F34F7-532F-A87B-0CCF-EEE0A578D77C}") = "PrimsNightmare", "Assembly-CSharp-vs.csproj", "{4AFEF864-7ADD-8A95-78B4-1E078251E34A}"
 EndProject
+Project("{CB5F34F7-532F-A87B-0CCF-EEE0A578D77C}") = "PrimsNightmare", "Assembly-CSharp-Editor-vs.csproj", "{DDF297BF-496C-FD08-268D-547641B49085}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,11 +21,15 @@ Global
 		{4AFEF864-7ADD-8A95-78B4-1E078251E34A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4AFEF864-7ADD-8A95-78B4-1E078251E34A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4AFEF864-7ADD-8A95-78B4-1E078251E34A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDF297BF-496C-FD08-268D-547641B49085}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDF297BF-496C-FD08-268D-547641B49085}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDF297BF-496C-FD08-268D-547641B49085}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDF297BF-496C-FD08-268D-547641B49085}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-																																																					GlobalSection(MonoDevelopProperties) = preSolution
+																																																							GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1

@@ -5,7 +5,7 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{7CBB0CD4-864B-890E-01E0-2AB16F96F9ED}</ProjectGuid>
+	<ProjectGuid>{4AFEF864-7ADD-8A95-78B4-1E078251E34A}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
@@ -87,6 +87,7 @@
      <Compile Include="Assets\Scripts\PrimsControls.cs" />
      <Compile Include="Assets\Scripts\PrimsFootsteps.cs" />
      <Compile Include="Assets\Scripts\SoundPool.cs" />
+     <Compile Include="Assets\Scripts\Sprint.cs" />
      <Compile Include="Assets\_IMPORTED\Photon Unity Networking\Plugins\PhotonNetwork\CustomTypes.cs" />
      <Compile Include="Assets\_IMPORTED\Photon Unity Networking\Plugins\PhotonNetwork\Enums.cs" />
      <Compile Include="Assets\_IMPORTED\Photon Unity Networking\Plugins\PhotonNetwork\Extensions.cs" />
@@ -137,7 +138,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass-vs.csproj">
-      <Project>{B6A9D4F4-72F7-F335-15EE-9140C9B28015}</Project>      <Name>Assembly-CSharp-firstpass-vs</Name>    </ProjectReference>
+      <Project>{3E2BE044-50AF-A8D9-1004-DC8AB402338B}</Project>      <Name>Assembly-CSharp-firstpass-vs</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
