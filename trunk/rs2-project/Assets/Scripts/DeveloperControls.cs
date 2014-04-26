@@ -16,10 +16,10 @@ public class DeveloperControls : MonoBehaviour
 		// Update is called once per frame
 		void Update ()
 		{
-				//Birdview camera toggle
-				if (Input.GetKeyDown (KeyCode.C)) {
+				//Birdview camera toggle (not needed really... use Scene overview)
+				/*if (Input.GetKeyDown (KeyCode.C)) {
 						BirdviewCamera.gameObject.camera.enabled = !BirdviewCamera.gameObject.camera.enabled;
-				}
+				}*/
 		
 				//Main light toggle
 				if (Input.GetKeyDown (KeyCode.L)) {

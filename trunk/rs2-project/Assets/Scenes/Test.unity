@@ -360,6 +360,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3eb509de669d6f43ba2ceb8cf1aa41b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AlwaysSpawnAs: 1
+  SpawnAs: Prim
 --- !u!4 &1343903571
 Transform:
   m_ObjectHideFlags: 0
