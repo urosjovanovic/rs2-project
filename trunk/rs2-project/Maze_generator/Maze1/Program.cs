@@ -16,7 +16,7 @@ namespace Maze1
         /// </summary>
         /// <param name="rows"> Number of rows in a maze matrix</param>
         /// <param name="cols"> Number of columns in a maze matrix </param>
-        static void testMazeGenerationSpeed(int rows, int cols)
+        static void testMazeGenerationSpeed(string outputFile, int rows, int cols)
         {
             try
             {
@@ -26,7 +26,7 @@ namespace Maze1
                 Stopwatch stopWatch = new Stopwatch();
                 stopWatch.Start();
 
-                testMaze.printToFile(@"C:\Users\Divic\Desktop\maze" + rows +"x" + cols + ".txt");
+                testMaze.PrintToFile(outputFile);
 
                 stopWatch.Stop();
                 // Get the elapsed time as a TimeSpan value.
@@ -51,7 +51,17 @@ namespace Maze1
 
         static void Main(string[] args)
         {
-            
+            Maze maze = new Maze(8,8);
+
+            maze.Graph.PrintGridGraph();
+
+            Console.WriteLine();
+
+            foreach (var pair in maze.GetSpawnNodes())
+            {
+                Console.WriteLine(pair.Key + " - " + pair.Value);
+            }
+
 
         }
     }

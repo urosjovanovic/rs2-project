@@ -28,16 +28,18 @@ public class NetworkManager : Photon.MonoBehaviour
 		void OnPhotonRandomJoinFailed ()
 		{
 				Debug.Log ("Failed to join random room, creating new room...");
-				PhotonNetwork.CreateRoom ("TestRoom");
+				PhotonNetwork.CreateRoom ("TestRoom");           
 		}
 
 		void OnJoinedRoom ()
 		{
 				Debug.Log ("Joined Room");
-				SpawnPlayer ();
+
+                SpawnPlayer();
+                
 		}
 
-		void SpawnPlayer ()
+		public static void SpawnPlayer ()
 		{
 				GameObject player = (GameObject)PhotonNetwork.Instantiate ("PlayerController", new Vector3 (0, 2, 0), Quaternion.identity, 0);
 				((MonoBehaviour)player.GetComponent ("FPSInputController")).enabled = true;
@@ -58,4 +60,7 @@ public class NetworkManager : Photon.MonoBehaviour
 
                
 		}
+
+       
+
 }
