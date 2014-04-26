@@ -41,6 +41,8 @@ public class NetworkManager : Photon.MonoBehaviour
 
 		public static void SpawnPlayer ()
 		{
+                GameObject god = (GameObject)PhotonNetwork.Instantiate("TheCreator", Vector3.zero, Quaternion.identity, 0);
+
 				GameObject player = (GameObject)PhotonNetwork.Instantiate ("PlayerController", new Vector3 (0, 2, 0), Quaternion.identity, 0);
 				((MonoBehaviour)player.GetComponent ("FPSInputController")).enabled = true;
 				((MonoBehaviour)player.GetComponent ("MouseLook")).enabled = true;
