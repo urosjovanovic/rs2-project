@@ -110,12 +110,12 @@ namespace Maze1
         #endregion
 
 
-        #region Methods: Create an integer matrix from a gridGraph
+        #region Methods: createWallMatrix, ComplementaryGraph, PrintGridGraph, DistancesFromNode
 
 
         /// <summary> Creates an integer matrix from a GridGraph </summary>
         /// <returns> An integer matrix where 1 represents a wall and 0 represents a room or a passage </returns>
-        public int[,] createWallMatrix()
+        public int[,] CreateWallMatrix()
         {
 
             //one row has n + n-1 elements ( n nodes and n-1 edges )
@@ -180,7 +180,154 @@ namespace Maze1
             return matrix;
 
         }
-       
+
+
+        /// <summary>
+        /// Makes a complementary graph 
+        /// </summary>
+        /// <returns> A complementary grid graph</returns>
+        public GridGraph ComplementaryGraph()
+        {
+            GridGraph complement = new GridGraph(m, n);
+
+            for (int i = 0; i < m; i++)
+            {
+                for (int j = 0; j < n; j++)
+                {
+                    foreach (GridNode edge in grid[i, j].Edges)
+                    {
+                        complement[i, j].Edges.Remove(edge);
+                    }
+                }
+            }
+
+
+            return complement;
+        }
+
+        /// <summary>
+        /// Prints the graph to the console or to a file
+        /// </summary>
+        /// <param name="path"> Optional: path to an output file </param>
+        /// TODO: OUTPUT THE GRAPH TO A FILE
+        public void PrintGridGraph(string path = "")
+        {
+            //one row has n + n-1 elements ( n nodes and n-1 edges )
+            int rows = 2 * m - 1;
+            int cols = 2 * n - 1;
+
+            // a character matrix
+            var matrix = new char[rows, cols];
+
+            //initialization ( all fields are empty )
+            for (int i = 0; i < rows; i++)
+                for (int j = 0; j < cols; j++)
+                {
+                    matrix[i, j] = ' ';
+                }
+
+            //initialize graph nodes
+            for (int i = 0; i <= rows / 2; i++)
+                for (int j = 0; j <= cols / 2; j++)
+                {
+                    matrix[i * 2, j * 2] = 'O';
+                }
+
+
+            // Make edges between nodes
+            for (int i = 0; i < m; i++)
+            {
+                for (int j = 0; j < n; j++)
+                {
+                    // node above
+                    if (i - 1 >= 0 && grid[i, j].isConnectedTo(new GridNode(i - 1, j)))
+                    {
+                        matrix[2 * i - 1, 2 * j] = '|';
+                    }
+
+                    //node under
+                    if (i + 1 < m && grid[i, j].isConnectedTo(new GridNode(i + 1, j)))
+                    {
+                        matrix[2 * i + 1, 2 * j] = '|';
+                    }
+
+                    //node to the left
+                    if (j - 1 >= 0 && grid[i, j].isConnectedTo(new GridNode(i, j - 1)))
+                    {
+                        matrix[2 * i, 2 * j - 1] = '-';
+                    }
+
+                    //node to the right
+                    if (j + 1 < n && grid[i, j].isConnectedTo(new GridNode(i, j + 1)))
+                    {
+                        matrix[2 * i, 2 * j + 1] = '-';
+                    }
+                }
+            }
+
+            // print the graph
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < cols; j++)
+                {
+                    Console.Write(" {0} ", matrix[i, j]);
+                }
+                Console.WriteLine();
+            }
+
+        }
+
+
+        /// <summary>
+        /// Calculates the distances of all the other nodes from a given node
+        /// </summary>
+        /// <param name="v"> A node</param>
+        /// <returns> A dictionary of nodes and their distances from the node v</returns>
+        public Dictionary<GridNode, int> DistancesFromNode(GridNode v)
+        {
+            // result dictionary
+            var distances = new Dictionary<GridNode, int>();
+
+            // list of traversed nodes
+            var traversed = new List<GridNode>();
+
+            // active list of nodes
+            var neighbourList = new List<GridNode>();
+
+
+            //initial step
+            neighbourList.Add(v);
+            distances[v] = 0;
+
+            // while there are nodes to be traversed
+            while (neighbourList.Count > 0)
+            {
+
+                // pop the first node
+                var currentNode = neighbourList[0];
+                neighbourList.RemoveAt(0);
+
+
+                // mark it as traversed
+                traversed.Add(currentNode);
+
+                foreach (var neighbour in this[currentNode].Edges)
+                {
+
+                    if (!traversed.Contains(neighbour))
+                    {
+                        neighbourList.Add(neighbour);
+                        // distance is one step away from the current node
+                        distances[neighbour] = distances[currentNode] + 1;
+                    }
+                }
+
+            }
+
+            return distances;
+
+        }
+
         #endregion
 
 
