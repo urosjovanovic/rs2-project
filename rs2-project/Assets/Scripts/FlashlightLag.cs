@@ -16,5 +16,6 @@ public class FlashlightLag : MonoBehaviour
 		void Update ()
 		{				
 				this.transform.rotation = Quaternion.Slerp (this.transform.rotation, Camera.transform.rotation, Time.deltaTime * 5.0f);
+				//this.transform.localRotation = Quaternion.Slerp (this.transform.localRotation, this.transform.parent.gameObject.transform.localRotation, Time.deltaTime);
 		}
 }
