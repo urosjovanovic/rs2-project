@@ -45,7 +45,7 @@ public class NetworkManager : Photon.MonoBehaviour
 		{
 				GameObject god = (GameObject)PhotonNetwork.Instantiate ("TheCreator", Vector3.zero, Quaternion.identity, 0);
 				
-				GameObject player;
+				GameObject player = null;
 
 				if (AlwaysSpawnAs) {
 						player = (GameObject)PhotonNetwork.Instantiate (SpawnAs, new Vector3 (0, 2, 0), Quaternion.identity, 0);
@@ -59,7 +59,7 @@ public class NetworkManager : Photon.MonoBehaviour
 				}
 
 				((MonoBehaviour)player.GetComponent ("FPSInputController")).enabled = true;
-				((MonoBehaviour)player.GetComponent ("MouseLook")).enabled = true;
+				//((MonoBehaviour)player.GetComponent ("MouseLook")).enabled = true;
 				player.transform.FindChild ("MainCamera").gameObject.camera.enabled = true;
 				
 
