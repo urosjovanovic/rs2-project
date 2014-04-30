@@ -25,4 +25,5 @@ MonoBehaviour:
   - InstantiateRpc
   - OnAwakeRPC
   - DestroyRpc
+  - RenderOneMazeRow
   DisableAutoOpenWizard: 0

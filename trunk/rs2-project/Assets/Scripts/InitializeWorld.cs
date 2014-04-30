@@ -2,15 +2,35 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class InitializeWorld : MonoBehaviour {
+public class InitializeWorld : MonoBehaviour
+{
 
-    private bool generated = false;
+    #region Class fields and properties
+
     private int[,] mazeMatrix;
-    private bool sent = false;
     int matrixSize = 0;
 
-	// Generate and render the world
+    /// <summary>
+    /// Photon view necessary for the RPC
+    /// </summary>
+    PhotonView thisScriptView;
+
+    #endregion
+
+
+    #region Start and Update
+
+    /// <summary>
+	/// Generate and render the world for the master client
+	/// </summary>
 	void Start () {
+
+        thisScriptView = this.GetComponent<PhotonView>();
+
+        if (thisScriptView == null)
+        {
+            Debug.LogError("thisScriptView is null! FREAK OUT!!");
+        }
 
         if (PhotonNetwork.isMasterClient)
         {
@@ -29,9 +49,8 @@ public class InitializeWorld : MonoBehaviour {
                 matrixSize = mazeMatrix.GetLength(0);
             }
 
-            Debug.Log("Rendering the maze.");
-            GenerateWorld.RenderMaze(mazeMatrix);
-            generated = true;
+            for (int i = 0; i < mazeMatrix.GetLength(0); i++ )
+                RenderOneMazeRow(i, getRow(i, mazeMatrix));
         }
         else
         {
@@ -41,105 +60,32 @@ public class InitializeWorld : MonoBehaviour {
 
 	}
 
-
     #region Variables necessary for data transfer over the network
 
+    /// <summary>
+    /// Keeps track of the current row sent to the other client
+    /// </summary>
     int rowsSent = 0;
-    int rowsRecieved = 0;
-   
-    List<int[]> rows= new List<int[]>();
-    bool sizeSent = false;
 
     #endregion
 
-
-    #region Sending data over the network method 
-
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    /// <summary>
+    /// The master client waits until the other client connects then the RPC method for sending the maze data
+    /// over the network is called.
+    /// </summary>
+    void Update()
     {
-        
-        if (stream.isWriting) {
-            //  only the master client sends the matrix data
-            if (PhotonNetwork.isMasterClient && rowsSent<matrixSize)
-            {
-                // the size of the matrix is sent first
-                if (!sizeSent)
-                {
-                    Debug.Log("Sending: Matrix size = " + matrixSize);
-                    stream.SendNext(matrixSize);
-                    sizeSent = true;
-                }
-                    //send the rows
-                else
-                {
-                    stream.SendNext(getRow(rowsSent, mazeMatrix));
-                    rowsSent++;
-                }
-            }
-               
-            }
-            else 
-            {
-                if (!PhotonNetwork.isMasterClient)
-                {
-                    // read the size of the matrix
-                    if (matrixSize == 0)
-                    {
-                        matrixSize = (int)stream.ReceiveNext();
-                        Debug.Log("Matrix size = " + matrixSize);
-                    }
-                    // read the rows 
-                    else
-                    {
-
-                        int[] current = (int[])stream.ReceiveNext();
-
-                        rows.Add(current);
-                        rowsRecieved++;
-
-                        if (rowsRecieved == matrixSize)
-                        {
-                            Debug.Log("Recieved data. Rendering the world.");
-
-                            mazeMatrix = combineRows(rows);
-
-                            GenerateWorld.RenderMaze(mazeMatrix);
-                        }
-                    }
-
-                }
-            }   
-
+        if (PhotonNetwork.isMasterClient && rowsSent < matrixSize && PhotonNetwork.playerList.Length == 2)
+        {
+            thisScriptView.RPC("RenderOneMazeRow", PhotonTargets.Others, new object[] { rowsSent, getRow(rowsSent, mazeMatrix) });
+            rowsSent++;
+        }
     }
 
     #endregion
 
 
     #region Support methods for network transfer
-
-    /// <summary>
-    /// Combine a list of int arrays into a two dimensional matrix
-    /// </summary>
-    /// <param name="rows"> List of rows </param>
-    /// <returns> A two dimensional integer matrix </returns>
-    private int[,] combineRows(List<int[]> rows)
-    {
-        int r = rows.Count;
-        int c = rows[0].Length; 
-
-        var matrix = new int[r, c];
-
-        for (int i = 0; i < r; i++)
-        {
-            for (int j = 0; j < c; j++)
-            {
-                matrix[i, j] = rows[i][j];
-            }
-        }
-
-            return matrix;
-    }
-
 
     /// <summary>
     /// Fetch one row from an integer matrix
@@ -160,5 +106,71 @@ public class InitializeWorld : MonoBehaviour {
     }
 
     #endregion
+
+
+    #region Render method
+
+    /// <summary>
+    /// We render the world row by row, because the F*****G Photon RPC can't use
+    /// and data structure more complex then a F*****G array.
+    /// </summary>
+    /// <param name="rowIndex"> Index of a row in a maze matrix</param>
+    /// <param name="row"> Integer row </param>
+    [RPC]
+    void RenderOneMazeRow(int rowIndex, int[] row)
+    {
+
+        int width = row.Length;
+
+        GameObject Walls = new GameObject();
+        Walls.gameObject.name = "Walls";
+        GameObject Floor = new GameObject();
+        Floor.gameObject.name = "Floor";
+
+        Vector3 center = new Vector3(width / 2, 0, width / 2);
+
+        Walls.transform.position = center;
+        Floor.transform.position = center;
+
+
+        for (int i = 0; i < width; i++)
+        {
+
+            GameObject kocka = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            kocka.isStatic = true;
+
+            int c = row[i];
+
+            Vector3 pos;
+            if (c == 0)
+            {
+                pos = new Vector3(i, -1, width - rowIndex);
+                kocka.gameObject.name = pos.ToString();
+                kocka.transform.position = pos;
+                kocka.gameObject.tag = "Floor";
+                kocka.gameObject.AddComponent<PathColor>();
+                kocka.transform.parent = Floor.transform;
+            }
+            else
+            {
+                pos = new Vector3(i, 0, width - rowIndex);
+                kocka.gameObject.name = pos.ToString();
+                kocka.transform.position = pos;
+                kocka.gameObject.tag = "Wall";
+                kocka.transform.parent = Walls.transform;
+            }
+        }
+
+
+    }
+
+    #endregion
+
+    // We don't use this for network transfer any more, but Unity complains if we erase this method.
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+
+
+    }
 
 }

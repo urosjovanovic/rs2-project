@@ -65,58 +65,7 @@ public class GenerateWorld : MonoBehaviour {
         return maze.matrix;
     }
 
-    public static void RenderMaze(int[,] mazeMatrix) {
-
-        int matrixHeight = mazeMatrix.GetLength(0);
-        int matrixWidth = mazeMatrix.GetLength(1);
-
-        float start = Time.realtimeSinceStartup;
-
-        GameObject Walls = new GameObject();
-        Walls.gameObject.name = "Walls";
-        GameObject Floor = new GameObject();
-        Floor.gameObject.name = "Floor";
-
-        Vector3 center = new Vector3(matrixHeight / 2, 0, matrixWidth / 2);
-
-        Walls.transform.position = center;
-        Floor.transform.position = center;
-
-
-        for (int i = 0; i < matrixHeight; i++) 
-        {
-            for (int j = 0; j < matrixWidth; j++)
-            {
-                GameObject kocka = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                kocka.isStatic = true;
-
-                int c = mazeMatrix[i,j];
-
-                Vector3 pos;
-                if (c == 0)
-                {
-                    pos = new Vector3(j, -1, matrixWidth - i);
-                    kocka.gameObject.name = pos.ToString();
-                    kocka.transform.position = pos;
-                    kocka.gameObject.tag = "Floor";
-                    kocka.gameObject.AddComponent<PathColor>();
-                    kocka.transform.parent = Floor.transform;
-                }
-                else
-                {
-                    pos = new Vector3(j, 0, matrixWidth - i);
-                    kocka.gameObject.name = pos.ToString();
-                    kocka.transform.position = pos;
-                    kocka.gameObject.tag = "Wall";
-                    kocka.transform.parent = Walls.transform;
-                }
-            }
-
-           
-        }
-        float end = Time.realtimeSinceStartup;
-        Debug.Log("World generated in: " + (end - start));
-    }
+    
 
 	
 }

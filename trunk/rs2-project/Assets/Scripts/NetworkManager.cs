@@ -9,7 +9,8 @@ public class NetworkManager : Photon.MonoBehaviour
 		// Use this for initialization
 		void Start ()
 		{
-				Connect ();
+            Screen.showCursor = false;
+            Connect ();
 		}
 
 		void Connect ()
@@ -44,14 +45,25 @@ public class NetworkManager : Photon.MonoBehaviour
 		public void SpawnPlayer ()
 		{
 				GameObject god = (GameObject)PhotonNetwork.Instantiate ("TheCreator", Vector3.zero, Quaternion.identity, 0);
-				
+
+                var initScript = ((MonoBehaviour)god.GetComponent("InitializeWorld"));
+
+                if (initScript != null)
+                {
+                    initScript.enabled = true;
+                }
+                else
+                {
+                    Debug.LogError("InitializeWorld is null! FREAK OUT!");
+                }
+
 				GameObject player = null;
 
 				if (AlwaysSpawnAs) {
 						player = (GameObject)PhotonNetwork.Instantiate (SpawnAs, new Vector3 (0, 2, 0), Quaternion.identity, 0);
 				} else {
 						// if room is empty spawn Prim
-						if (PhotonNetwork.room.playerCount == 1) {
+						if (PhotonNetwork.isMasterClient) {
 								player = (GameObject)PhotonNetwork.Instantiate ("Prim", new Vector3 (0, 2, 0), Quaternion.identity, 0);
 						} else { //spawn DarkPrim
 								player = (GameObject)PhotonNetwork.Instantiate ("DarkPrim", new Vector3 (0, 2, 0), Quaternion.identity, 0);
