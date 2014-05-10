@@ -68,7 +68,7 @@ GameObject:
   - 54: {fileID: 5400000}
   m_Layer: 0
   m_Name: Trigger
-  m_TagString: Player
+  m_TagString: Prim
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -88,9 +88,10 @@ GameObject:
   - 114: {fileID: 11400006}
   - 114: {fileID: 11400004}
   - 114: {fileID: 11400002}
+  - 114: {fileID: 11400016}
   m_Layer: 0
   m_Name: Prim
-  m_TagString: Untagged
+  m_TagString: Prim
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -463,6 +464,20 @@ MonoBehaviour:
   bobbingSpeed: .180000007
   bobbingAmount: .200000003
   midpoint: 1
+--- !u!114 &11400016
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29b46085434769e418d917e27be225aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  footLeft: {fileID: 2100000, guid: b81d03c849c5be84e91d3989ae522b4b, type: 2}
+  footRight: {fileID: 2100000, guid: 34413a75bd9167b40915500f5bff7521, type: 2}
+  trailSize: 10
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1

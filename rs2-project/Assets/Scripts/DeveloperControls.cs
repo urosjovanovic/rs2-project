@@ -7,6 +7,9 @@ public class DeveloperControls : MonoBehaviour
 		public Transform BirdviewCamera;
 		public Transform DirectLight;
 		public Transform Player1Camera;
+
+		private bool pathColoring = false;
+
 		// Use this for initialization
 		void Start ()
 		{
@@ -24,6 +27,25 @@ public class DeveloperControls : MonoBehaviour
 				//Main light toggle
 				if (Input.GetKeyDown (KeyCode.L)) {
 						DirectLight.gameObject.light.enabled = !DirectLight.gameObject.light.enabled;
+				}
+
+				//Colorize path
+				if (Input.GetKeyDown (KeyCode.P)) {
+						GameObject[] floors = GameObject.FindGameObjectsWithTag ("Floor");
+
+						if (!pathColoring) {
+								foreach (var floor in floors) {
+										floor.GetComponent<PathColor> ().Colorize ();
+										floor.GetComponent<PathColor> ().autoRefresh = true;
+								}
+								pathColoring = true;
+						} else {
+								foreach (var floor in floors) {
+										floor.GetComponent<PathColor> ().ResetColor ();
+										floor.GetComponent<PathColor> ().autoRefresh = false;
+								}
+								pathColoring = false;
+						}
 				}
 		}
 }

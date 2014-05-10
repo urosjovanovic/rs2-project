@@ -5,10 +5,10 @@ TagManager:
   tags:
   - Floor
   - Wall
+  - Prim
+  - DarkPrim
   - 
   - 
-  - 
-  - floor
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

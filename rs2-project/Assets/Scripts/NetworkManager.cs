@@ -67,7 +67,7 @@ public class NetworkManager : Photon.MonoBehaviour
 						}
 				}
 
-				if (player.gameObject.name == "Prim(Clone)") {
+				if (player.gameObject.tag == "Prim") {
 						//spawn the goddamn flashlight...
 						GameObject flashlight = (GameObject)PhotonNetwork.Instantiate ("Flashlight", new Vector3 (0, 2, 0), Quaternion.identity, 0);
 						if (flashlight) {
