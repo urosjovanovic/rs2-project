@@ -70,16 +70,28 @@ public class NetworkManager : Photon.MonoBehaviour
 				if (player.gameObject.tag == "Prim") {
 						//spawn the goddamn flashlight...
 						GameObject flashlight = (GameObject)PhotonNetwork.Instantiate ("Flashlight", new Vector3 (0, 2, 0), Quaternion.identity, 0);
-						if (flashlight) {
-								flashlight.GetComponent<FlashlightBehaviour> ().parent = player.transform;
-						}
+						flashlight.GetComponent<FlashlightBehaviour> ().enabled = true;			
+						flashlight.GetComponent<FlashlightBehaviour> ().parent = player.transform;
 						//set the controls for the goddamn flashlight...
 						player.GetComponent<PrimsControls> ().flashlight = flashlight.transform;
 				}
 
 				((MonoBehaviour)player.GetComponent ("FPSInputController")).enabled = true;
 				//((MonoBehaviour)player.GetComponent ("MouseLook")).enabled = true;
+				((MonoBehaviour)player.GetComponent ("Sprint")).enabled = true;
 				player.transform.FindChild ("MainCamera").gameObject.camera.enabled = true;
+
+				if (player.gameObject.tag == "Prim") {
+						((MonoBehaviour)player.GetComponent ("PrimsControls")).enabled = true;
+						((MonoBehaviour)player.GetComponent ("GenerateFootsteps")).enabled = true;
+				} else if (player.gameObject.tag == "DarkPrim") {
+						((MonoBehaviour)player.GetComponent ("DarkPrimControls")).enabled = true;
+						GameObject flashlight = GameObject.FindGameObjectWithTag ("Flashlight");
+						if (flashlight) {
+								//Ako lampa vec postoji, znaci da je Prim vec spawnovan
+								flashlight.GetComponent<FlashlightBehaviour> ().parent = GameObject.FindGameObjectWithTag ("Prim").transform;
+						}
+				}
 				
 
 				// movement setup
