@@ -346,7 +346,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100008}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7206d8c00cd3f6a479508904916b4f2c, type: 3}
   m_Name: 
@@ -378,7 +378,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100008}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 82ec2688ba4c2ac48861dc04afb5faee, type: 3}
   m_Name: 
@@ -470,14 +470,14 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100008}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 29b46085434769e418d917e27be225aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   footLeft: {fileID: 2100000, guid: b81d03c849c5be84e91d3989ae522b4b, type: 2}
   footRight: {fileID: 2100000, guid: 34413a75bd9167b40915500f5bff7521, type: 2}
-  trailSize: 10
+  foostepLifeTime: 2
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1
