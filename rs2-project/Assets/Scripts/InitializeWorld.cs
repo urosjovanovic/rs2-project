@@ -15,10 +15,16 @@ public class InitializeWorld : MonoBehaviour
     /// </summary>
     PhotonView thisScriptView;
 
+    bool AlwaysSpawnAs = false;
+    string SpawnAs = "Prim";
+
+    Dictionary<string, GridNode> spawnNodes;
+
     #endregion
 
 
     #region Start and Update
+
 
     /// <summary>
 	/// Generate and render the world for the master client
@@ -36,6 +42,10 @@ public class InitializeWorld : MonoBehaviour
         {
             Debug.Log("I am the master client. Generating the maze.");
 
+            // prims spawn coordinates
+            int x_sp = 0;
+            int z_sp = 0;
+
             // If staticMaze variable is set generate a static maze from a given file
             // procedurally generate a maze otherwise
             if (ConfigManager.staticMaze)
@@ -45,12 +55,39 @@ public class InitializeWorld : MonoBehaviour
             }
             else
             {
-                mazeMatrix = GenerateWorld.GenerateMaze();
+
+                var maze = GenerateWorld.GenerateMaze();
+
+                mazeMatrix = maze.matrix;
                 matrixSize = mazeMatrix.GetLength(0);
+
+               spawnNodes = maze.GetSpawnNodes();
+
+                var primSpawn = spawnNodes["Prim"];
+
+                x_sp = primSpawn.i;
+                z_sp = primSpawn.j;
+
             }
 
             for (int i = 0; i < mazeMatrix.GetLength(0); i++ )
                 RenderOneMazeRow(i, getRow(i, mazeMatrix));
+
+            // Spawn Prim
+            int XPosition = x_sp * 2;
+            int ZPosition = z_sp * 2 + 1;
+            spawnPlayer("Prim", new Vector3(XPosition , 0.1f, ZPosition));
+
+
+            // Instantiate EXIT
+            var exitNode = spawnNodes["Exit"];
+
+            int exitX = exitNode.i * 2;
+            int exitZ = exitNode.j * 2 + 1;
+
+            GameObject exit = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+            exit.transform.position = new Vector3(exitX, 0.3f, exitZ);
+            exit.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
         }
         else
         {
@@ -59,16 +96,7 @@ public class InitializeWorld : MonoBehaviour
         
 
 	}
-
-    #region Variables necessary for data transfer over the network
-
-    /// <summary>
-    /// Keeps track of the current row sent to the other client
-    /// </summary>
-    int rowsSent = 0;
-
-    #endregion
-
+    
     /// <summary>
     /// The master client waits until the other client connects then the RPC method for sending the maze data
     /// over the network is called.
@@ -79,8 +107,36 @@ public class InitializeWorld : MonoBehaviour
         {
             thisScriptView.RPC("RenderOneMazeRow", PhotonTargets.Others, new object[] { rowsSent, getRow(rowsSent, mazeMatrix) });
             rowsSent++;
+
+            // when the world is generated, instantiate the other player
+            if (rowsSent >= matrixSize)
+            {
+                var darkPrimSpawn = spawnNodes["DarkPrim"];
+
+                int XPosition = darkPrimSpawn.i * 2;
+                int ZPosition = darkPrimSpawn.j * 2 + 1;
+
+                thisScriptView.RPC("spawnPlayer", PhotonTargets.Others, new object[] {"DarkPrim", new Vector3(XPosition, 1f, ZPosition) });
+            }
+
+        }
+
+        // If the other player disconnects, reset the process
+        if (PhotonNetwork.playerList.Length == 1 && rowsSent > 0)
+        {
+            rowsSent = 0;
         }
     }
+
+    #endregion
+
+
+    #region Variables necessary for data transfer over the network
+
+    /// <summary>
+    /// Keeps track of the current row sent to the other client
+    /// </summary>
+    int rowsSent = 0;
 
     #endregion
 
@@ -108,7 +164,7 @@ public class InitializeWorld : MonoBehaviour
     #endregion
 
 
-    #region Render method
+    #region Render and SpawnPlayer methods
 
     /// <summary>
     /// We render the world row by row, because the F*****G Photon RPC can't use
@@ -164,13 +220,83 @@ public class InitializeWorld : MonoBehaviour
 
     }
 
+
+    /// <summary>
+    /// Spawns the chosen player prefab at the given position
+    /// </summary>
+    /// <param name="who"> Prim or DarkPrim </param>
+    /// <param name="where"> Spawn point coordinates </param>
+    [RPC]
+    public void spawnPlayer(string who, Vector3 where)
+    {
+
+        GameObject player = null;
+
+        if (AlwaysSpawnAs)
+        {
+            player = (GameObject)PhotonNetwork.Instantiate(SpawnAs, where, Quaternion.identity, 0);
+        }
+        else
+        {
+
+            player = (GameObject)PhotonNetwork.Instantiate(who, where, Quaternion.identity, 0);
+
+        }
+
+        if (player.gameObject.tag == "Prim")
+        {
+            //spawn the goddamn flashlight...
+            GameObject flashlight = (GameObject)PhotonNetwork.Instantiate("Flashlight", new Vector3(0, 2, 0), Quaternion.identity, 0);
+            flashlight.GetComponent<FlashlightBehaviour>().enabled = true;
+            flashlight.GetComponent<FlashlightBehaviour>().parent = player.transform;
+            //set the controls for the goddamn flashlight...
+            player.GetComponent<PrimsControls>().flashlight = flashlight.transform;
+        }
+
+        ((MonoBehaviour)player.GetComponent("FPSInputController")).enabled = true;
+        //((MonoBehaviour)player.GetComponent ("MouseLook")).enabled = true;
+        ((MonoBehaviour)player.GetComponent("Sprint")).enabled = true;
+        player.transform.FindChild("MainCamera").gameObject.camera.enabled = true;
+
+        if (player.gameObject.tag == "Prim")
+        {
+            ((MonoBehaviour)player.GetComponent("PrimsControls")).enabled = true;
+            ((MonoBehaviour)player.GetComponent("GenerateFootsteps")).enabled = true;
+        }
+        else if (player.gameObject.tag == "DarkPrim")
+        {
+            ((MonoBehaviour)player.GetComponent("DarkPrimControls")).enabled = true;
+            GameObject flashlight = GameObject.FindGameObjectWithTag("Flashlight");
+            if (flashlight)
+            {
+                //Ako lampa vec postoji, znaci da je Prim vec spawnovan
+                flashlight.GetComponent<FlashlightBehaviour>().parent = GameObject.FindGameObjectWithTag("Prim").transform;
+            }
+        }
+
+
+        // movement setup
+        var motor = player.GetComponent<CharacterMotor>();
+
+        if (motor != null)
+        {
+            motor.jumping.enabled = ConfigManager.canJump;
+        }
+        else
+        {
+            Debug.Log("Failed to get component CharacterMotor.");
+        }
+    }
+
     #endregion
 
+
+    #region Serialize view
     // We don't use this for network transfer any more, but Unity complains if we erase this method.
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
 
 
     }
-
+    #endregion
 }

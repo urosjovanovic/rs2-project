@@ -58,16 +58,12 @@ public class GenerateWorld : MonoBehaviour {
     /// Procedurally generates a new maze
     /// </summary>
     /// <returns> An integer maze matrix </returns>
-    public static int[,] GenerateMaze()
+    public static Maze GenerateMaze()
     {
-        Maze maze = new Maze(32,32);
-
-        return maze.matrix;
+        return new Maze(32,32);
     }
 
     
-
-	
 }
 
 
@@ -76,7 +72,7 @@ public class GenerateWorld : MonoBehaviour {
 /// <summary>
 /// A class representing a maze
 /// </summary>
-class Maze
+public class Maze
 {
 
     #region Class fields and properties
@@ -162,6 +158,8 @@ class Maze
 
         int side = rand.Next(1, 5);
 
+        int limit = graphCols - 1;
+
 
         // Prim gets a random edge node for his spawn point
         GridNode primSpawnPoint = new GridNode(0, 0);
@@ -170,23 +168,23 @@ class Maze
         if (side == 1)
         {
             int i = 0;
-            int j = rand.Next(0, 4);
+            int j = rand.Next(0, limit);
 
             primSpawnPoint = Graph[i, j];
         }
         // right
         if (side == 2)
         {
-            int j = 3;
-            int i = rand.Next(0, 4);
+            int j = limit;
+            int i = rand.Next(0, limit);
 
             primSpawnPoint = Graph[i, j];
         }
         //down
         if (side == 3)
         {
-            int i = 3;
-            int j = rand.Next(0, 4);
+            int i = limit;
+            int j = rand.Next(0, limit);
 
             primSpawnPoint = Graph[i, j];
         }
@@ -194,7 +192,7 @@ class Maze
         if (side == 4)
         {
             int j = 0;
-            int i = rand.Next(0, 4);
+            int i = rand.Next(0, limit);
 
             primSpawnPoint = Graph[i, j];
         }
@@ -237,13 +235,23 @@ class Maze
 /// <summary>
 /// A class representing a node inside a grid graph
 /// </summary>
-class GridNode
+public class GridNode
 {
 
     #region Class fields and properties
 
     private List<GridNode> edges = new List<GridNode>();
-    private int i, j;
+    public int i
+    {
+        get;
+        private set;
+    }
+
+    public int j
+    {
+        get;
+        private set;
+    }
 
     public List<GridNode> Edges
     {
@@ -325,7 +333,7 @@ class GridNode
 /// <summary>
 /// A class representing a grid graph
 /// </summary>
-class GridGraph
+public class GridGraph
 {
 
     #region Class fields and properties
