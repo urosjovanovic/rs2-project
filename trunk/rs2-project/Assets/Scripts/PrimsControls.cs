@@ -17,4 +17,23 @@ public class PrimsControls : MonoBehaviour {
 			flashlight.gameObject.light.enabled = !flashlight.gameObject.light.enabled;
 		}
 	}
+
+	void OnTriggerEnter (Collider other)
+	{
+		if (other.transform.parent.gameObject.tag == "DarkPrim") 
+		{
+			var distance = Vector3.Distance(this.transform.position, other.transform.parent.gameObject.transform.position);
+			Debug.Log ("Prim: End Game " + distance + " " + System.DateTime.Now);
+		}				
+	}
+
+	void OnTriggerStay (Collider other)
+	{
+
+	}
+
+	void OnTriggerExit (Collider other)
+	{
+
+	}
 }
