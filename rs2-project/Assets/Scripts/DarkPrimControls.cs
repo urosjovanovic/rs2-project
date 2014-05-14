@@ -32,4 +32,23 @@ public class DarkPrimControls : MonoBehaviour
 						}
 				}
 		}
+
+		void OnTriggerEnter (Collider other)
+		{
+			if (other.transform.parent.gameObject.tag == "Prim") 
+			{
+				var distance = Vector3.Distance(this.transform.position, other.transform.parent.gameObject.transform.position);
+				Debug.Log ("DarkPrim: End Game " + distance + " " + System.DateTime.Now);
+			}				
+		}
+
+		void OnTriggerStay (Collider other)
+		{
+			
+		}
+
+		void OnTriggerExit (Collider other)
+		{
+			
+		}
 }
