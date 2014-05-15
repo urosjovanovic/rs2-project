@@ -45,9 +45,13 @@ public class FlashlightBehaviour : MonoBehaviour
 				var fwd = transform.TransformDirection (Vector3.forward);
 				RaycastHit hit;
 			
-				if (Physics.Raycast (transform.position, fwd, out hit, 3)) {
+				if (Physics.Raycast (transform.position, fwd, out hit, 3)) 
+				{
 						if (hit.rigidbody!=null && hit.rigidbody.gameObject.tag == "DarkPrim")
-								Debug.Log ("There is something in front of the object!");
+						{
+							Debug.Log ("There is something in front of the object!");
+							//hit.rigidbody.gameObject.GetComponent<CharacterController>().enabled=false;
+						}
 				}
 				
 				coolDown = fireRate;
