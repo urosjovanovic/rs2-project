@@ -6,7 +6,6 @@ public class GenerateFootsteps : MonoBehaviour
 {
 		public Material footLeft;
 		public Material footRight;
-		public float foostepLifeTime = 2.0f; //u sekundama
 
 		private bool lastWasLeft = false;
 
@@ -27,31 +26,31 @@ public class GenerateFootsteps : MonoBehaviour
 				while (true) {
 						yield return new WaitForSeconds (0.25f);
 						if (controller.velocity.magnitude > 0.02) {
-								GameObject footstep = generateFootstep ();
+								generateFootstep ();
 						}
 				}
 		}
 
-		private GameObject generateFootstep ()
+		private void generateFootstep ()
 		{
-				GameObject quad = GameObject.CreatePrimitive (PrimitiveType.Quad);
-				quad.GetComponent<MeshCollider> ().enabled = false;
-				quad.transform.position = this.transform.position;
-				quad.transform.Rotate (new Vector3 (90, this.transform.rotation.eulerAngles.y, 0));
-				//TODO: Namestiti malo bolje lociranje po Y osi
-				quad.transform.position = new Vector3 (quad.transform.position.x, -0.499f, quad.transform.position.z);
-				quad.transform.localScale = new Vector3 (0.25f, 0.25f, 0.25f);
+				string nextFoot;
 				if (!lastWasLeft) {
-						quad.renderer.material = footLeft;
+						nextFoot = "FootstepLeft";
 						lastWasLeft = true;
 				} else {
-						quad.renderer.material = footRight;
+						nextFoot = "FootstepRight";
 						lastWasLeft = false;
 				}
 
-				quad.AddComponent ("FootstepBehaviour");
-				quad.GetComponent<FootstepBehaviour> ().lifetime = foostepLifeTime;
+				GameObject footstep = PhotonNetwork.Instantiate (nextFoot, this.transform.position, Quaternion.identity, 0);
+				footstep.transform.Rotate (new Vector3 (90, this.transform.rotation.eulerAngles.y, 0));
+				//TODO: Namestiti malo bolje lociranje po Y osi
+				footstep.transform.position = new Vector3 (footstep.transform.position.x, -0.499f, footstep.transform.position.z);
+				footstep.transform.localScale = new Vector3 (0.25f, 0.25f, 0.25f);
+				
+				if (ConfigManager.alwaysShowFootsteps)
+						footstep.GetComponent<MeshRenderer> ().enabled = true;
 
-				return quad;
+				footstep.GetComponent<FootstepBehaviour> ().isOwner = true;
 		}
 }

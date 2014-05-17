@@ -8,9 +8,11 @@ TagManager:
   - Prim
   - DarkPrim
   - Flashlight
+  - Footstep
   - 
   - 
   - 
+  - floor
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

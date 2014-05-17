@@ -6,6 +6,7 @@ public class DarkPrimControls : MonoBehaviour
 		public Texture opacityMap;
 		private bool nightmareVision = false;
 		private GameObject[] walls;
+		private GameObject[] footsteps;
 
 		// Use this for initialization
 		void Start ()
@@ -16,6 +17,17 @@ public class DarkPrimControls : MonoBehaviour
 		// Update is called once per frame
 		void Update ()
 		{
+				footsteps = GameObject.FindGameObjectsWithTag ("Footstep");
+				if (nightmareVision) {
+						foreach (var footstep in footsteps) {
+								footstep.GetComponent<MeshRenderer> ().enabled = true;
+						}
+				} else if (!ConfigManager.alwaysShowFootsteps) {
+						foreach (var footstep in footsteps) {
+								footstep.GetComponent<MeshRenderer> ().enabled = false;
+						}
+				}
+		
 				if (Input.GetKeyDown (KeyCode.E)) {
 						if (!nightmareVision) {
 								foreach (var wall in walls) {
@@ -35,11 +47,10 @@ public class DarkPrimControls : MonoBehaviour
 
 		void OnTriggerEnter (Collider other)
 		{
-			if (other.transform.parent.gameObject.tag == "Prim") 
-			{
-				var distance = Vector3.Distance(this.transform.position, other.transform.parent.gameObject.transform.position);
-				Debug.Log ("DarkPrim: End Game " + distance + " " + System.DateTime.Now);
-			}				
+				if (other.transform.parent.gameObject.tag == "Prim") {
+						var distance = Vector3.Distance (this.transform.position, other.transform.parent.gameObject.transform.position);
+						Debug.Log ("DarkPrim: End Game " + distance + " " + System.DateTime.Now);
+				}				
 		}
 
 		void OnTriggerStay (Collider other)

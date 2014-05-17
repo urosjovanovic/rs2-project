@@ -3,12 +3,15 @@ using System.Collections;
 
 public class FootstepBehaviour : MonoBehaviour
 {
+		public bool isOwner = false; //check if current client is the owner of this object
 		public float lifetime = 2.0f;
-		private float fadeoutTime = 2.0f;
+		public float fadeoutTime = 2.0f;
 
 		// Use this for initialization
 		void Start ()
 		{
+				if (lifetime < fadeoutTime)
+						fadeoutTime = lifetime;
 				StartCoroutine (lifetimeCounter ());
 		}
 	
@@ -34,8 +37,8 @@ public class FootstepBehaviour : MonoBehaviour
 						yield return new WaitForSeconds (step);
 						Color c = this.gameObject.renderer.material.color;
 						this.gameObject.renderer.material.color = new Color (c.r, c.g, c.b, c.a - step);
-						if (this.gameObject.renderer.material.color.a <= 0)
-								GameObject.Destroy (this.gameObject); //unisti se nakon 'lifetime' sekundi
+						if (this.gameObject.renderer.material.color.a <= 0 && isOwner)
+								PhotonNetwork.Destroy (this.gameObject); //objekat ce biti unisten na svim klijentima
 				}
 		}
 }
