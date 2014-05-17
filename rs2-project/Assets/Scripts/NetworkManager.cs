@@ -3,8 +3,6 @@ using System.Collections;
 
 public class NetworkManager : Photon.MonoBehaviour
 {
-		public bool AlwaysSpawnAs = false;
-		public string SpawnAs = "Prim";
 
 		// Use this for initialization
 		void Start ()
@@ -38,7 +36,7 @@ public class NetworkManager : Photon.MonoBehaviour
 		{
 				Debug.Log ("Joined Room");
 
-			    InitializeWorld ();
+				InitializeWorld ();
                 
 		}
 

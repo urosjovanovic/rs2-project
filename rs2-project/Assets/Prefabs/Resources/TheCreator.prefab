@@ -59,6 +59,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dfbc99e2388b014ba3ac59acc60f154, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AlwaysSpawnAs: 1
+  SpawnAs: Prim
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
