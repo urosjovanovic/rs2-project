@@ -24,6 +24,7 @@ public class PrimsControls : MonoBehaviour {
 		{
 			var distance = Vector3.Distance(this.transform.position, other.transform.parent.gameObject.transform.position);
 			Debug.Log ("Prim: End Game " + distance + " " + System.DateTime.Now);
+            Application.LoadLevel("GameOver");
 		}				
 	}
 
