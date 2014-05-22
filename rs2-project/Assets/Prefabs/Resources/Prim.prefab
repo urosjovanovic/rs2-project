@@ -461,7 +461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c183a2d50f9b9b84fab81ec0690b566a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bobbingSpeed: .200000003
+  bobbingSpeed: .264999986
   bobbingAmount: .100000001
   midpoint: 1
 --- !u!114 &11400016
@@ -477,7 +477,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   footLeft: {fileID: 2100000, guid: b81d03c849c5be84e91d3989ae522b4b, type: 2}
   footRight: {fileID: 2100000, guid: 34413a75bd9167b40915500f5bff7521, type: 2}
-  foostepLifeTime: 2
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1
