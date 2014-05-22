@@ -27,4 +27,7 @@ MonoBehaviour:
   - DestroyRpc
   - RenderOneMazeRow
   - spawnPlayer
+  - Fire
+  - Freeze
+  - FreezeDarkPrim
   DisableAutoOpenWizard: 0
