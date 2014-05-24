@@ -15,6 +15,7 @@ SubShader {
     }
     // Render normally
     Pass {
+		Cull Off
         ZWrite Off
         Blend SrcAlpha OneMinusSrcAlpha
         ColorMask RGB

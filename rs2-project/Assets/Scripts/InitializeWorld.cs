@@ -256,6 +256,17 @@ public class InitializeWorld : MonoBehaviour
 								//Ako lampa vec postoji, znaci da je Prim vec spawnovan
 								flashlight.GetComponent<FlashlightBehaviour> ().parent = GameObject.FindGameObjectWithTag ("Prim").transform;
 						}
+                        GameObject[] walls = GameObject.FindGameObjectsWithTag("Wall");
+                        foreach(var wall in walls)
+                        {
+                            wall.renderer.material.color = Color.gray;
+                        }
+                        GameObject[] floors = GameObject.FindGameObjectsWithTag("Floor");
+                        foreach(var floor in floors)
+                        {
+                            floor.renderer.material.color = Color.gray;
+                        }
+                        GameObject.Find("Skylight").light.enabled = true;
 				}
 
 
