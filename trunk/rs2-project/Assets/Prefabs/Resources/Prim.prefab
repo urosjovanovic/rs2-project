@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 400006}
   - 33: {fileID: 3300002}
   - 23: {fileID: 2300002}
+  - 122: {fileID: 12200000}
   m_Layer: 0
   m_Name: Graphics
   m_TagString: Untagged
@@ -47,6 +48,7 @@ GameObject:
   - 114: {fileID: 11400000}
   - 81: {fileID: 8100000}
   - 114: {fileID: 11400014}
+  - 45: {fileID: 4500000}
   m_Layer: 0
   m_Name: MainCamera
   m_TagString: MainCamera
@@ -103,7 +105,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: -1, z: 0, w: -4.37113883e-08}
-  m_LocalPosition: {x: 0, y: 2.12528658, z: -0}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
   m_LocalScale: {x: 3.33333325, y: 3.33333325, z: 3.33333325}
   m_Children: []
   m_Father: {fileID: 400008}
@@ -211,13 +213,13 @@ Renderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 3d3d0b1a588e842459818eff10834ce0, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -240,6 +242,14 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_Mesh: {fileID: 10205, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!45 &4500000
+Skybox:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100004}
+  m_Enabled: 1
+  m_CustomSkybox: {fileID: 2100000, guid: 2fcac75573f01134e87198d5665a7075, type: 2}
 --- !u!54 &5400000
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -279,7 +289,7 @@ Light:
   serializedVersion: 3
   m_Type: 2
   m_Color: {r: .917647064, g: .917647064, b: .917647064, a: 1}
-  m_Intensity: .5
+  m_Intensity: .200000003
   m_Range: 3
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -477,6 +487,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   footLeft: {fileID: 2100000, guid: b81d03c849c5be84e91d3989ae522b4b, type: 2}
   footRight: {fileID: 2100000, guid: 34413a75bd9167b40915500f5bff7521, type: 2}
+--- !u!122 &12200000
+Halo:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 0
+  m_Color:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_Size: 3
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1

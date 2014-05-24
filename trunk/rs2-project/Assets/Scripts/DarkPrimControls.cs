@@ -18,15 +18,21 @@ public class DarkPrimControls : MonoBehaviour
 		void Update ()
 		{
 				footsteps = GameObject.FindGameObjectsWithTag ("Footstep");
-				if (nightmareVision) {
-						foreach (var footstep in footsteps) {
-								footstep.GetComponent<MeshRenderer> ().enabled = true;
-						}
-				} else if (!ConfigManager.alwaysShowFootsteps) {
-						foreach (var footstep in footsteps) {
-								footstep.GetComponent<MeshRenderer> ().enabled = false;
-						}
-				}
+                if(nightmareVision)
+                {
+                    foreach (var footstep in footsteps)
+                    {
+                        footstep.GetComponent<MeshRenderer>().enabled = true;
+                    }
+                }
+                else
+                {
+                    foreach (var footstep in footsteps)
+                    {
+                        if(!ConfigManager.alwaysShowFootsteps)
+                            footstep.GetComponent<MeshRenderer>().enabled = false;
+                    }
+                }
 		
 				if (Input.GetKeyDown (KeyCode.E)) {
 						if (!nightmareVision) {
@@ -34,11 +40,19 @@ public class DarkPrimControls : MonoBehaviour
 										wall.renderer.material.shader = Shader.Find ("Transparent/Diffuse");
 										wall.renderer.material.color = new Color (1, 0, 0, 0.2f);
 								}
+
+                                GameObject prim = GameObject.FindGameObjectWithTag("Prim").transform.FindChild("Graphics").gameObject;
+                                (prim.GetComponent("Halo") as Behaviour).enabled = true;
+
 								nightmareVision = true;
 						} else {
-								foreach (var wall in walls) {
-										wall.renderer.material.shader = Shader.Find ("Diffuse");
-										wall.renderer.material.color = new Color (1, 1, 1, 1);
+								    foreach (var wall in walls) {
+										    wall.renderer.material.shader = Shader.Find ("Diffuse");
+                                            wall.renderer.material.color = Color.gray;
+
+                                    GameObject prim = GameObject.FindGameObjectWithTag("Prim").transform.FindChild("Graphics").gameObject;
+                                    (prim.GetComponent("Halo") as Behaviour).enabled = false;
+
 								}
 								nightmareVision = false;
 						}
@@ -50,7 +64,6 @@ public class DarkPrimControls : MonoBehaviour
 				if (other.transform.parent.gameObject.tag == "Prim") {
 						var distance = Vector3.Distance (this.transform.position, other.transform.parent.gameObject.transform.position);
 						Debug.Log ("DarkPrim: End Game " + distance + " " + System.DateTime.Now);
-                        Application.LoadLevel("GameOver");
 				}				
 		}
 

@@ -24,7 +24,7 @@ public class PathColor : MonoBehaviour
 		public void Colorize ()
 		{
 				if (walkedOnByPrim)
-						this.gameObject.renderer.material.color = Color.gray;
+						this.gameObject.renderer.material.color = Color.white;
 				if (walkedOnByDarkPrim)
 						this.gameObject.renderer.material.color = Color.red;
 		}

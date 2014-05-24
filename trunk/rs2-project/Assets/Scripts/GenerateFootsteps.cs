@@ -32,8 +32,9 @@ public class GenerateFootsteps : MonoBehaviour
 		}
 
 		private void generateFootstep ()
-		{
-				string nextFoot;
+        {
+            #region 2D footsteps
+            string nextFoot;
 				if (!lastWasLeft) {
 						nextFoot = "FootstepLeft";
 						lastWasLeft = true;
@@ -47,8 +48,27 @@ public class GenerateFootsteps : MonoBehaviour
 				//TODO: Namestiti malo bolje lociranje po Y osi
 				footstep.transform.position = new Vector3 (footstep.transform.position.x, -0.499f, footstep.transform.position.z);
 				footstep.transform.localScale = new Vector3 (0.25f, 0.25f, 0.25f);
-				
-				if (ConfigManager.alwaysShowFootsteps)
+            #endregion
+
+                #region 3D footsteps(not finished)
+                /*GameObject footstep = PhotonNetwork.Instantiate("FootstepBeam", this.transform.position, Quaternion.identity, 0);
+                footstep.transform.Rotate(new Vector3(-90, this.transform.localEulerAngles.y, 0));
+                //TODO: Namestiti malo bolje lociranje po Y osi
+                if (lastWasLeft)
+                {
+                    footstep.transform.localPosition = new Vector3(footstep.transform.localPosition.x + 0.1f, -0.499f, footstep.transform.localPosition.z);
+                    footstep.transform.localScale = new Vector3(-0.1f, -0.1f, 0.1f);
+                    lastWasLeft = false;
+                }
+                else
+                {
+                    footstep.transform.localPosition = new Vector3(footstep.transform.localPosition.x - 0.1f, -0.499f, footstep.transform.localPosition.z);
+                    footstep.transform.localScale = new Vector3(0.1f, -0.1f, 0.1f);
+                    lastWasLeft = true;
+                }*/
+                #endregion
+
+                if (ConfigManager.alwaysShowFootsteps)
 						footstep.GetComponent<MeshRenderer> ().enabled = true;
 
 				footstep.GetComponent<FootstepBehaviour> ().isOwner = true;
