@@ -29,8 +29,10 @@ public class DarkPrimControls : MonoBehaviour
                 {
                     foreach (var footstep in footsteps)
                     {
-                        if(!ConfigManager.alwaysShowFootsteps)
-                            footstep.GetComponent<MeshRenderer>().enabled = false;
+                       if(!ConfigManager.alwaysShowFootsteps)
+                          footstep.GetComponent<MeshRenderer>().enabled = false;
+                       else
+                           footstep.GetComponent<MeshRenderer>().enabled = true;
                     }
                 }
 		

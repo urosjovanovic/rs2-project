@@ -239,6 +239,7 @@ public class InitializeWorld : MonoBehaviour
 						flashlight.GetComponent<FlashlightBehaviour> ().parent = player.transform;
 						//set the controls for the goddamn flashlight...
 						player.GetComponent<PrimsControls> ().flashlight = flashlight.transform;
+                        player.transform.FindChild("Point light").light.enabled = true;
 				}
 
 				((MonoBehaviour)player.GetComponent ("FPSInputController")).enabled = true;
@@ -251,11 +252,14 @@ public class InitializeWorld : MonoBehaviour
 						((MonoBehaviour)player.GetComponent ("GenerateFootsteps")).enabled = true;
 				} else if (player.gameObject.tag == "DarkPrim") {
 						((MonoBehaviour)player.GetComponent ("DarkPrimControls")).enabled = true;
-						GameObject flashlight = GameObject.FindGameObjectWithTag ("Flashlight");
+						
+                        //Lampa nije bitna vise za DarkPrima...
+                        /*GameObject flashlight = GameObject.FindGameObjectWithTag ("Flashlight");
 						if (flashlight) {
 								//Ako lampa vec postoji, znaci da je Prim vec spawnovan
 								flashlight.GetComponent<FlashlightBehaviour> ().parent = GameObject.FindGameObjectWithTag ("Prim").transform;
-						}
+						}*/
+
                         GameObject[] walls = GameObject.FindGameObjectsWithTag("Wall");
                         foreach(var wall in walls)
                         {
