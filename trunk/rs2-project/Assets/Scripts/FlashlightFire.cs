@@ -26,7 +26,6 @@ public class FlashlightFire : MonoBehaviour {
 
     void Fire()
     {
-        Debug.Log("Fire!");
 
         if (coolDown > 0)
             return;

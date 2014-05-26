@@ -4,10 +4,10 @@ using System.Collections;
 public class PrimsFootsteps : MonoBehaviour {
 
 	AudioSource footstepsSource;
-	public AudioClip forwardFootstep;
     public float footstepDelayForward;
     public float footstepDelayBackward;
     public float footstepDelaySide;
+    public float footstepDelaySprint;
 
     private float currentFootstepDelay;
 
@@ -18,7 +18,6 @@ public class PrimsFootsteps : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		//footstepsSource = GetComponents (typeof(AudioSource)) [0] as AudioSource;
         footstepsSource = audio;
         StartCoroutine(PlayFootsteps());
 	}
@@ -31,20 +30,26 @@ public class PrimsFootsteps : MonoBehaviour {
         while (true)
         {
             // ako se karakter krece u napred
-            if (controller.isGrounded && controller.velocity.magnitude > 0.3 && movingForward)
+            if (controller.isGrounded && controller.velocity.magnitude > 0.25 && movingForward)
             {
-                currentFootstepDelay = footstepDelayForward;
-                footstepsSource.PlayOneShot(SoundPool.ForwardFootstep); 
+                if( Input.GetKey("left shift") || Input.GetKey("right shift")){
+                    currentFootstepDelay = footstepDelaySprint;
+                    footstepsSource.PlayOneShot(SoundPool.SprintFootstep);
+                }
+                else {
+                    currentFootstepDelay = footstepDelayForward;
+                    footstepsSource.PlayOneShot(SoundPool.ForwardFootstep); 
+                }
             }
-            else if (controller.isGrounded && controller.velocity.magnitude > 0.2 && movingBackward)
+            else if (controller.isGrounded && controller.velocity.magnitude > 0.15 && movingBackward)
             {
                 currentFootstepDelay = footstepDelayBackward;
-                footstepsSource.PlayOneShot(SoundPool.BackwardFootstep);
+               footstepsSource.PlayOneShot(SoundPool.sideStep);
             }
             else if (controller.isGrounded && controller.velocity.magnitude > 0.2 && movingSide)
             {
                 currentFootstepDelay = footstepDelaySide;
-                footstepsSource.PlayOneShot(SoundPool.SideStep);
+                footstepsSource.PlayOneShot(SoundPool.sideStep);
             }
 
             else
