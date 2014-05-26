@@ -6,6 +6,8 @@ public class SoundPool : MonoBehaviour {
     public AudioClip[] publicForwardFootsteps;
     public AudioClip[] publicSprintFootsteps;
 
+    public AudioClip[] publicDarkForwardFootsteps;
+
     public AudioClip publicSideStep;
     public AudioClip publicFlashlightClick;
 
@@ -19,12 +21,23 @@ public class SoundPool : MonoBehaviour {
 
     public static AudioClip flashlightClick;
 
+    public static AudioClip[] darkForwardFootsteps;
+    private static int currentDarkForwardFootstep = 0;
+
+    public AudioClip[] publicDarkSideStep;
+    public static AudioClip[] darkSideStep;
+
+    private static int currentDarkSideStep = 0;
+
     public void Start()
     {
         forwardFootsteps = publicForwardFootsteps;
         sideStep = publicSideStep;
 
         sprintFootsteps = publicSprintFootsteps;
+
+        darkForwardFootsteps = publicDarkForwardFootsteps;
+        darkSideStep = publicDarkSideStep;
     }
 
     public static AudioClip ForwardFootstep {
@@ -32,10 +45,6 @@ public class SoundPool : MonoBehaviour {
         {
             currentForwardFootstep = (currentForwardFootstep + 1) % 2;
             return forwardFootsteps[currentForwardFootstep];
-        }
-        set
-        {
-
         }
     }
 
@@ -46,10 +55,6 @@ public class SoundPool : MonoBehaviour {
             currentSprintFootstep = (currentSprintFootstep + 1) % 2;
             return sprintFootsteps[currentSprintFootstep];
         }
-        set
-        {
-
-        }
     }
 
     public static AudioClip SideStep
@@ -58,12 +63,6 @@ public class SoundPool : MonoBehaviour {
         {
             return sideStep;
         }
-
-        set
-        {
-
-        }
-
     }
 
     public static AudioClip FlashlightClick
@@ -72,9 +71,24 @@ public class SoundPool : MonoBehaviour {
         {
             return flashlightClick;
         }
-        set
-        {
+    }
 
+    public static AudioClip DarkForwardFootstep
+    {
+        get
+        {
+            currentDarkForwardFootstep = (currentDarkForwardFootstep + 1) % 2;
+            return darkForwardFootsteps[currentDarkForwardFootstep];
         }
     }
+
+    public static AudioClip DarkSideStep
+    {
+        get
+        {
+            currentDarkSideStep = (currentDarkSideStep + 1) % 2;
+            return darkSideStep[currentDarkSideStep];
+        }
+    }
+
 }

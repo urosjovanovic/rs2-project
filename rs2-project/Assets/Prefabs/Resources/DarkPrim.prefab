@@ -33,6 +33,7 @@ GameObject:
   - 114: {fileID: 11400004}
   - 81: {fileID: 8100000}
   - 45: {fileID: 4500000}
+  - 82: {fileID: 8200002}
   m_Layer: 0
   m_Name: MainCamera
   m_TagString: MainCamera
@@ -69,8 +70,10 @@ GameObject:
   - 114: {fileID: 11400008}
   - 114: {fileID: 11400010}
   - 114: {fileID: 11400002}
-  - 114: {fileID: 11400000}
   - 114: {fileID: 11400012}
+  - 82: {fileID: 8200000}
+  - 114: {fileID: 11400014}
+  - 114: {fileID: 11400016}
   m_Layer: 0
   m_Name: DarkPrim
   m_TagString: DarkPrim
@@ -269,6 +272,122 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_Enabled: 0
+--- !u!82 &8200000
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100006}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: .300000012
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+--- !u!82 &8200002
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 8300000, guid: 3c304513f465f364da12fd182237e8ca, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: .5
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!92 &9200000
 Behaviour:
   m_ObjectHideFlags: 1
@@ -311,18 +430,6 @@ Light:
   m_ShadowAngle: 0
   m_IndirectIntensity: 1
   m_AreaSize: {x: 1, y: 1}
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100006}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7206d8c00cd3f6a479508904916b4f2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sprintSpeed: 5
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -393,7 +500,7 @@ MonoBehaviour:
   canControl: 1
   useFixedUpdate: 1
   movement:
-    maxForwardSpeed: 1.5
+    maxForwardSpeed: 2
     maxSidewaysSpeed: 1
     maxBackwardsSpeed: 1
     slopeSpeedMultiplier:
@@ -457,6 +564,41 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   opacityMap: {fileID: 0}
+--- !u!114 &11400014
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 601d54ebafe03954b9d48d27b07ff654, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  publicForwardFootsteps: []
+  publicSprintFootsteps: []
+  publicDarkForwardFootsteps:
+  - {fileID: 8300000, guid: 4339d80cb46e8b44aa9c95a2b98cba5d, type: 3}
+  - {fileID: 8300000, guid: 6f0287131fa06a74e9890aa750b720f0, type: 3}
+  publicSideStep: {fileID: 0}
+  publicFlashlightClick: {fileID: 0}
+  publicDarkSideStep:
+  - {fileID: 8300000, guid: 6e5e49b33f15a0d4c9b62eb42caa3616, type: 3}
+  - {fileID: 8300000, guid: bade8bc25c51b8440bc376721971f60c, type: 3}
+--- !u!114 &11400016
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14c33564efa188a40b71907674a4a661, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  footstepDelayForward: .5
+  footstepDelayBackward: .5
+  footstepDelaySide: .600000024
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1
