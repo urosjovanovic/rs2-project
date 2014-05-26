@@ -23,8 +23,9 @@ public class HeadBob : MonoBehaviour {
         var horizontal = Input.GetAxis("Horizontal");
         var vertical = Input.GetAxis("Vertical");
         var run = Input.GetKey("left shift") ;
+        var w = Input.GetKey(KeyCode.W);
 
-        if (run)
+        if (run && w)
         {
             if (Mathf.Abs(horizontal) == 0 && Mathf.Abs(vertical) == 0)
             {

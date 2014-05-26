@@ -3,51 +3,78 @@ using System.Collections.Generic;
 
 public class SoundPool : MonoBehaviour {
 
-	// Use this for initialization
+    public AudioClip[] publicForwardFootsteps;
+    public AudioClip[] publicSprintFootsteps;
 
-    public List<AudioClip> soundClips;
-    public static List<AudioClip> staticSoundClips;
+    public AudioClip publicSideStep;
+    public AudioClip publicFlashlightClick;
 
-    private enum SoundIndexes { ForwardFootstep = 0, BackwardFootstep = 1, SideStep = 2, Heartbeat = 3 };
+    public static AudioClip[] forwardFootsteps;
+    private static int currentForwardFootstep = 0;
 
-	void Start () {
-        staticSoundClips = soundClips;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    public static AudioClip sideStep;
+
+    public static AudioClip[] sprintFootsteps;
+    private static int currentSprintFootstep = 0;
+
+    public static AudioClip flashlightClick;
+
+    public void Start()
+    {
+        forwardFootsteps = publicForwardFootsteps;
+        sideStep = publicSideStep;
+
+        sprintFootsteps = publicSprintFootsteps;
+    }
 
     public static AudioClip ForwardFootstep {
-        get {
-            return staticSoundClips[ (int)SoundIndexes.ForwardFootstep];
+        get
+        {
+            currentForwardFootstep = (currentForwardFootstep + 1) % 2;
+            return forwardFootsteps[currentForwardFootstep];
+        }
+        set
+        {
+
         }
     }
 
-    public static AudioClip BackwardFootstep
+    public static AudioClip SprintFootstep
     {
         get
         {
-            return staticSoundClips[(int)SoundIndexes.BackwardFootstep];
+            currentSprintFootstep = (currentSprintFootstep + 1) % 2;
+            return sprintFootsteps[currentSprintFootstep];
         }
+        set
+        {
 
+        }
     }
 
     public static AudioClip SideStep
     {
         get
         {
-            return staticSoundClips[(int)SoundIndexes.SideStep];
+            return sideStep;
         }
+
+        set
+        {
+
+        }
+
     }
 
-    public static AudioClip Heartbeat
+    public static AudioClip FlashlightClick
     {
         get
         {
-            return staticSoundClips[(int)SoundIndexes.Heartbeat];
+            return flashlightClick;
+        }
+        set
+        {
+
         }
     }
-
 }

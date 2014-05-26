@@ -6,9 +6,10 @@ public class PrimsControls : MonoBehaviour {
 	public Transform flashlight;
     private int markerCount = 3;
 
+
 	// Use this for initialization
 	void Start () {
-	
+       
 	}
 	
 	// Update is called once per frame
@@ -18,6 +19,7 @@ public class PrimsControls : MonoBehaviour {
 		{
 			flashlight.gameObject.light.enabled = !flashlight.gameObject.light.enabled;
 		}
+
         if(Input.GetKeyDown(KeyCode.T))
         {
             if (markerCount > 0)

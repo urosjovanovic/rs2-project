@@ -240,12 +240,15 @@ public class InitializeWorld : MonoBehaviour
 						//set the controls for the goddamn flashlight...
 						player.GetComponent<PrimsControls> ().flashlight = flashlight.transform;
                         player.transform.FindChild("Point light").light.enabled = true;
+
+                        player.transform.FindChild("MainCamera").GetComponent<AudioSource>().enabled = true;
 				}
 
 				((MonoBehaviour)player.GetComponent ("FPSInputController")).enabled = true;
 				//((MonoBehaviour)player.GetComponent ("MouseLook")).enabled = true;
 				((MonoBehaviour)player.GetComponent ("Sprint")).enabled = true;
 				player.transform.FindChild ("MainCamera").gameObject.camera.enabled = true;
+                player.transform.FindChild("MainCamera").GetComponent<AudioListener>().enabled = true;
 
 				if (player.gameObject.tag == "Prim") {
 						((MonoBehaviour)player.GetComponent ("PrimsControls")).enabled = true;
