@@ -44,6 +44,7 @@ public class DarkPrimControls : MonoBehaviour
 								}
 
                                 GameObject prim = GameObject.FindGameObjectWithTag("Prim").transform.FindChild("Graphics").gameObject;
+
                                 (prim.GetComponent("Halo") as Behaviour).enabled = true;
 
 								nightmareVision = true;
