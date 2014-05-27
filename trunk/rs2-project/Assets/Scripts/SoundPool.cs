@@ -6,8 +6,6 @@ public class SoundPool : MonoBehaviour {
     public AudioClip[] publicForwardFootsteps;
     public AudioClip[] publicSprintFootsteps;
 
-    public AudioClip[] publicDarkForwardFootsteps;
-
     public AudioClip publicSideStep;
     public AudioClip publicFlashlightClick;
 
@@ -21,13 +19,6 @@ public class SoundPool : MonoBehaviour {
 
     public static AudioClip flashlightClick;
 
-    public static AudioClip[] darkForwardFootsteps;
-    private static int currentDarkForwardFootstep = 0;
-
-    public AudioClip[] publicDarkSideStep;
-    public static AudioClip[] darkSideStep;
-
-    private static int currentDarkSideStep = 0;
 
     public void Start()
     {
@@ -35,9 +26,6 @@ public class SoundPool : MonoBehaviour {
         sideStep = publicSideStep;
 
         sprintFootsteps = publicSprintFootsteps;
-
-        darkForwardFootsteps = publicDarkForwardFootsteps;
-        darkSideStep = publicDarkSideStep;
     }
 
     public static AudioClip ForwardFootstep {
@@ -73,22 +61,5 @@ public class SoundPool : MonoBehaviour {
         }
     }
 
-    public static AudioClip DarkForwardFootstep
-    {
-        get
-        {
-            currentDarkForwardFootstep = (currentDarkForwardFootstep + 1) % 2;
-            return darkForwardFootsteps[currentDarkForwardFootstep];
-        }
-    }
-
-    public static AudioClip DarkSideStep
-    {
-        get
-        {
-            currentDarkSideStep = (currentDarkSideStep + 1) % 2;
-            return darkSideStep[currentDarkSideStep];
-        }
-    }
 
 }
