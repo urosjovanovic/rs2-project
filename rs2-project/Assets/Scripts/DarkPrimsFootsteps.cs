@@ -34,19 +34,19 @@ public class DarkPrimsFootsteps : MonoBehaviour
             if (controller.isGrounded && controller.velocity.magnitude > 0.25 && movingForward)
             {
                 currentFootstepDelay = footstepDelayForward;
-                footstepsSource.PlayOneShot(SoundPool.DarkForwardFootstep);
+                footstepsSource.PlayOneShot(DarkPrimSoundPool.DarkForwardFootstep);
 
             }
 
             else if (controller.isGrounded && controller.velocity.magnitude > 0.15 && movingBackward)
             {
                 currentFootstepDelay = footstepDelayBackward;
-                footstepsSource.PlayOneShot(SoundPool.DarkSideStep);
+                footstepsSource.PlayOneShot(DarkPrimSoundPool.DarkSideStep);
             }
             else if (controller.isGrounded && controller.velocity.magnitude > 0.2 && movingSide)
             {
                 currentFootstepDelay = footstepDelaySide;
-                footstepsSource.PlayOneShot(SoundPool.DarkSideStep);
+                footstepsSource.PlayOneShot(DarkPrimSoundPool.DarkSideStep);
             }
 
             else
