@@ -15,7 +15,7 @@ public class PrimsControls : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
-		if(Input.GetKeyDown(KeyCode.F))
+		if(Input.GetKeyDown(KeyCode.F) && flashlight.gameObject.GetComponent<FlashlightRecharge>().flashLightEnabled)
 		{
 			flashlight.gameObject.light.enabled = !flashlight.gameObject.light.enabled;
 		}

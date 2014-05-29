@@ -53,7 +53,7 @@ public class FlashlightBehaviour : MonoBehaviour
                 }
                 else
                 {
-                    if (flashlight.enabled)
+					if (flashlight.enabled && flashlight.gameObject.GetComponent<FlashlightRecharge>().flashLightEnabled)
                     {
                         var darkPrim = GameObject.FindGameObjectWithTag("DarkPrim");
 
