@@ -16,7 +16,7 @@ public class FlashlightFire : MonoBehaviour {
 	void Update () {
 
         //flashlight rays
-        if (this.gameObject.light.enabled)
+		if (this.gameObject.light.enabled && this.gameObject.GetComponent<FlashlightRecharge>().flashLightEnabled)
         {
             coolDown -= Time.deltaTime;
             Fire();

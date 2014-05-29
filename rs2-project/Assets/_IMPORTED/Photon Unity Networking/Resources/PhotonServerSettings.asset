@@ -30,4 +30,5 @@ MonoBehaviour:
   - Fire
   - Freeze
   - FreezeDarkPrim
+  - ReCharge
   DisableAutoOpenWizard: 0
