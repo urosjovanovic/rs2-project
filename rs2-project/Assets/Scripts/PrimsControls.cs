@@ -6,6 +6,11 @@ public class PrimsControls : MonoBehaviour {
 	public Transform flashlight;
     private int markerCount = 3;
 
+    public int MarkerCount
+    {
+        get { return markerCount;  }
+    }
+
 
 	// Use this for initialization
 	void Start () {
@@ -40,11 +45,6 @@ public class PrimsControls : MonoBehaviour {
 
 
 	}
-
-    void OnGUI()
-    {
-        GUI.TextField(new Rect(Screen.width-150, Screen.height-25, 300, 50), markerCount.ToString());
-    }
 
 	void OnTriggerEnter (Collider other)
 	{

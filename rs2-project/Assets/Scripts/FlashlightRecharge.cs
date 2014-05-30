@@ -28,20 +28,17 @@ public class FlashlightRecharge : MonoBehaviour {
 			{
 				view.RPC ("ReCharge", PhotonTargets.All, null);
 			}
-			else
-				Debug.Log("FlashLight Percent" + flashLightChargedPercent); 
+
 		} 
 		else if(flashLightTimeRemaining<flashLightLifeTime)
 		{
 			flashLightTimeRemaining += (Time.deltaTime*flashLightLifeTime)/flashLightReChargeTime;
 			flashLightChargedPercent = (int)(((float)flashLightTimeRemaining/flashLightLifeTime)*100 + 0.5f);
-			Debug.Log("FlashLight Percent" + flashLightChargedPercent);  
 		}
 		else if(flashLightTimeRemaining>flashLightLifeTime)
 		{
 			flashLightTimeRemaining = flashLightLifeTime;
 			flashLightChargedPercent = 100;
-			Debug.Log("FlashLight Percent" + flashLightChargedPercent);
 		}
 	}
 	
