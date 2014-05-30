@@ -232,7 +232,17 @@ public class InitializeWorld : MonoBehaviour
 
 				}
 
-				if (player.gameObject.tag == "Prim") {
+                //global
+    
+                ((MonoBehaviour)player.GetComponent("FPSInputController")).enabled = true;
+                //((MonoBehaviour)player.GetComponent ("MouseLook")).enabled = true;
+                player.transform.FindChild("MainCamera").GetComponent<AudioSource>().enabled = true;
+                player.transform.FindChild("MainCamera").gameObject.camera.enabled = true;
+                player.transform.FindChild("MainCamera").GetComponent<AudioListener>().enabled = true;
+
+                //Prim only
+				if (player.gameObject.tag == "Prim") 
+                {
 						//spawn the goddamn flashlight...
 						GameObject flashlight = (GameObject)PhotonNetwork.Instantiate ("Flashlight", new Vector3 (0, 2, 0), Quaternion.identity, 0);
 						flashlight.GetComponent<FlashlightBehaviour> ().enabled = true;
@@ -240,21 +250,14 @@ public class InitializeWorld : MonoBehaviour
 						//set the controls for the goddamn flashlight...
 						player.GetComponent<PrimsControls> ().flashlight = flashlight.transform;
                         player.transform.FindChild("Point light").light.enabled = true;
-
                         ((MonoBehaviour)player.GetComponent("Sprint")).enabled = true;
+                        ((MonoBehaviour)player.GetComponent("PrimsControls")).enabled = true;
+                        ((MonoBehaviour)player.GetComponent("GenerateFootsteps")).enabled = true;
+                        player.transform.FindChild("MainCamera").GetComponent<UIPrim>().enabled = true;
 				}
-
-				((MonoBehaviour)player.GetComponent ("FPSInputController")).enabled = true;
-				//((MonoBehaviour)player.GetComponent ("MouseLook")).enabled = true;
-                player.transform.FindChild("MainCamera").GetComponent<AudioSource>().enabled = true;
-				
-				player.transform.FindChild ("MainCamera").gameObject.camera.enabled = true;
-                player.transform.FindChild("MainCamera").GetComponent<AudioListener>().enabled = true;
-
-				if (player.gameObject.tag == "Prim") {
-						((MonoBehaviour)player.GetComponent ("PrimsControls")).enabled = true;
-						((MonoBehaviour)player.GetComponent ("GenerateFootsteps")).enabled = true;
-				} else if (player.gameObject.tag == "DarkPrim") {
+                else //DarkPrim only
+                    if (player.gameObject.tag == "DarkPrim") 
+                {
 						((MonoBehaviour)player.GetComponent ("DarkPrimControls")).enabled = true;
 						
                         //Lampa nije bitna vise za DarkPrima...

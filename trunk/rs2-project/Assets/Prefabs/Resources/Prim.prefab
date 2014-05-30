@@ -50,6 +50,7 @@ GameObject:
   - 114: {fileID: 11400014}
   - 45: {fileID: 4500000}
   - 82: {fileID: 8200002}
+  - 114: {fileID: 11400022}
   m_Layer: 0
   m_Name: MainCamera
   m_TagString: MainCamera
@@ -642,6 +643,21 @@ MonoBehaviour:
   publicSideStep: {fileID: 8300000, guid: 2f6c7080719cac04dbf4c59b4aadc0f6, type: 3}
   publicFlashlightClick: {fileID: 8300000, guid: b1559c8171519b847b44cefdb2577a35,
     type: 3}
+--- !u!114 &11400022
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100004}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66d1410f6ce3b644cbbfa91a7a6086ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lightOn: {fileID: 2800000, guid: 67a9837e502396e44ae6644840e81828, type: 3}
+  lightOff: {fileID: 2800000, guid: 7d5e89fc3d8a89c4687059ceec3a80aa, type: 3}
+  lightbar: {fileID: 2800000, guid: 638bea4eab2c27a4383785ff92c36965, type: 3}
+  markerIcon: {fileID: 2800000, guid: 8607fba379f3d264bb05559a3cd43b39, type: 3}
 --- !u!122 &12200000
 Halo:
   m_ObjectHideFlags: 1
