@@ -4,6 +4,7 @@ using System.IO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 public class GenerateWorld : MonoBehaviour {
 	
@@ -58,9 +59,9 @@ public class GenerateWorld : MonoBehaviour {
     /// Procedurally generates a new maze
     /// </summary>
     /// <returns> An integer maze matrix </returns>
-    public static Maze GenerateMaze()
+    public static Maze GenerateMaze(int size)
     {
-        return new Maze(32,32);
+        return new Maze(size,size);
     }
 
     
@@ -199,12 +200,15 @@ public class Maze
 
         spawnNodes.Add("Prim", primSpawnPoint);
 
+        Graph.PrintGridGraph(@"C:\Users\Divic\Desktop\izlaz.txt");
         var distances = Graph.DistancesFromNode(primSpawnPoint);
 
         // Exit is the node that is farthest from Prim
         var farthestFromPrim = (from d in distances
                                 where d.Value == distances.Max(x => x.Value)
                                 select d.Key).First();
+
+        Debug.Log("Distance: " + distances[farthestFromPrim]);
 
         spawnNodes.Add("Exit", farthestFromPrim);
 
@@ -320,6 +324,11 @@ public class GridNode
     public override string ToString()
     {
         return "(" + i + ", " + j + ")";
+    }
+
+    public override int GetHashCode()
+    {
+        return i ^ j;
     }
 
     #endregion
@@ -589,14 +598,25 @@ public class GridGraph
             }
         }
 
+        StringBuilder sb = new StringBuilder();
+
         // print the graph
         for (int i = 0; i < rows; i++)
         {
             for (int j = 0; j < cols; j++)
             {
-                Console.Write(" {0} ", matrix[i, j]);
+                sb.Append(matrix[i, j]);
             }
-            Console.WriteLine();
+            sb.Append("\n");
+        }
+
+        if (!String.IsNullOrEmpty(path))
+        {
+            File.WriteAllText(path, sb.ToString());
+        }
+        else
+        {
+
         }
 
     }
@@ -609,47 +629,61 @@ public class GridGraph
     /// <returns> A dictionary of nodes and their distances from the node v</returns>
     public Dictionary<GridNode, int> DistancesFromNode(GridNode v)
     {
-        // result dictionary
+        Debug.Log("Calculating distances from node: (" + v.i + ", " + v.j + ")");
+
+
+        // distances
         var distances = new Dictionary<GridNode, int>();
 
-        // list of traversed nodes
+        var activeDistances = new Dictionary<GridNode, int>();
+
         var traversed = new List<GridNode>();
 
-        // active list of nodes
-        var neighbourList = new List<GridNode>();
+        traversed.Add(v);
 
 
-        //initial step
-        neighbourList.Add(v);
-        distances[v] = 0;
-
-        // while there are nodes to be traversed
-        while (neighbourList.Count > 0)
+        foreach (var neighbour in v.Edges)
         {
+            activeDistances[neighbour] = 1;
+        }
 
-            // pop the first node
-            var currentNode = neighbourList[0];
-            neighbourList.RemoveAt(0);
+       
 
+        while (activeDistances.Count > 0)
+        {
+            // nadji najmanji
+            var minDistanceNode = (from node in activeDistances
+                                   where node.Value == activeDistances.Min(x => x.Value)
+                                   select node).First().Key;
 
-            // mark it as traversed
-            traversed.Add(currentNode);
+            minDistanceNode = this[minDistanceNode];
 
-            foreach (var neighbour in this[currentNode].Edges)
+            // dodaj ga u distance
+            distances[minDistanceNode] = activeDistances[minDistanceNode];
+            traversed.Add(minDistanceNode);
+
+            Debug.Log("Distance from: (" + minDistanceNode.i + ", " + minDistanceNode.j + ") is " + distances[minDistanceNode]);
+
+            // dodaj njegove susede u aktivne distance
+            foreach (var neighbour in minDistanceNode.Edges)
             {
-
                 if (!traversed.Contains(neighbour))
                 {
-                    neighbourList.Add(neighbour);
-                    // distance is one step away from the current node
-                    distances[neighbour] = distances[currentNode] + 1;
+                    if (!distances.ContainsKey(neighbour) || (distances[minDistanceNode] + 1) < distances[neighbour])
+                    {
+                        activeDistances[neighbour] = distances[minDistanceNode] + 1;
+                    }
                 }
             }
 
+
+            // obrisi najmanji
+            activeDistances.Remove(minDistanceNode);
+
         }
 
-        return distances;
 
+        return distances;
     }
 
     #endregion

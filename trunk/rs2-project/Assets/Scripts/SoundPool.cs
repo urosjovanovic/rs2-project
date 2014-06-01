@@ -26,6 +26,7 @@ public class SoundPool : MonoBehaviour {
         sideStep = publicSideStep;
 
         sprintFootsteps = publicSprintFootsteps;
+        flashlightClick = publicFlashlightClick;
     }
 
     public static AudioClip ForwardFootstep {

@@ -52,7 +52,7 @@ public class InitializeWorld : MonoBehaviour
 								matrixSize = mazeMatrix.GetLength (0);
 						} else {
 
-								var maze = GenerateWorld.GenerateMaze ();
+								var maze = GenerateWorld.GenerateMaze (32);
 
 								mazeMatrix = maze.matrix;
 								matrixSize = mazeMatrix.GetLength (0);
@@ -60,6 +60,10 @@ public class InitializeWorld : MonoBehaviour
 								spawnNodes = maze.GetSpawnNodes ();
 
 								var primSpawn = spawnNodes ["Prim"];
+                                var exitSpawn = spawnNodes["Exit"];
+
+                                Debug.Log("Prim: " + primSpawn.i + " " + primSpawn.j);
+                                Debug.Log("Exit: " + exitSpawn.i + " " + exitSpawn.j);
 
 								x_sp = primSpawn.i;
 								z_sp = primSpawn.j;
@@ -69,17 +73,18 @@ public class InitializeWorld : MonoBehaviour
 						for (int i = 0; i < mazeMatrix.GetLength(0); i++)
 								RenderOneMazeRow (i, getRow (i, mazeMatrix));
 
+                       
 						// Spawn Prim
-						int XPosition = x_sp * 2;
-						int ZPosition = z_sp * 2 + 1;
+						int XPosition = z_sp * 2 ;
+						int ZPosition = matrixSize - x_sp * 2 ;
 						spawnPlayer ("Prim", new Vector3 (XPosition, 0.1f, ZPosition));
-
+                        
 
 						// Instantiate EXIT
 						var exitNode = spawnNodes ["Exit"];
 
-						int exitX = exitNode.i * 2;
-						int exitZ = exitNode.j * 2 + 1;
+						int exitX = exitNode.j * 2;
+						int exitZ = matrixSize - exitNode.i * 2;
 
 						GameObject exit = GameObject.CreatePrimitive (PrimitiveType.Sphere);
 						exit.transform.position = new Vector3 (exitX, 0.3f, exitZ);
@@ -108,8 +113,8 @@ public class InitializeWorld : MonoBehaviour
 						if (rowsSent >= matrixSize) {
 								var darkPrimSpawn = spawnNodes ["DarkPrim"];
 
-								int XPosition = darkPrimSpawn.i * 2;
-								int ZPosition = darkPrimSpawn.j * 2 + 1;
+								int XPosition = darkPrimSpawn.j * 2;
+								int ZPosition = matrixSize - darkPrimSpawn.i * 2 ;
 
 								thisScriptView.RPC ("spawnPlayer", PhotonTargets.Others, new object[] {
 										"DarkPrim",
@@ -148,7 +153,7 @@ public class InitializeWorld : MonoBehaviour
 		/// <returns> An array of integers representing a row </returns>
 		private int[] getRow (int index, int[,] matrix)
 		{
-				var result = new int[31];
+				var result = new int[matrix.GetLength(0)];
 
 				for (int j = 0; j < matrix.GetLength(1); j++) {
 						result [j] = matrix [index, j];

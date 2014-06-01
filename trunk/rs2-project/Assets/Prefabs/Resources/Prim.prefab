@@ -641,7 +641,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 9eeb2ffd8f0d3ff4db4446f884585902, type: 3}
   - {fileID: 8300000, guid: 6cd43357867a2d2499995f2fca76d5d2, type: 3}
   publicSideStep: {fileID: 8300000, guid: 2f6c7080719cac04dbf4c59b4aadc0f6, type: 3}
-  publicFlashlightClick: {fileID: 8300000, guid: b1559c8171519b847b44cefdb2577a35,
+  publicFlashlightClick: {fileID: 8300000, guid: d378d7a5364b9b442b6576e6dec71198,
     type: 3}
 --- !u!114 &11400022
 MonoBehaviour:
