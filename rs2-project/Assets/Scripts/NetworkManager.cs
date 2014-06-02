@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class NetworkManager : Photon.MonoBehaviour
 {
@@ -29,12 +30,12 @@ public class NetworkManager : Photon.MonoBehaviour
 		void OnPhotonRandomJoinFailed ()
 		{
 				Debug.Log ("Failed to join random room, creating new room...");
-				PhotonNetwork.CreateRoom ("TestRoom");           
+				PhotonNetwork.CreateRoom ("VeryScaryRoom");           
 		}
 
 		void OnJoinedRoom ()
 		{
-				Debug.Log ("Joined Room");
+				Debug.Log ("Joined Room!");
 
 				InitializeWorld ();
                 
@@ -42,16 +43,13 @@ public class NetworkManager : Photon.MonoBehaviour
 
 		public void InitializeWorld ()
 		{
+                // AND THAT'S HOW A GOD IS BORN
 				GameObject god = (GameObject)PhotonNetwork.Instantiate ("TheCreator", Vector3.zero, Quaternion.identity, 0);
 
+                // AND THIS IS HOW HE CREATED THE WORLD
 				var initScript = ((MonoBehaviour)god.GetComponent ("InitializeWorld"));
-
-				if (initScript != null) {
-						initScript.enabled = true;
-				} else {
-						Debug.LogError ("InitializeWorld is null! FREAK OUT!");
-				}
-
+                if (initScript == null) throw new Exception("Component initScript is null.");
+                initScript.enabled = true;
                
 		}
 
