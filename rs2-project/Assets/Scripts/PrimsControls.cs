@@ -9,6 +9,7 @@ public class PrimsControls : MonoBehaviour {
     public int MarkerCount
     {
         get { return markerCount;  }
+        set { markerCount = value; }
     }
 
 
