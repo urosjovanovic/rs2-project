@@ -8,52 +8,6 @@ using System.Text;
 
 public class GenerateWorld : MonoBehaviour {
 	
-    /// <summary>
-    /// Reads the maze matrix from a given file
-    /// </summary>
-    /// <param name="filePath"> Path of a file containing the maze matrix</param>
-    /// <returns> An integer matrix where 0 represents a room or a passage and 1 represents a wall </returns>
-	public static int[,] GenerateMazeStatic(string filePath){
-
-        try
-        {
-            var lines = File.ReadAllLines(filePath);
-
-
-            int matrixHeight = lines.Length;
-            int matrixWidth = lines[0].Length;
-
-            var mazeMatrix = new int[matrixHeight, matrixWidth];
-
-            int row = 0;
-
-            while (row < matrixHeight)
-            {
-                char[] characters = lines[row].ToCharArray();
-
-                for (int col = 0; col < matrixWidth; col++)
-                {
-                    mazeMatrix[row, col] = (int)Char.GetNumericValue(characters[col]);
-                }
-
-                row++;
-            }
-
-            return mazeMatrix;
-
-        }
-        catch (FileNotFoundException fnf)
-        {
-            Debug.Log("EXCEPTION: File " + filePath + " not found!");
-            Debug.Log(fnf.Message);
-        }
-        catch (Exception ex)
-        {
-            Debug.Log(ex.Message);
-        }
-
-        return null;
-    }
 
     /// <summary>
     /// Procedurally generates a new maze
@@ -124,7 +78,7 @@ public class Maze
     #endregion
 
 
-    #region Methods: PrintToFile, GetSpawnNodes
+    #region Methods: PrintToFile, GetSpawnNodes, GetMarkerCollectibleSpawnNodes
 
     /// <summary> Writes a maze matrix to a file with a given path  </summary>
     /// <param name="filePath"> A path to a file.</param>
@@ -200,7 +154,7 @@ public class Maze
 
         spawnNodes.Add("Prim", primSpawnPoint);
 
-        Graph.PrintGridGraph(@"C:\Users\Divic\Desktop\izlaz.txt");
+        
         var distances = Graph.DistancesFromNode(primSpawnPoint);
 
         // Exit is the node that is farthest from Prim
@@ -208,7 +162,6 @@ public class Maze
                                 where d.Value == distances.Max(x => x.Value)
                                 select d.Key).First();
 
-        Debug.Log("Distance: " + distances[farthestFromPrim]);
 
         spawnNodes.Add("Exit", farthestFromPrim);
 
@@ -225,11 +178,47 @@ public class Maze
         return spawnNodes;
     }
 
+    /// <summary>
+    /// Generates the random spawn nodes for the marker collectibles
+    /// </summary>
+    /// <param name="howMany"> How many markers to be spawned </param>
+    /// <returns> A list of spawn nodes for the marker collectibles </returns>
+    public List<GridNode> GetMarkerCollectibleSpawnNodes(int howMany = 3)
+    {
+        var markers = new List<GridNode>();
+
+        List<GridNode> deadEnds = new List<GridNode>();
+
+        for (int i = 1; i < graphRows -1; i++)
+        {
+            for (int j = 1; j < graphCols - 1; j++)
+            {
+                if (Graph[i, j].Edges.Count == 1)
+                {
+                    deadEnds.Add(Graph[i, j]);
+                }
+            }
+        }
+
+        System.Random rand = new System.Random();
+
+        for (int i = 0; i < howMany; i++)
+        {
+            int index = rand.Next(deadEnds.Count);
+
+            markers.Add(deadEnds[index]);
+            deadEnds.RemoveAt(index);
+
+        }
+
+        return markers;
+    }
+
+
     #endregion
 
 
 }
-
 
 #endregion
 
@@ -629,8 +618,6 @@ public class GridGraph
     /// <returns> A dictionary of nodes and their distances from the node v</returns>
     public Dictionary<GridNode, int> DistancesFromNode(GridNode v)
     {
-        Debug.Log("Calculating distances from node: (" + v.i + ", " + v.j + ")");
-
 
         // distances
         var distances = new Dictionary<GridNode, int>();
@@ -662,7 +649,6 @@ public class GridGraph
             distances[minDistanceNode] = activeDistances[minDistanceNode];
             traversed.Add(minDistanceNode);
 
-            Debug.Log("Distance from: (" + minDistanceNode.i + ", " + minDistanceNode.j + ") is " + distances[minDistanceNode]);
 
             // dodaj njegove susede u aktivne distance
             foreach (var neighbour in minDistanceNode.Edges)

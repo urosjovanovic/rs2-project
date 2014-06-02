@@ -23,6 +23,7 @@ public class PrimsControls : MonoBehaviour {
 		if(Input.GetKeyDown(KeyCode.F) && flashlight.gameObject.GetComponent<FlashlightRecharge>().flashLightEnabled)
 		{
 			flashlight.gameObject.light.enabled = !flashlight.gameObject.light.enabled;
+            flashlight.audio.PlayOneShot(SoundPool.FlashlightClick);
 		}
 
         if(Input.GetKeyDown(KeyCode.T))

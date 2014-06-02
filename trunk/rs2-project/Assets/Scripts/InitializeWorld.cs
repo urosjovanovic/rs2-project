@@ -1,100 +1,146 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 public class InitializeWorld : MonoBehaviour
 {
 
-    #region Class fields and properties
+    #region Private class fields and properties
 
+        // a generated maze matrix
 		private int[,] mazeMatrix;
-		int matrixSize = 0;
+		private int matrixSize = 0;
 
-		/// <summary>
-		/// Photon view necessary for the RPC
-		/// </summary>
-		PhotonView thisScriptView;
-
-		public bool AlwaysSpawnAs = false;
-		public string SpawnAs = "Prim";
-
-		Dictionary<string, GridNode> spawnNodes;
+        // photon view for RPC methods
+		private PhotonView thisScriptView;
+        
+        // generated spawn points
+		private Dictionary<string, GridNode> spawnNodes;
+        
+        // MarkerCollectible prefab
+        private UnityEngine.Object markerCollectible = Resources.Load("MarkerCollectible");
 
     #endregion
 
 
-    #region Start and Update
+    #region Public class fields and properties
+        
+        /// <summary>
+        /// Always spawn as a given character
+        /// </summary>
+        public bool AlwaysSpawnAs = false;
+
+        /// <summary>
+        /// Possible values for this field are "Prim" and "DarkPrim"
+        /// </summary>
+        public string SpawnAs = "Prim";
+
+    #endregion
 
 
-		/// <summary>
+    #region Start ( Maze and spawn point generation, Prim stuff ) and Update ( sending data over the network )
+
+
+        /// <summary>
 		/// Generate and render the world for the master client
 		/// </summary>
 		void Start ()
 		{
 
+                // get the neccessary components
 				thisScriptView = this.GetComponent<PhotonView> ();
+                if (thisScriptView == null) throw new Exception("Component thisScriptView is NULL.");
 
-				if (thisScriptView == null) {
-						Debug.LogError ("thisScriptView is null! FREAK OUT!!");
-				}
+                markerCollectible = Resources.Load("MarkerCollectible");
+                if (markerCollectible == null) throw new Exception("Object markerCollectible is null. Resource load failed.");
 
+
+                // Master client is always Prim, so we need to generate the maze,
+                // instantiate Prim, collectible markers and the exit.
 				if (PhotonNetwork.isMasterClient) {
-						Debug.Log ("I am the master client. Generating the maze.");
 
-						// prims spawn coordinates
-						int x_sp = 0;
-						int z_sp = 0;
+						Debug.Log ("-- I AM THE MASTER CLIENT --");
 
-						// If staticMaze variable is set generate a static maze from a given file
-						// procedurally generate a maze otherwise
-						if (ConfigManager.staticMaze) {
-								mazeMatrix = GenerateWorld.GenerateMazeStatic (@"maze32.txt");
-								matrixSize = mazeMatrix.GetLength (0);
-						} else {
 
-								var maze = GenerateWorld.GenerateMaze (32);
+                        // Generate the world
+                        Debug.Log("Generating the world.");
+                        var maze = GenerateWorld.GenerateMaze(32);
+                        mazeMatrix = maze.matrix;
+                        matrixSize = mazeMatrix.GetLength(0);
 
-								mazeMatrix = maze.matrix;
-								matrixSize = mazeMatrix.GetLength (0);
+                        // Generate all spawn nodes
+                        spawnNodes = maze.GetSpawnNodes();
+                        var primSpawn = spawnNodes["Prim"];
+                        var exitSpawn = spawnNodes["Exit"];
+                        var darkPrimSpawn = spawnNodes["DarkPrim"];
+                        var markerCollectibleNodes = maze.GetMarkerCollectibleSpawnNodes();
 
-								spawnNodes = maze.GetSpawnNodes ();
+                        // MAZE RENDERING 
+                        for (int i = 0; i < mazeMatrix.GetLength(0); i++)
+                            RenderOneMazeRow(i, getRow(i, mazeMatrix));
 
-								var primSpawn = spawnNodes ["Prim"];
-                                var exitSpawn = spawnNodes["Exit"];
+                        // Spawn the character
+                        // If AlwaysSpawnAs is not set, default is Prim
+                        if (AlwaysSpawnAs && SpawnAs.Equals("DarkPrim"))
+                        {
+                            Vector3 darkPrimSpawnPosition = GetVectorFromNode(darkPrimSpawn, 0.1f);
+                            spawnPlayer("Prim", darkPrimSpawnPosition);
+                            Debug.Log("DarkPrim spawned.");
+                        }
+                        else
+                        {
+                            // Spawn Prim
+                            Vector3 primSpawnPosition = GetVectorFromNode(primSpawn, 0.1f);
+                            spawnPlayer("Prim", primSpawnPosition);
 
-                                Debug.Log("Prim: " + primSpawn.i + " " + primSpawn.j);
-                                Debug.Log("Exit: " + exitSpawn.i + " " + exitSpawn.j);
+                            Debug.Log("PRIM spawned.");
 
-								x_sp = primSpawn.i;
-								z_sp = primSpawn.j;
+                            // Instantiate exit
+                            GameObject exit = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                            exit.transform.position = GetVectorFromNode(exitSpawn, -0.1f);
+                            exit.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
 
-						}
+                            // Instantiate the marker collectibles
+                            InstantiateMarkerPrefabs(markerCollectibleNodes);
+                        }
 
-						for (int i = 0; i < mazeMatrix.GetLength(0); i++)
-								RenderOneMazeRow (i, getRow (i, mazeMatrix));
-
-                       
-						// Spawn Prim
-						int XPosition = z_sp * 2 ;
-						int ZPosition = matrixSize - x_sp * 2 ;
-						spawnPlayer ("Prim", new Vector3 (XPosition, 0.1f, ZPosition));
-                        
-
-						// Instantiate EXIT
-						var exitNode = spawnNodes ["Exit"];
-
-						int exitX = exitNode.j * 2;
-						int exitZ = matrixSize - exitNode.i * 2;
-
-						GameObject exit = GameObject.CreatePrimitive (PrimitiveType.Sphere);
-						exit.transform.position = new Vector3 (exitX, 0.3f, exitZ);
-						exit.transform.localScale = new Vector3 (0.2f, 0.2f, 0.2f);
 				} else {
-						Debug.Log ("I am not the master client, waiting for data to be recieved over the network.");
+						Debug.Log ("-- SLAVE CLIENT -- \n Waiting for data to be recieved over the network.");
 				}
         
-
 		}
+
+        /// <summary>
+        /// Calculates the vector position of a graph node in the world
+        /// </summary>
+        /// <param name="node"> A node in the graph </param>
+        /// <param name="VerticalOffset"> Vertical position </param>
+        /// <returns> A Vector3 representing the position of the node </returns>
+        private Vector3 GetVectorFromNode(GridNode node, float VerticalOffset)
+        {
+            return new Vector3(node.j * 2, VerticalOffset, matrixSize - node.i * 2);
+        }
+
+        /// <summary>
+        /// Instantiate the MarkerCollectible prefab given list of nodes 
+        /// </summary>
+        /// <param name="markerCollectibleNodes"> List of graph nodes that should contain the marker collectibles </param>
+        private void InstantiateMarkerPrefabs(List<GridNode> markerCollectibleNodes)
+        {
+            foreach (var node in markerCollectibleNodes)
+            {
+                int XPos = node.j * 2;
+                int ZPos = matrixSize - node.i * 2;
+
+                var ins = (GameObject)Instantiate(markerCollectible, new Vector3(XPos, 0.1f, ZPos), Quaternion.identity);
+
+                ins.transform.localScale = new Vector3(0.08f, 0.08f, 0.08f);
+                ins.transform.Translate(new Vector3(0, -0.6f, 0));
+            }
+        }
+
+
     
 		/// <summary>
 		/// The master client waits until the other client connects then the RPC method for sending the maze data
@@ -109,17 +155,25 @@ public class InitializeWorld : MonoBehaviour
 						});
 						rowsSent++;
 
-						// when the world is generated, instantiate the other player
+						// when the world is generated, instantiate the other player ( DarkPrim )
 						if (rowsSent >= matrixSize) {
-								var darkPrimSpawn = spawnNodes ["DarkPrim"];
 
-								int XPosition = darkPrimSpawn.j * 2;
-								int ZPosition = matrixSize - darkPrimSpawn.i * 2 ;
-
-								thisScriptView.RPC ("spawnPlayer", PhotonTargets.Others, new object[] {
-										"DarkPrim",
-										new Vector3 (XPosition, 1f, ZPosition)
+                            if (AlwaysSpawnAs && SpawnAs.Equals("DarkPrim"))
+                            {
+                                thisScriptView.RPC("spawnPlayer", PhotonTargets.Others, new object[] {
+										"Prim",
+										GetVectorFromNode(spawnNodes["Prim"], 0.5f)
 								});
+                            }
+                            else
+                            {
+                                thisScriptView.RPC("spawnPlayer", PhotonTargets.Others, new object[] {
+										"DarkPrim",
+										GetVectorFromNode(spawnNodes["DarkPrim"], 0.5f)
+								});
+
+                                Debug.Log("DarkPrim joined the room.");
+                            }
 						}
 
 				}
