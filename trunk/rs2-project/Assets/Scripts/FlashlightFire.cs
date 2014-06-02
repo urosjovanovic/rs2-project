@@ -55,7 +55,7 @@ public class FlashlightFire : MonoBehaviour {
        if (darkprim)
        {
            Debug.Log("Freeze motherfucker!");
-           darkprim.GetComponent<CharacterController>().enabled = false;
+           darkprim.GetComponent<CharacterMotor>().canControl = false;
            StartCoroutine(WaitAndUnfreeze(10,darkprim));
           //darkprim.GetComponent<CharacterController>().enabled = true;
        }
@@ -64,6 +64,6 @@ public class FlashlightFire : MonoBehaviour {
     IEnumerator WaitAndUnfreeze(float time,GameObject obj)
     {
         yield return new WaitForSeconds(time);
-        obj.GetComponent<CharacterController>().enabled = true;
+        obj.GetComponent<CharacterMotor>().canControl = true;
     }
 }
