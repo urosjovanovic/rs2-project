@@ -6,6 +6,8 @@ public class FlashlightFire : MonoBehaviour {
     public float fireRate = 0.5f;
     float coolDown = 0;
     private PhotonView view;
+    private bool freezeActive = false;
+    private GameObject darkPrimSprite = null;
 
 	// Use this for initialization
 	void Start () {
@@ -21,11 +23,16 @@ public class FlashlightFire : MonoBehaviour {
             coolDown -= Time.deltaTime;
             Fire();
         }
+
+        if (!freezeActive && darkPrimSprite != null)
+            GameObject.Destroy(darkPrimSprite);
 	
 	}
 
     void Fire()
     {
+        if (freezeActive)
+            return;
 
         if (coolDown > 0)
             return;
@@ -39,9 +46,10 @@ public class FlashlightFire : MonoBehaviour {
             if (hit.rigidbody != null && hit.rigidbody.gameObject.tag == "DarkPrim")
             {
                 Debug.Log("There is something in front of the object!");
-                this.gameObject.light.enabled = false;
+                darkPrimSprite = Instantiate(Resources.Load("DarkPrim2DSprite")) as GameObject;
+                darkPrimSprite.transform.position = hit.rigidbody.gameObject.transform.position;
                 view.RPC("FreezeDarkPrim", PhotonTargets.All, null);
-                //hit.rigidbody.gameObject.GetComponent<CharacterController>().enabled=false;
+                freezeActive = true;
             }
         }
 
@@ -65,5 +73,6 @@ public class FlashlightFire : MonoBehaviour {
     {
         yield return new WaitForSeconds(time);
         obj.GetComponent<CharacterMotor>().canControl = true;
+        freezeActive = false;
     }
 }
