@@ -7,6 +7,7 @@ public class FlashlightFire : MonoBehaviour {
     float coolDown = 0;
     private PhotonView view;
     private bool freezeActive = false;
+    private float freezeTime = 10;
     private GameObject darkPrimSprite = null;
 
 	// Use this for initialization
@@ -64,7 +65,7 @@ public class FlashlightFire : MonoBehaviour {
        {
            Debug.Log("Freeze motherfucker!");
            darkprim.GetComponent<CharacterMotor>().canControl = false;
-           StartCoroutine(WaitAndUnfreeze(10,darkprim));
+           StartCoroutine(WaitAndUnfreeze(freezeTime,darkprim));
           //darkprim.GetComponent<CharacterController>().enabled = true;
        }
     }
