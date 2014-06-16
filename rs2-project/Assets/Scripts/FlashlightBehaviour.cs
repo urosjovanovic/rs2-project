@@ -11,7 +11,7 @@ public class FlashlightBehaviour : MonoBehaviour
 
         public float blinkCooldown = 0.5f;
         private float currentCooldown;
-        public float blinkDuration = 0.1f;
+        public float blinkDuration = 0.005f;
 
         private double blinkProbability = 0.005;
 
@@ -19,6 +19,7 @@ public class FlashlightBehaviour : MonoBehaviour
 
         public int probabilityMagicNumber = 3;
 
+        public static bool FlashlightHardDisabled = false;
         System.Random rand = new System.Random();
 
         Light flashlight;
@@ -68,7 +69,6 @@ public class FlashlightBehaviour : MonoBehaviour
 
                             if (r <= blinkProbability)
                             {
-                                Debug.Log("r=" + r + ", p=" + blinkProbability);
                                 StartCoroutine(FlashlightBlink());
                             }
 
@@ -81,6 +81,7 @@ public class FlashlightBehaviour : MonoBehaviour
         public IEnumerator FlashlightBlink()
         {
             yield return StartCoroutine(FlashlightOff());
+
             FlashlightOn();
         }
 

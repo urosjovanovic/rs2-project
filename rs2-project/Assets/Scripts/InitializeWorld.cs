@@ -20,6 +20,7 @@ public class InitializeWorld : MonoBehaviour
         
         // MarkerCollectible prefab
         private UnityEngine.Object markerCollectible = Resources.Load("MarkerCollectible");
+        private UnityEngine.Object exit = Resources.Load("Exit");
 
     #endregion
 
@@ -85,21 +86,27 @@ public class InitializeWorld : MonoBehaviour
                         if (AlwaysSpawnAs && SpawnAs.Equals("DarkPrim"))
                         {
                             Vector3 darkPrimSpawnPosition = GetVectorFromNode(darkPrimSpawn, 0.1f);
-                            spawnPlayer("Prim", darkPrimSpawnPosition);
+
+                            var rotation = Quaternion.LookRotation((GetVectorFromNode(darkPrimSpawn.Edges[0], 0.1f) - darkPrimSpawnPosition).normalized);
+
+                            spawnPlayer("Prim", darkPrimSpawnPosition, rotation);
                             Debug.Log("DarkPrim spawned.");
                         }
                         else
                         {
                             // Spawn Prim
                             Vector3 primSpawnPosition = GetVectorFromNode(primSpawn, 0.1f);
-                            spawnPlayer("Prim", primSpawnPosition);
+
+                            var rotation = Quaternion.LookRotation((GetVectorFromNode(primSpawn.Edges[0], 0.1f) - primSpawnPosition).normalized);
+
+                            spawnPlayer("Prim", primSpawnPosition, rotation);
 
                             Debug.Log("PRIM spawned.");
 
+                            var exitNode = spawnNodes["Exit"];
+
                             // Instantiate exit
-                            GameObject exit = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                            exit.transform.position = GetVectorFromNode(exitSpawn, -0.1f);
-                            exit.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+                            GameObject exitObj = (GameObject)Instantiate(exit, GetVectorFromNode(exitNode, -1), Quaternion.LookRotation((GetVectorFromNode(exitNode.Edges[0], 0) - GetVectorFromNode(exitNode, 0)).normalized)); // look toward a neighbour node
 
                             // Instantiate the marker collectibles
                             InstantiateMarkerPrefabs(markerCollectibleNodes);
@@ -160,16 +167,29 @@ public class InitializeWorld : MonoBehaviour
 
                             if (AlwaysSpawnAs && SpawnAs.Equals("DarkPrim"))
                             {
+                                var primSpawn = spawnNodes["Prim"];
+                                Vector3 primSpawnPosition = GetVectorFromNode(primSpawn, 0.1f);
+
+                                var rotation = Quaternion.LookRotation((GetVectorFromNode(primSpawn.Edges[0], 0.1f) - primSpawnPosition).normalized);
+
+
                                 thisScriptView.RPC("spawnPlayer", PhotonTargets.Others, new object[] {
 										"Prim",
-										GetVectorFromNode(spawnNodes["Prim"], 0.5f)
+										primSpawnPosition,
+                                        rotation
 								});
                             }
                             else
                             {
+                                var darkPrimSpawn = spawnNodes["DarkPrim"];
+                                Vector3 darkPrimSpawnPosition = GetVectorFromNode(darkPrimSpawn, 0.1f);
+
+                                var rotation = Quaternion.LookRotation((GetVectorFromNode(darkPrimSpawn.Edges[0], 0.1f) - darkPrimSpawnPosition).normalized);
+
                                 thisScriptView.RPC("spawnPlayer", PhotonTargets.Others, new object[] {
 										"DarkPrim",
-										GetVectorFromNode(spawnNodes["DarkPrim"], 0.5f)
+										darkPrimSpawnPosition,
+                                        rotation
 								});
 
                                 Debug.Log("DarkPrim joined the room.");
@@ -278,16 +298,16 @@ public class InitializeWorld : MonoBehaviour
 		/// <param name="who"> Prim or DarkPrim </param>
 		/// <param name="where"> Spawn point coordinates </param>
 		[RPC]
-		public void spawnPlayer (string who, Vector3 where)
+		public void spawnPlayer (string who, Vector3 where, Quaternion rotation)
 		{
 
 				GameObject player = null;
 
 				if (AlwaysSpawnAs) {
-						player = (GameObject)PhotonNetwork.Instantiate (SpawnAs, where, Quaternion.identity, 0);
+						player = (GameObject)PhotonNetwork.Instantiate (SpawnAs, where, rotation, 0);
 				} else {
 
-						player = (GameObject)PhotonNetwork.Instantiate (who, where, Quaternion.identity, 0);
+						player = (GameObject)PhotonNetwork.Instantiate (who, where, rotation, 0);
 
 				}
 
