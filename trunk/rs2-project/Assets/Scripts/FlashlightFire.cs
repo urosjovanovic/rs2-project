@@ -51,6 +51,7 @@ public class FlashlightFire : MonoBehaviour {
                 darkPrimSprite.transform.position = hit.rigidbody.gameObject.transform.position;
                 view.RPC("FreezeDarkPrim", PhotonTargets.All, null);
                 freezeActive = true;
+
             }
         }
 
