@@ -8,8 +8,10 @@ public class MarkerBehaviour : MonoBehaviour
         if(other.gameObject.tag == "Prim")
         {
             other.gameObject.transform.parent.gameObject.GetComponent<PrimsControls>().MarkerCount++;
-            //play a sound
+            other.gameObject.transform.parent.gameObject.audio.PlayOneShot(SoundPool.pickupSound);
+
             GameObject.Destroy(this.transform.parent.gameObject);
         }
     }
+
 }

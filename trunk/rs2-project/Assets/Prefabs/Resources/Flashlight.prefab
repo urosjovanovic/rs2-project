@@ -186,6 +186,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flashLightLifeTime: 15
   flashLightReChargeTime: 5
+  flashLightTimeRemaining: 0
   flashLightChargedPercent: 100
   flashLightEnabled: 1
 --- !u!1001 &100100000

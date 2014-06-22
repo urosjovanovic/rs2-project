@@ -5,7 +5,7 @@ public class FlashlightRecharge : MonoBehaviour {
 	
 	public float flashLightLifeTime;
 	public float flashLightReChargeTime;
-	private float flashLightTimeRemaining;
+	public float flashLightTimeRemaining;
 	public int flashLightChargedPercent = 100;
 	public bool flashLightEnabled = true;
 	

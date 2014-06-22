@@ -50,6 +50,7 @@ public class ExitDoorBehaviour : MonoBehaviour {
         step /= 100.0f;
         float rotated = 0;
 
+
         while(rotated + 0.1 < angle)
         {
             yield return new WaitForSeconds(1 / 100.0f);
