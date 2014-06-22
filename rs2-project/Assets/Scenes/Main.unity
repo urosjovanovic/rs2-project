@@ -261,6 +261,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1343903571}
   - 114: {fileID: 1343903570}
+  - 114: {fileID: 1343903572}
   m_Layer: 0
   m_Name: _SCRIPTS
   m_TagString: Untagged
@@ -290,6 +291,32 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!114 &1343903572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1343903569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 601d54ebafe03954b9d48d27b07ff654, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  publicForwardFootsteps:
+  - {fileID: 8300000, guid: e50dace95a6b89143ad3cab73e52edc6, type: 3}
+  - {fileID: 8300000, guid: 8d2bfdc4bb1dd1442b7d4f51887dabcf, type: 3}
+  publicSprintFootsteps:
+  - {fileID: 8300000, guid: 9eeb2ffd8f0d3ff4db4446f884585902, type: 3}
+  - {fileID: 8300000, guid: 6cd43357867a2d2499995f2fca76d5d2, type: 3}
+  publicSideStep: {fileID: 8300000, guid: 2f6c7080719cac04dbf4c59b4aadc0f6, type: 3}
+  publicFlashlightClick: {fileID: 8300000, guid: d378d7a5364b9b442b6576e6dec71198,
+    type: 3}
+  publicFlashlightBuzzes:
+  - {fileID: 8300000, guid: 87de8c4c967042e47aa5246a7c30371f, type: 3}
+  - {fileID: 8300000, guid: c00528dfd16f38b40b7f09cd766ed5db, type: 3}
+  - {fileID: 8300000, guid: 3f5b0aa75a39abc4fbfe098875fa8c24, type: 3}
+  publicDoorSound: {fileID: 8300000, guid: 23bb831dc7448eb4a976a0aa3b72159f, type: 3}
+  publicPickupSound: {fileID: 8300000, guid: 824682421d02af54496f06dc2b26a49a, type: 3}
 --- !u!1 &1606721908
 GameObject:
   m_ObjectHideFlags: 0

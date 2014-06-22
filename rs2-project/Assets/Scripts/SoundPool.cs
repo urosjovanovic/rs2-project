@@ -19,6 +19,15 @@ public class SoundPool : MonoBehaviour {
 
     public static AudioClip flashlightClick;
 
+    public AudioClip[] publicFlashlightBuzzes;
+    public static AudioClip[] FlashlightBuzzes;
+
+    public AudioClip publicDoorSound;
+    public static AudioClip doorSound;
+
+    public AudioClip publicPickupSound;
+    public static AudioClip pickupSound;
+
 
     public void Start()
     {
@@ -27,6 +36,21 @@ public class SoundPool : MonoBehaviour {
 
         sprintFootsteps = publicSprintFootsteps;
         flashlightClick = publicFlashlightClick;
+
+        FlashlightBuzzes = publicFlashlightBuzzes;
+
+        doorSound = publicDoorSound;
+        pickupSound = publicPickupSound;
+    }
+
+    public static AudioClip FlashlightBuzz
+    {
+        get
+        {
+            var rand = new System.Random();
+
+            return FlashlightBuzzes[rand.Next(FlashlightBuzzes.Length)];
+        }
     }
 
     public static AudioClip ForwardFootstep {
@@ -62,5 +86,19 @@ public class SoundPool : MonoBehaviour {
         }
     }
 
+    public static AudioClip DoorSound
+    {
+        get
+        {
+            return doorSound;
+        }
+    }
+    public static AudioClip PickupSound
+    {
+        get
+        {
+            return pickupSound;
+        }
+    }
 
 }

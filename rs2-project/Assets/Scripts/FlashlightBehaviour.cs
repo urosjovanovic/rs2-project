@@ -19,10 +19,13 @@ public class FlashlightBehaviour : MonoBehaviour
 
         public int probabilityMagicNumber = 3;
 
-        public static bool FlashlightHardDisabled = false;
+
         System.Random rand = new System.Random();
 
         Light flashlight;
+
+        FlashlightRecharge flashlightRecharge;
+
 		// Use this for initialization
 		void Start ()
         {
@@ -37,6 +40,10 @@ public class FlashlightBehaviour : MonoBehaviour
             {
                 throw new Exception("Flashlight is null!");
             }
+
+            flashlightRecharge = flashlight.gameObject.GetComponent<FlashlightRecharge>();
+
+            if (!flashlightRecharge) throw new Exception("Flashlight recharge is null!");
         }
 	
 		// Update is called once per frame
@@ -54,7 +61,7 @@ public class FlashlightBehaviour : MonoBehaviour
                 }
                 else
                 {
-					if (flashlight.enabled && flashlight.gameObject.GetComponent<FlashlightRecharge>().flashLightEnabled)
+					if (flashlight.enabled && flashlightRecharge.flashLightEnabled)
                     {
                         var darkPrim = GameObject.FindGameObjectWithTag("DarkPrim");
 
@@ -82,12 +89,14 @@ public class FlashlightBehaviour : MonoBehaviour
         {
             yield return StartCoroutine(FlashlightOff());
 
-            FlashlightOn();
+            if(flashlightRecharge.flashLightEnabled)
+             FlashlightOn();
         }
 
         IEnumerator FlashlightOff()
         {
             flashlight.enabled = false;
+            this.audio.PlayOneShot(SoundPool.FlashlightBuzz);
             yield return new WaitForSeconds(blinkDuration);  
         }
 

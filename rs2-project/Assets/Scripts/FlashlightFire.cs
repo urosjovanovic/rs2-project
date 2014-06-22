@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class FlashlightFire : MonoBehaviour {
 
@@ -10,9 +11,15 @@ public class FlashlightFire : MonoBehaviour {
     private float freezeTime = 10;
     private GameObject darkPrimSprite = null;
 
+    FlashlightRecharge flashlightRecharge;
+
 	// Use this for initialization
 	void Start () {
         view = this.gameObject.GetComponent<PhotonView>();
+
+        flashlightRecharge = this.GetComponent<FlashlightRecharge>();
+
+        if (!flashlightRecharge) throw new Exception("FlashlightRecharge is null!");
 	}
 	
 	// Update is called once per frame
@@ -51,6 +58,7 @@ public class FlashlightFire : MonoBehaviour {
                 darkPrimSprite.transform.position = hit.rigidbody.gameObject.transform.position;
                 view.RPC("FreezeDarkPrim", PhotonTargets.All, null);
                 freezeActive = true;
+                flashlightRecharge.flashLightTimeRemaining = 0;
 
             }
         }
