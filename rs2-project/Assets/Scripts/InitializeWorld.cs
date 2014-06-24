@@ -99,6 +99,7 @@ public class InitializeWorld : MonoBehaviour
 
                             var rotation = Quaternion.LookRotation((GetVectorFromNode(primSpawn.Edges[0], 0.1f) - primSpawnPosition).normalized);
 
+
                             spawnPlayer("Prim", primSpawnPosition, rotation);
 
                             Debug.Log("PRIM spawned.");
