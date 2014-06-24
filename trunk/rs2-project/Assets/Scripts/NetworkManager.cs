@@ -5,6 +5,8 @@ using System;
 public class NetworkManager : Photon.MonoBehaviour
 {
 
+        GameObject god;
+
 		// Use this for initialization
 		void Start ()
 		{
@@ -44,14 +46,28 @@ public class NetworkManager : Photon.MonoBehaviour
 		public void InitializeWorld ()
 		{
                 // AND THAT'S HOW A GOD IS BORN
-				GameObject god = (GameObject)PhotonNetwork.Instantiate ("TheCreator", Vector3.zero, Quaternion.identity, 0);
-
-                // AND THIS IS HOW HE CREATED THE WORLD
-				var initScript = ((MonoBehaviour)god.GetComponent ("InitializeWorld"));
-                if (initScript == null) throw new Exception("Component initScript is null.");
-                initScript.enabled = true;
+				god = (GameObject)PhotonNetwork.Instantiate ("TheCreator", Vector3.zero, Quaternion.identity, 0);
+       
                
 		}
+
+        void Update()
+        {
+            if (PhotonNetwork.room.playerCount == 2 && god!=null)
+            {
+                // AND THIS IS HOW HE CREATED THE WORLD
+                var initScript = ((MonoBehaviour)god.GetComponent("InitializeWorld"));
+                if (initScript == null) throw new Exception("Component initScript is null.");
+                initScript.enabled = true;
+
+                GameObject loadingGameCamera = GameObject.Find("LoadingGameCamera");
+                loadingGameCamera.GetComponent<GUIText>().enabled = false;
+                loadingGameCamera.camera.enabled = false;
+
+                this.enabled = false;
+            }
+
+        }
 
        
 
