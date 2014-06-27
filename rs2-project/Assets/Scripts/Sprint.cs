@@ -9,6 +9,7 @@ public class Sprint : MonoBehaviour
    
     public float sprintSpeed;
     private float walkSpeed;
+    public bool isInSprint = false;
 
     private CharacterMotor motor;
     private Transform tr;
@@ -28,11 +29,12 @@ public class Sprint : MonoBehaviour
     {
         // default speed
         float speed = walkSpeed;
-        
+        isInSprint = false;
         // if shift is pressed change the speed
-        if ((Input.GetKey("left shift") || Input.GetKey("right shift")) && motor.grounded)
+        if ((Input.GetKey("left shift") || Input.GetKey("right shift")) && motor.grounded && GetComponent<LimitSprint>().sprintEnabled)
         {
             speed = sprintSpeed;
+            isInSprint = true;
         }
 
         // set the speed
