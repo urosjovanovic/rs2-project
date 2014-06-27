@@ -10,12 +10,18 @@ public class PathColor : MonoBehaviour
 		void OnTriggerEnter (Collider other)
 		{
 				//Debug.Log (other.gameObject.tag);
-				if (other.gameObject.tag == "Prim")
-						walkedOnByPrim = true;
-				else if (other.gameObject.tag == "DarkPrim")
-						walkedOnByDarkPrim = true;
-				else
-						Debug.Log ("There is someone here... He is not from this world...");
+            if (other.gameObject.tag == "Prim")
+            {
+                walkedOnByPrim = true;
+                Debug.Log(other.gameObject.transform.position.x + " " + other.gameObject.transform.position.z);
+            }
+            else if (other.gameObject.tag == "DarkPrim")
+            {
+                walkedOnByDarkPrim = true;
+                Debug.Log(other.gameObject.transform.position.x + " " + other.gameObject.transform.position.z);
+            }
+            else
+                Debug.Log("There is someone here... He is not from this world...");
 
 				if (autoRefresh)
 						Colorize ();

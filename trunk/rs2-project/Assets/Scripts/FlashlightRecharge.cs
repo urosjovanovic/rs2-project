@@ -8,13 +8,17 @@ public class FlashlightRecharge : MonoBehaviour {
 	public float flashLightTimeRemaining;
 	public int flashLightChargedPercent = 100;
 	public bool flashLightEnabled = true;
-	
+
+	private float treshold;
+	private float defaultTreshold = 0.5f;
+
 	private PhotonView view;
 	// Use this for initialization
 	void Start () 
 	{
 		view = this.gameObject.GetComponent<PhotonView>();
 		flashLightTimeRemaining = flashLightLifeTime;
+		treshold = defaultTreshold;
 	}
 	
 	// Update is called once per frame
@@ -22,6 +26,8 @@ public class FlashlightRecharge : MonoBehaviour {
 	{
 		if (this.gameObject.light.enabled) 
 		{
+			treshold = defaultTreshold;
+
 			flashLightTimeRemaining -= Time.deltaTime;
 			flashLightChargedPercent = (int)(((float)flashLightTimeRemaining/flashLightLifeTime)*100 + 0.5f);
 			if (flashLightTimeRemaining <= 0) 
@@ -32,8 +38,13 @@ public class FlashlightRecharge : MonoBehaviour {
 		} 
 		else if(flashLightTimeRemaining<flashLightLifeTime)
 		{
-			flashLightTimeRemaining += (Time.deltaTime*flashLightLifeTime)/flashLightReChargeTime;
-			flashLightChargedPercent = (int)(((float)flashLightTimeRemaining/flashLightLifeTime)*100 + 0.5f);
+			treshold -= Time.deltaTime;
+
+			if(treshold<0)
+			{
+				flashLightTimeRemaining += (Time.deltaTime*flashLightLifeTime)/flashLightReChargeTime;
+				flashLightChargedPercent = (int)(((float)flashLightTimeRemaining/flashLightLifeTime)*100 + 0.5f);
+			}
 		}
 		else if(flashLightTimeRemaining>flashLightLifeTime)
 		{
@@ -55,6 +66,7 @@ public class FlashlightRecharge : MonoBehaviour {
 		yield return new WaitForSeconds(flashLightReChargeTime);
 		flashLightTimeRemaining = flashLightLifeTime;
 		flashLightChargedPercent = 100;
+		treshold = defaultTreshold;
 		flashLightEnabled = true;
 		//this.gameObject.light.enabled = true;
 	}

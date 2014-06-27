@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EndGameScript : MonoBehaviour {
+public class EndGameScript : MonoBehaviour 
+{
 
+    GameObject text = null;
 	// Use this for initialization
 	void Start () {
+        text = GameObject.Find("MainMenu");
         GameObject[] cameras = GameObject.FindGameObjectsWithTag("MainCamera");
         foreach (var camera in cameras)
             camera.camera.enabled = false;
@@ -25,7 +28,14 @@ public class EndGameScript : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-	    
+	void Update () 
+    {
+	    if(text.GetComponent<MouseOver>().isMouseOver && Input.GetMouseButtonDown(0))
+        {
+            Application.LoadLevel("MainMenu");
+        }
+
+        if(Input.GetKeyDown(KeyCode.Escape))
+            Application.LoadLevel("MainMenu");
 	}
 }

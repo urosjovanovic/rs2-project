@@ -45,6 +45,11 @@ public class PrimsControls : MonoBehaviour {
             }
         }
 
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            GameObject.Find("_SCRIPTS").GetComponent<EndGameScript>().enabled = true;
+        }
+
 
 	}
 
@@ -52,8 +57,6 @@ public class PrimsControls : MonoBehaviour {
 	{
 		if (other.transform.parent.gameObject.tag == "DarkPrim") 
 		{
-			var distance = Vector3.Distance(this.transform.position, other.transform.parent.gameObject.transform.position);
-			Debug.Log ("Prim: End Game " + distance + " " + System.DateTime.Now);
             GameObject.Find("_SCRIPTS").GetComponent<EndGameScript>().enabled = true;
 		}				
 	}
