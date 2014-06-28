@@ -25,7 +25,7 @@ public class HeadBob : MonoBehaviour {
         var run = Input.GetKey("left shift") ;
         var w = Input.GetKey(KeyCode.W);
 
-        if (run && w)
+        if (run && w && this.transform.parent.gameObject.GetComponent<LimitSprint>().sprintEnabled)
         {
             if (Mathf.Abs(horizontal) == 0 && Mathf.Abs(vertical) == 0)
             {

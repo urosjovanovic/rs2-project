@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
-public class FlashlightRecharge : MonoBehaviour {
-	
-	public float flashLightLifeTime;
+public class FlashlightRecharge : MonoBehaviour
+{
+
+    #region Class fields
+    public float flashLightLifeTime;
 	public float flashLightReChargeTime;
 	public float flashLightTimeRemaining;
 	public int flashLightChargedPercent = 100;
@@ -12,19 +15,29 @@ public class FlashlightRecharge : MonoBehaviour {
 	private float treshold;
 	private float defaultTreshold = 0.5f;
 
-	private PhotonView view;
-	// Use this for initialization
+    #endregion
+
+    #region Components
+    private PhotonView view;
+    private FlashlightBehaviour fb;
+    #endregion
+
+    // Use this for initialization
 	void Start () 
 	{
-		view = this.gameObject.GetComponent<PhotonView>();
-		flashLightTimeRemaining = flashLightLifeTime;
+        // initialize the components
+        if (!(fb = this.gameObject.GetComponent<FlashlightBehaviour>())) throw new NullReferenceException("FlashlightBehaviour component in the FlashlightRecharge script is null.");
+		if(!(view = this.gameObject.GetComponent<PhotonView>())) throw new NullReferenceException("PhotonView component in the FlashlightRecharge script is null.");
+		
+        //initialize the fields
+        flashLightTimeRemaining = flashLightLifeTime;
 		treshold = defaultTreshold;
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
-		if (this.gameObject.light.enabled) 
+		if (fb.FlashlightIsOn) 
 		{
 			treshold = defaultTreshold;
 
@@ -57,7 +70,8 @@ public class FlashlightRecharge : MonoBehaviour {
 	void ReCharge()
 	{
 		flashLightEnabled = false;
-		this.gameObject.light.enabled = false;
+        fb.TurnFlashlightOff();
+
 		StartCoroutine(WaitAndUnfreeze());
 	}
 	

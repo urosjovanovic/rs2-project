@@ -136,16 +136,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b072c3de7c972c49ab22a6bef77d336, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flashlightLag: 5
   parent: {fileID: 0}
-  lag: 6
-  blinkCooldown: .5
+  blinkCutoffDistance: 5
+  probabilityMagicNumber: 20
+  blinkCooldown: .400000006
   blinkDuration: .100000001
-  probabilityMagicNumber: 3
   cookies:
   - {fileID: 2800000, guid: 7f9d75067009d014a9c5797a5661f062, type: 3}
   - {fileID: 2800000, guid: 8703327301e1a8a448447198b13019c5, type: 3}
   - {fileID: 2800000, guid: fe6e1c8e0cd494b4b9e376b0642b66de, type: 3}
   - {fileID: 2800000, guid: 4c6b5b10edc61e944ab3fc0cfaee7150, type: 3}
+  FlashlightIsOn: 0
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

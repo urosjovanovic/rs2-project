@@ -32,7 +32,7 @@ public class PrimsFootsteps : MonoBehaviour {
             // ako se karakter krece u napred
             if (controller.isGrounded && controller.velocity.magnitude > 0.25 && movingForward)
             {
-                if( Input.GetKey("left shift") || Input.GetKey("right shift")){
+                if( (Input.GetKey("left shift") || Input.GetKey("right shift")) && this.GetComponent<LimitSprint>().sprintEnabled){
                     currentFootstepDelay = footstepDelaySprint;
                     footstepsSource.PlayOneShot(SoundPool.SprintFootstep);
                 }
