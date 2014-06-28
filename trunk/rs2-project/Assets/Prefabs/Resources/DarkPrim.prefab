@@ -34,6 +34,7 @@ GameObject:
   - 81: {fileID: 8100000}
   - 45: {fileID: 4500000}
   - 82: {fileID: 8200002}
+  - 114: {fileID: 11400018}
   m_Layer: 0
   m_Name: MainCamera
   m_TagString: MainCamera
@@ -110,7 +111,6 @@ Transform:
   m_LocalScale: {x: 1, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 400006}
-  m_RootOrder: 2
 --- !u!4 &400002
 Transform:
   m_ObjectHideFlags: 1
@@ -122,7 +122,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400006}
-  m_RootOrder: 1
 --- !u!4 &400004
 Transform:
   m_ObjectHideFlags: 1
@@ -134,7 +133,6 @@ Transform:
   m_LocalScale: {x: 3.33333325, y: 3.33333325, z: 3.33333325}
   m_Children: []
   m_Father: {fileID: 400006}
-  m_RootOrder: 3
 --- !u!4 &400006
 Transform:
   m_ObjectHideFlags: 1
@@ -150,7 +148,6 @@ Transform:
   - {fileID: 400000}
   - {fileID: 400004}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
 --- !u!4 &400008
 Transform:
   m_ObjectHideFlags: 1
@@ -162,7 +159,6 @@ Transform:
   m_LocalScale: {x: .400000006, y: .5, z: .400000006}
   m_Children: []
   m_Father: {fileID: 400006}
-  m_RootOrder: 0
 --- !u!20 &2000000
 Camera:
   m_ObjectHideFlags: 1
@@ -190,11 +186,8 @@ Camera:
     m_Bits: 4294967295
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
   m_HDR: 0
   m_OcclusionCulling: 1
-  m_StereoConvergence: 10
-  m_StereoSeparation: .0219999999
 --- !u!23 &2300000
 Renderer:
   m_ObjectHideFlags: 1
@@ -213,8 +206,9 @@ Renderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
+  m_SortingLayerID: 0
 --- !u!23 &2300002
 Renderer:
   m_ObjectHideFlags: 1
@@ -233,8 +227,9 @@ Renderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
+  m_SortingLayerID: 0
 --- !u!33 &3300000
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -600,7 +595,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe342785d06c36747bdb40eaa5e23087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visionLifeTime: 15
+  visionLifeTime: 10
   visionReChargeTime: 5
   visionTimeRemaining: 15
   visionChargedPercent: 100
@@ -619,6 +614,20 @@ MonoBehaviour:
   footstepDelayForward: .5
   footstepDelayBackward: .5
   footstepDelaySide: .600000024
+--- !u!114 &11400018
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ada4bac00ca391445b1021084103485f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nvMeterOff: {fileID: 2800000, guid: 20addfaf705db4c429ca58f36d727ee4, type: 3}
+  nvMeterOn: {fileID: 2800000, guid: c3eed2682ec83c0409512a1ea3ddcee5, type: 3}
+  nvMeterFill: {fileID: 2800000, guid: 6449550b5a2d3a14b958d3245dd80f47, type: 3}
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1

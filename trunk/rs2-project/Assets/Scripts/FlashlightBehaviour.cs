@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System;
 
 public class FlashlightBehaviour : MonoBehaviour
@@ -18,6 +19,10 @@ public class FlashlightBehaviour : MonoBehaviour
         private float cutoffDistance = 5;
 
         public int probabilityMagicNumber = 3;
+
+        public enum FlashlightCookieMode { FC_NORMAL = 0, FC_RUN, FC_WAKEUP, FC_HEISCOMING };
+
+        public Texture2D[] cookies;
 
 
         System.Random rand = new System.Random();
@@ -103,5 +108,10 @@ public class FlashlightBehaviour : MonoBehaviour
         void FlashlightOn()
         {
             flashlight.enabled = true;
+        }
+
+        public void SwitchCookie(FlashlightCookieMode mode)
+        {
+            this.light.cookie = cookies[(int)mode];
         }
 }

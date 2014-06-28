@@ -39,9 +39,9 @@ public class DarkPrimControls : MonoBehaviour
 				if (Input.GetKeyDown (KeyCode.E) && GetComponent<LimitVision>().visionEnabled) 
                 {
                     if (!nightmareVision)
-                        ShowVision();
+                        EnableVision();
                     else
-                        HideVision();
+                        DisableVision();
 				}
                 
                 if(Input.GetKeyDown(KeyCode.Escape))
@@ -58,7 +58,7 @@ public class DarkPrimControls : MonoBehaviour
 				}				
 		}
 
-        public void ShowVision()
+        public void EnableVision()
         {
             foreach (var wall in walls)
             {
@@ -66,22 +66,32 @@ public class DarkPrimControls : MonoBehaviour
                 wall.renderer.material.color = new Color(1, 0, 0, 0.2f);
             }
 
-            GameObject prim = GameObject.FindGameObjectWithTag("Prim").transform.FindChild("Graphics").gameObject;
 
-            (prim.GetComponent("Halo") as Behaviour).enabled = true;
+            GameObject prim = GameObject.FindGameObjectWithTag("Prim");
+
+            if(prim!=null)
+            {
+                prim = prim.transform.FindChild("Graphics").gameObject;
+                (prim.GetComponent("Halo") as Behaviour).enabled = true;
+            }        
 
             nightmareVision = true;
         }
 
-        public void HideVision()
+        public void DisableVision()
         {
             foreach (var wall in walls)
             {
                 wall.renderer.material.shader = Shader.Find("Diffuse");
                 wall.renderer.material.color = Color.gray;
 
-                GameObject prim = GameObject.FindGameObjectWithTag("Prim").transform.FindChild("Graphics").gameObject;
-                (prim.GetComponent("Halo") as Behaviour).enabled = false;
+                GameObject prim = GameObject.FindGameObjectWithTag("Prim");
+
+                if (prim != null)
+                {
+                    prim = prim.transform.FindChild("Graphics").gameObject;
+                    (prim.GetComponent("Halo") as Behaviour).enabled = false;
+                }  
 
             }
 

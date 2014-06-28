@@ -347,19 +347,19 @@ public class InitializeWorld : MonoBehaviour
 								flashlight.GetComponent<FlashlightBehaviour> ().parent = GameObject.FindGameObjectWithTag ("Prim").transform;
 						}*/
 
-                        GameObject[] walls = GameObject.FindGameObjectsWithTag("Wall");
-                        foreach(var wall in walls)
-                        {
-                            wall.renderer.material.color = Color.gray;
-                        }
-                        GameObject[] floors = GameObject.FindGameObjectsWithTag("Floor");
-                        foreach(var floor in floors)
-                        {
-                            floor.renderer.material.color = Color.gray;
-                        }
                         GameObject.Find("Skylight").light.enabled = true;
 				}
 
+                GameObject[] walls = GameObject.FindGameObjectsWithTag("Wall");
+                foreach (var wall in walls)
+                {
+                    wall.renderer.material.color = Color.gray;
+                }
+                GameObject[] floors = GameObject.FindGameObjectsWithTag("Floor");
+                foreach (var floor in floors)
+                {
+                    floor.renderer.material.color = Color.white;
+                }
 
 				// movement setup
 				var motor = player.GetComponent<CharacterMotor> ();

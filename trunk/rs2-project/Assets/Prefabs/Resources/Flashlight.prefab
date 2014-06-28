@@ -141,6 +141,11 @@ MonoBehaviour:
   blinkCooldown: .5
   blinkDuration: .100000001
   probabilityMagicNumber: 3
+  cookies:
+  - {fileID: 2800000, guid: 7f9d75067009d014a9c5797a5661f062, type: 3}
+  - {fileID: 2800000, guid: 8703327301e1a8a448447198b13019c5, type: 3}
+  - {fileID: 2800000, guid: fe6e1c8e0cd494b4b9e376b0642b66de, type: 3}
+  - {fileID: 2800000, guid: 4c6b5b10edc61e944ab3fc0cfaee7150, type: 3}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
