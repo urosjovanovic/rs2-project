@@ -635,7 +635,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cbf9527c9e640f44927d4b822258b97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprintLifeTime: 15
+  sprintLifeTime: 10
   sprintReChargeTime: 5
   sprintTimeRemaining: 15
   sprintEnabled: 1

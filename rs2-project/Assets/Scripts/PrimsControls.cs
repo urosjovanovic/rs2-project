@@ -1,10 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class PrimsControls : MonoBehaviour {
 
 	public Transform flashlight;
+    private FlashlightBehaviour fb;
+
     private int markerCount = 3;
+
+    bool flashlightOn = false;
 
     public int MarkerCount
     {
@@ -12,21 +17,30 @@ public class PrimsControls : MonoBehaviour {
         set { markerCount = value; }
     }
 
-
-	// Use this for initialization
-	void Start () {
-       
-	}
+    void Start()
+    {
+        if(!(fb = flashlight.GetComponent<FlashlightBehaviour>()))  throw new NullReferenceException("FlashlightBehaviour component in PrimsControls script is null!");
+    }
 	
 	// Update is called once per frame
 	void Update () {
 	
+        // F toggles the flashlight
 		if(Input.GetKeyDown(KeyCode.F) && flashlight.gameObject.GetComponent<FlashlightRecharge>().flashLightEnabled)
 		{
-			flashlight.gameObject.light.enabled = !flashlight.gameObject.light.enabled;
             flashlight.audio.PlayOneShot(SoundPool.FlashlightClick);
+            
+            if (fb.FlashlightIsOn)
+            {
+                fb.TurnFlashlightOff();
+            }
+            else
+            {
+                fb.TurnFlashlightOn();
+            }
 		}
 
+        // T draws a marker
         if(Input.GetKeyDown(KeyCode.T))
         {
             if (markerCount > 0)
@@ -45,6 +59,7 @@ public class PrimsControls : MonoBehaviour {
             }
         }
 
+        // Escape ends the game
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             GameObject.Find("_SCRIPTS").GetComponent<EndGameScript>().enabled = true;

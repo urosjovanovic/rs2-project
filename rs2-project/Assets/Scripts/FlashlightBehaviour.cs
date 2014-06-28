@@ -5,86 +5,108 @@ using System;
 
 public class FlashlightBehaviour : MonoBehaviour
 {
-		public Transform parent;
-		public float lag = 5.0f;
 
-		private Transform camera;
+        public float flashlightLag = 5.0f;
+      
+        #region Components
 
-        public float blinkCooldown = 0.5f;
-        private float currentCooldown;
-        public float blinkDuration = 0.005f;
+        private Transform camera;
+        public Transform parent;
+        Light flashlight;
+        FlashlightRecharge flashlightRecharge;
 
-        private double blinkProbability = 0.005;
+        #endregion
 
-        private float cutoffDistance = 5;
+        #region Variables for blinking
 
-        public int probabilityMagicNumber = 3;
+        private double blinkProbability;
+        public float blinkCutoffDistance;
+        public int probabilityMagicNumber;
+        
+        public float blinkCooldown;
+        private float currentBlinkCooldown;
+        public float blinkDuration;
 
+        System.Random rand = new System.Random();
+
+        private bool isBlinking;
+        #endregion
+
+        #region Cookie stuff
         public enum FlashlightCookieMode { FC_NORMAL = 0, FC_RUN, FC_WAKEUP, FC_HEISCOMING };
 
         public Texture2D[] cookies;
 
+        #endregion
 
-        System.Random rand = new System.Random();
+        #region Flashlight controls
+        public bool FlashlightIsOn;
 
-        Light flashlight;
+        public void TurnFlashlightOff()
+        {
+            FlashlightIsOn = false;
+        }
 
-        FlashlightRecharge flashlightRecharge;
+        public void TurnFlashlightOn()
+        {
+            FlashlightIsOn = true;
+        }
+        #endregion
 
-		// Use this for initialization
 		void Start ()
         {
-            camera = parent.FindChild ("MainCamera");
-				if (!camera) 
-						Debug.Log ("FlashlightBehaviour: No camera object found on parent.");
+            if (!(camera = parent.FindChild ("MainCamera"))) throw new NullReferenceException("MainCamera in FlashlightBehaviour script is null!");
+            if (!(flashlight = this.GetComponent<Light>())) throw new NullReferenceException("flashlight in FlashliightBehaviour script is null!");
+            if (!(flashlightRecharge = flashlight.gameObject.GetComponent<FlashlightRecharge>())) throw new NullReferenceException("flaslightRecharge component in FlashlightBehaviour script is null!");
 
-            currentCooldown = blinkCooldown;
-            flashlight = this.GetComponent<Light>();
-
-            if (!flashlight)
-            {
-                throw new Exception("Flashlight is null!");
-            }
-
-            flashlightRecharge = flashlight.gameObject.GetComponent<FlashlightRecharge>();
-
-            if (!flashlightRecharge) throw new Exception("Flashlight recharge is null!");
+            currentBlinkCooldown = blinkCooldown;
+            FlashlightIsOn = false;
+            isBlinking = false;
         }
 	
 		// Update is called once per frame
 		void Update ()
-		{		
+		{
+                // update the flashlight state
+                if(!isBlinking) flashlight.enabled = FlashlightIsOn;
+
 				//follow parent
 				this.transform.position = parent.transform.position;
 
 				//sway with camera
-				this.transform.rotation = Quaternion.Slerp (this.transform.rotation, camera.transform.rotation, Time.deltaTime * lag);
+				this.transform.rotation = Quaternion.Slerp (this.transform.rotation, camera.transform.rotation, Time.deltaTime * flashlightLag);
 
-                if (currentCooldown >= 0)
+                if (currentBlinkCooldown >= 0)
                 {
-                    currentCooldown -= Time.deltaTime;
+                    currentBlinkCooldown -= Time.deltaTime;
                 }
                 else
                 {
-					if (flashlight.enabled && flashlightRecharge.flashLightEnabled)
+					if (FlashlightIsOn)
                     {
                         var darkPrim = GameObject.FindGameObjectWithTag("DarkPrim");
 
                         if (darkPrim)
                         {
                             float currentDistance = Vector3.Distance(this.transform.position, darkPrim.transform.position);
-                            
 
-                            blinkProbability = Math.Round(cutoffDistance / (currentDistance*probabilityMagicNumber), 2);
-
-                            double r = ((double)rand.Next(100)) / 100;
-
-                            if (r <= blinkProbability)
+                            if (currentDistance < blinkCutoffDistance)
                             {
-                                StartCoroutine(FlashlightBlink());
+                                blinkProbability = 1;
+                            }
+                            else
+                            {
+                                blinkProbability = Math.Round(blinkCutoffDistance / (currentDistance * probabilityMagicNumber), 3);
                             }
 
-                            currentCooldown = blinkCooldown;
+                            double r = ((double)rand.Next(1000)) / 1000;
+
+                            if (r <= blinkProbability && FlashlightIsOn)
+                            {
+                                StartCoroutine(FlashlightBlink());
+                                currentBlinkCooldown = blinkCooldown;
+                            }
+
                         }
                     }
                 }
@@ -92,17 +114,30 @@ public class FlashlightBehaviour : MonoBehaviour
 
         public IEnumerator FlashlightBlink()
         {
-            yield return StartCoroutine(FlashlightOff());
+            isBlinking = true;
+            SwitchCookie(FlashlightCookieMode.FC_RUN);
 
-            if(flashlightRecharge.flashLightEnabled)
-             FlashlightOn();
+            this.audio.PlayOneShot(SoundPool.FlashlightBuzz);
+
+            for (int i = 0; i < (int)(blinkCooldown/blinkDuration); i++)
+            {
+                yield return StartCoroutine(FlashlightOff());
+            }
+
+            if (FlashlightIsOn)
+                FlashlightOn();
+
+            SwitchCookie(FlashlightCookieMode.FC_RUN);
+            isBlinking = false;
         }
 
         IEnumerator FlashlightOff()
         {
-            flashlight.enabled = false;
-            this.audio.PlayOneShot(SoundPool.FlashlightBuzz);
-            yield return new WaitForSeconds(blinkDuration);  
+            if (FlashlightIsOn)
+            {
+                flashlight.enabled = !flashlight.enabled;
+                yield return new WaitForSeconds(blinkDuration);
+            }
         }
 
         void FlashlightOn()

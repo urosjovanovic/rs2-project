@@ -1,34 +1,42 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
-public class UIPrim : MonoBehaviour {
+public class UIPrim : MonoBehaviour
+{
 
-    private GameObject flaslight;
+    #region Components
+    private GameObject flashlight;
     private PrimsControls primsControls;
+    private FlashlightBehaviour fb;
+    private FlashlightRecharge fr;
+    #endregion
 
+    #region Textures
     public Texture lightOn;
     public Texture lightOff;
     public Texture lightbar;
     public Texture markerIcon;
+    #endregion
 
-	// Use this for initialization
+    // Use this for initialization
 	void Start () {
-        primsControls = this.transform.parent.gameObject.GetComponent<PrimsControls>();
-        flaslight = primsControls.flashlight.gameObject;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+        if (!(primsControls = this.transform.parent.gameObject.GetComponent<PrimsControls>())) throw new NullReferenceException("PrimsControls component in UIPrim script is null!");
+        if (!(flashlight = primsControls.flashlight.gameObject)) throw new NullReferenceException("Flashlight component in UIPrim script is null!");
+        if (!(fb = flashlight.GetComponent<FlashlightBehaviour>())) throw new NullReferenceException("FlashlightBehaviour component in UIPrim script is null!");
+        if (!(fr = flashlight.GetComponent<FlashlightRecharge>())) throw new NullReferenceException("FlashlightRecharge component in UIPrim script is null!");
+
 	}
 
     void OnGUI()
     {
-        float lightbarmeter = lightOn.height/100.0f * flaslight.GetComponent<FlashlightRecharge>().flashLightChargedPercent;
+        float lightbarmeter = lightOn.height/100.0f * fr.flashLightChargedPercent;
         GUI.DrawTexture(new Rect(Screen.width - lightOn.width, Screen.height - 10, lightbarmeter, 10), lightbar, ScaleMode.StretchToFill,true,1.0f);
         
         Rect position = new Rect(Screen.width-lightOff.width,Screen.height-lightOff.height,lightOff.width,lightOff.height);
-        if (flaslight.light.enabled)
+
+        if (fb.FlashlightIsOn)
         {
             GUI.DrawTexture(position, lightOn);
         }
