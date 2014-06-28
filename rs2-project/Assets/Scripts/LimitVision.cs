@@ -46,7 +46,7 @@ public class LimitVision : MonoBehaviour
     private void RechargeVision()
     {
         visionEnabled = false;
-        GetComponent<DarkPrimControls>().HideVision();
+        GetComponent<DarkPrimControls>().DisableVision();
         StartCoroutine(WaitAndUnfreeze());
     }
 

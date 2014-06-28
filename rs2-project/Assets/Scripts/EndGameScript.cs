@@ -30,10 +30,12 @@ public class EndGameScript : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
     {
-	    if(text.GetComponent<MouseOver>().isMouseOver && Input.GetMouseButtonDown(0))
-        {
-            Application.LoadLevel("MainMenu");
-        }
+        //TODO: Ovo sam ti iskomentarisao jer sam obrisao onaj main menu text...
+
+        //if(text.GetComponent<MouseOver>().isMouseOver && Input.GetMouseButtonDown(0))
+        //{
+        //    Application.LoadLevel("MainMenu");
+        //}
 
         if(Input.GetKeyDown(KeyCode.Escape))
             Application.LoadLevel("MainMenu");

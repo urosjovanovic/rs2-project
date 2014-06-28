@@ -14,6 +14,15 @@ public class ExitDoorBehaviour : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         doorPanel = this.transform.parent.transform.FindChild("panel").transform;
+        Transform doorFrame = this.transform.parent.transform.FindChild("frame");
+        
+        //Paint the door red
+        doorFrame.renderer.material.color = Color.red;
+
+        for (int i = 0; i < doorPanel.renderer.materials.Length; i++)
+        {
+            doorPanel.renderer.materials[i].color = Color.red;
+        }
 	}
 	
     void OnTriggerEnter(Collider other)

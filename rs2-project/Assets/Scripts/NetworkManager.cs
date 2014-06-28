@@ -53,18 +53,21 @@ public class NetworkManager : Photon.MonoBehaviour
 
         void Update()
         {
-            if (PhotonNetwork.room.playerCount == 2 && god!=null)
+            if ( (!ConfigManager.waitForOtherPlayer) || PhotonNetwork.room.playerCount == 2)
             {
-                // AND THIS IS HOW HE CREATED THE WORLD
-                var initScript = ((MonoBehaviour)god.GetComponent("InitializeWorld"));
-                if (initScript == null) throw new Exception("Component initScript is null.");
-                initScript.enabled = true;
+                if (god != null)
+                {
+                    // AND THIS IS HOW HE CREATED THE WORLD
+                    var initScript = ((MonoBehaviour)god.GetComponent("InitializeWorld"));
+                    if (initScript == null) throw new Exception("Component initScript is null.");
+                    initScript.enabled = true;
 
-                GameObject loadingGameCamera = GameObject.Find("LoadingGameCamera");
-                loadingGameCamera.GetComponent<GUIText>().enabled = false;
-                loadingGameCamera.camera.enabled = false;
+                    GameObject loadingGameCamera = GameObject.Find("LoadingGameCamera");
+                    loadingGameCamera.GetComponent<GUIText>().enabled = false;
+                    loadingGameCamera.camera.enabled = false;
 
-                this.enabled = false;
+                    this.enabled = false;
+                }
             }
 
         }
