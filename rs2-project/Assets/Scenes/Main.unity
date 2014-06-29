@@ -378,6 +378,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 3f5b0aa75a39abc4fbfe098875fa8c24, type: 3}
   publicDoorSound: {fileID: 8300000, guid: 23bb831dc7448eb4a976a0aa3b72159f, type: 3}
   publicPickupSound: {fileID: 8300000, guid: 824682421d02af54496f06dc2b26a49a, type: 3}
+  publicScream: {fileID: 8300000, guid: 3800857f648ea244fa6b283b8bcabaf1, type: 3}
 --- !u!114 &1343903573
 MonoBehaviour:
   m_ObjectHideFlags: 0

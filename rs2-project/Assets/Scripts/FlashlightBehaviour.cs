@@ -127,7 +127,7 @@ public class FlashlightBehaviour : MonoBehaviour
             if (FlashlightIsOn)
                 FlashlightOn();
 
-            SwitchCookie(FlashlightCookieMode.FC_RUN);
+            SwitchCookie(FlashlightCookieMode.FC_NORMAL);
             isBlinking = false;
         }
 

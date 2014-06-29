@@ -28,6 +28,13 @@ public class SoundPool : MonoBehaviour {
     public AudioClip publicPickupSound;
     public static AudioClip pickupSound;
 
+    public AudioClip publicScream;
+
+    public static AudioClip Scream
+    {
+        get;
+        private set;
+    }
 
     public void Start()
     {
@@ -41,6 +48,8 @@ public class SoundPool : MonoBehaviour {
 
         doorSound = publicDoorSound;
         pickupSound = publicPickupSound;
+
+        Scream = publicScream;
     }
 
     public static AudioClip FlashlightBuzz
