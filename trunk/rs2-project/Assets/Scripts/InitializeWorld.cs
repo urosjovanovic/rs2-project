@@ -339,7 +339,7 @@ public class InitializeWorld : MonoBehaviour
                     if (player.gameObject.tag == "DarkPrim") 
                 {
 						((MonoBehaviour)player.GetComponent ("DarkPrimControls")).enabled = true;
-						
+
                         //Lampa nije bitna vise za DarkPrima...
                         /*GameObject flashlight = GameObject.FindGameObjectWithTag ("Flashlight");
 						if (flashlight) {

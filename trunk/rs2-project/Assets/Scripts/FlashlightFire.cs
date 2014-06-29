@@ -54,6 +54,7 @@ public class FlashlightFire : MonoBehaviour {
             if (hit.rigidbody != null && hit.rigidbody.gameObject.tag == "DarkPrim")
             {
                 Debug.Log("There is something in front of the object!");
+                this.audio.PlayOneShot(SoundPool.Scream);
                 darkPrimSprite = Instantiate(Resources.Load("DarkPrim2DSprite")) as GameObject;
                 darkPrimSprite.transform.position = hit.rigidbody.gameObject.transform.position;
                 view.RPC("FreezeDarkPrim", PhotonTargets.All, null);

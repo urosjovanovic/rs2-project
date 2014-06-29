@@ -6,6 +6,7 @@ public class NetworkManager : Photon.MonoBehaviour
 {
 
         GameObject god;
+        bool initialized = false;
 
 		// Use this for initialization
 		void Start ()
@@ -47,13 +48,13 @@ public class NetworkManager : Photon.MonoBehaviour
 		{
                 // AND THAT'S HOW A GOD IS BORN
 				god = (GameObject)PhotonNetwork.Instantiate ("TheCreator", Vector3.zero, Quaternion.identity, 0);
-       
+                initialized = true;
                
 		}
 
         void Update()
         {
-            if ( (!ConfigManager.waitForOtherPlayer) || PhotonNetwork.room.playerCount == 2)
+            if (initialized && ((!ConfigManager.waitForOtherPlayer) || PhotonNetwork.room.playerCount == 2))
             {
                 if (god != null)
                 {
