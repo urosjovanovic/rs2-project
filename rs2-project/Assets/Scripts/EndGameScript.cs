@@ -3,11 +3,10 @@ using System.Collections;
 
 public class EndGameScript : MonoBehaviour 
 {
-
-    GameObject text = null;
+    public bool PrimWin;
 	// Use this for initialization
-	void Start () {
-        text = GameObject.Find("MainMenu");
+	void Start () 
+    {
         GameObject[] cameras = GameObject.FindGameObjectsWithTag("MainCamera");
         foreach (var camera in cameras)
             camera.camera.enabled = false;
@@ -25,19 +24,27 @@ public class EndGameScript : MonoBehaviour
             //floor.GetComponent<PathColor>().enabled = true;
             floor.GetComponent<PathColor>().Colorize();
         }
+
+        if(PrimWin)
+        {
+            if (this.gameObject.tag == "Prim")
+                GameObject.Find("Win").GetComponent<MeshRenderer>().enabled = true;
+            else if(this.gameObject.tag == "DarkPrim")
+                GameObject.Find("Lose").GetComponent<MeshRenderer>().enabled = true;
+        }
+        else
+        {
+            if (this.gameObject.tag == "DarkPrim")
+                GameObject.Find("Win").GetComponent<MeshRenderer>().enabled = true;
+            else if (this.gameObject.tag == "Prim")
+                GameObject.Find("Lose").GetComponent<MeshRenderer>().enabled = true;
+        }
 	}
 	
 	// Update is called once per frame
 	void Update () 
     {
-        //TODO: Ovo sam ti iskomentarisao jer sam obrisao onaj main menu text...
-
-        //if(text.GetComponent<MouseOver>().isMouseOver && Input.GetMouseButtonDown(0))
-        //{
-        //    Application.LoadLevel("MainMenu");
-        //}
-
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
             Application.LoadLevel("MainMenu");
 	}
 }

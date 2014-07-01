@@ -43,19 +43,6 @@ public class DarkPrimControls : MonoBehaviour
                     else
                         DisableVision();
 				}
-                
-                if(Input.GetKeyDown(KeyCode.Escape))
-                {
-                    GameObject.Find("_SCRIPTS").GetComponent<EndGameScript>().enabled = true;
-                }
-		}
-
-		void OnTriggerEnter (Collider other)
-		{
-				if (other.transform.parent.gameObject.tag == "Prim") 
-                {
-                        GameObject.Find("_SCRIPTS").GetComponent<EndGameScript>().enabled = true;
-				}				
 		}
 
         public void EnableVision()

@@ -15,6 +15,7 @@ public class MenuScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
+        Screen.showCursor = true;
 		back = GameObject.Find ("Shadow");
 		menuItemPlay = GameObject.Find ("MenuItem0");
 		menuItemControls = GameObject.Find ("MenuItem1");

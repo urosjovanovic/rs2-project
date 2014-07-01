@@ -109,6 +109,12 @@ public class InitializeWorld : MonoBehaviour
                             // Instantiate exit
                             GameObject exitObj = (GameObject)Instantiate(exit, GetVectorFromNode(exitNode, -1), Quaternion.LookRotation((GetVectorFromNode(exitNode.Edges[0], 0) - GetVectorFromNode(exitNode, 0)).normalized)); // look toward a neighbour node
 
+                            foreach (var component in exitObj.GetComponentsInChildren<Collider>())
+                            {
+                                if(component.transform.rotation == new Quaternion(0.0f, 180.0f, 0.0f, 0.0f))
+                                    component.isTrigger = true;
+                            }
+
                             // Instantiate the marker collectibles
                             InstantiateMarkerPrefabs(markerCollectibleNodes);
                         }
@@ -301,7 +307,6 @@ public class InitializeWorld : MonoBehaviour
 		[RPC]
 		public void spawnPlayer (string who, Vector3 where, Quaternion rotation)
 		{
-
 				GameObject player = null;
 
 				if (AlwaysSpawnAs) {
@@ -333,10 +338,11 @@ public class InitializeWorld : MonoBehaviour
                         ((MonoBehaviour)player.GetComponent("Sprint")).enabled = true;
                         ((MonoBehaviour)player.GetComponent("PrimsControls")).enabled = true;
                         ((MonoBehaviour)player.GetComponent("GenerateFootsteps")).enabled = true;
+                        ((MonoBehaviour)player.GetComponent("EndGamePrim")).enabled = true;
                         player.transform.FindChild("MainCamera").GetComponent<UIPrim>().enabled = true;
 				}
-                else //DarkPrim only
-                    if (player.gameObject.tag == "DarkPrim") 
+                    //DarkPrim only
+                else if (player.gameObject.tag == "DarkPrim") 
                 {
 						((MonoBehaviour)player.GetComponent ("DarkPrimControls")).enabled = true;
 
@@ -346,6 +352,8 @@ public class InitializeWorld : MonoBehaviour
 								//Ako lampa vec postoji, znaci da je Prim vec spawnovan
 								flashlight.GetComponent<FlashlightBehaviour> ().parent = GameObject.FindGameObjectWithTag ("Prim").transform;
 						}*/
+
+                        ((MonoBehaviour)player.GetComponent("EndGameDarkPrim")).enabled = true;
 
                         GameObject.Find("Skylight").light.enabled = true;
 				}
