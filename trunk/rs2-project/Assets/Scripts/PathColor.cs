@@ -13,12 +13,12 @@ public class PathColor : MonoBehaviour
             if (other.gameObject.tag == "Prim")
             {
                 walkedOnByPrim = true;
-                Debug.Log(other.gameObject.transform.position.x + " " + other.gameObject.transform.position.z);
+                //Debug.Log(other.gameObject.transform.position.x + " " + other.gameObject.transform.position.z);
             }
             else if (other.gameObject.tag == "DarkPrim")
             {
                 walkedOnByDarkPrim = true;
-                Debug.Log(other.gameObject.transform.position.x + " " + other.gameObject.transform.position.z);
+                //Debug.Log(other.gameObject.transform.position.x + " " + other.gameObject.transform.position.z);
             }
             else
                 Debug.Log("There is someone here... He is not from this world...");

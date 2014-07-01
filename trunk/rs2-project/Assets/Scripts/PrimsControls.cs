@@ -58,31 +58,5 @@ public class PrimsControls : MonoBehaviour {
                 markerCount = Mathf.Clamp(markerCount, 0, 6);
             }
         }
-
-        // Escape ends the game
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            GameObject.Find("_SCRIPTS").GetComponent<EndGameScript>().enabled = true;
-        }
-
-
-	}
-
-	void OnTriggerEnter (Collider other)
-	{
-		if (other.transform.parent.gameObject.tag == "DarkPrim") 
-		{
-            GameObject.Find("_SCRIPTS").GetComponent<EndGameScript>().enabled = true;
-		}				
-	}
-
-	void OnTriggerStay (Collider other)
-	{
-
-	}
-
-	void OnTriggerExit (Collider other)
-	{
-
 	}
 }

@@ -31,4 +31,6 @@ MonoBehaviour:
   - Freeze
   - FreezeDarkPrim
   - ReCharge
+  - LoseThisGame
+  - WinThisGame
   DisableAutoOpenWizard: 0
