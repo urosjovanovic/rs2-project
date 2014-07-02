@@ -36,13 +36,6 @@ public class EndGamePrim : MonoBehaviour
         {
             view.RPC("LoseThisGame", PhotonTargets.Others, null);
             Lose();
-
-            //this.enabled = false;
-        }
-        else if (other.transform.parent.gameObject.name == "ExitHeaven")
-        {
-            view.RPC("WinThisGame", PhotonTargets.Others, null);
-            Win();
         }
     }
 
@@ -107,6 +100,12 @@ public class EndGamePrim : MonoBehaviour
 
         myEndScript.PrimWin = true;
         myEndScript.enabled = true;
+    }
+
+    public void WinWhenExit()
+    {
+        view.RPC("WinThisGame", PhotonTargets.Others, null);
+        Win();
     }
 
     #endregion
