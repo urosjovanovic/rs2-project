@@ -108,13 +108,7 @@ public class InitializeWorld : MonoBehaviour
 
                             // Instantiate exit
                             GameObject exitObj = (GameObject)Instantiate(exit, GetVectorFromNode(exitNode, -1), Quaternion.LookRotation((GetVectorFromNode(exitNode.Edges[0], 0) - GetVectorFromNode(exitNode, 0)).normalized)); // look toward a neighbour node
-
-                            foreach (var component in exitObj.GetComponentsInChildren<Collider>())
-                            {
-                                if(component.transform.rotation == new Quaternion(0.0f, 180.0f, 0.0f, 0.0f))
-                                    component.isTrigger = true;
-                            }
-
+                            
                             // Instantiate the marker collectibles
                             InstantiateMarkerPrefabs(markerCollectibleNodes);
                         }
