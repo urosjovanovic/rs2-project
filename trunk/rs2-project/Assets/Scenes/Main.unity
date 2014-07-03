@@ -544,6 +544,7 @@ GameObject:
   - 124: {fileID: 1732574327}
   - 92: {fileID: 1732574326}
   - 132: {fileID: 1732574325}
+  - 114: {fileID: 1732574324}
   m_Layer: 0
   m_Name: LoadingGameCamera
   m_TagString: Untagged
@@ -563,6 +564,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
+--- !u!114 &1732574324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1732574322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bb94a2a8b1d93442b413ce430cb01e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!132 &1732574325
 GUIText:
   m_ObjectHideFlags: 0
@@ -571,10 +583,10 @@ GUIText:
   m_GameObject: {fileID: 1732574322}
   m_Enabled: 1
   serializedVersion: 3
-  m_Text: Loading...
+  m_Text: Loading
   m_Anchor: 4
   m_Alignment: 1
-  m_PixelOffset: {x: 400, y: 300}
+  m_PixelOffset: {x: 0, y: 0}
   m_LineSpacing: 1
   m_TabSize: 4
   m_Font: {fileID: 12800000, guid: 1acf3c7b74018bf4685dc9f9e6d0cac8, type: 3}
