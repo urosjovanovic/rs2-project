@@ -7,11 +7,14 @@ public class DarkPrimControls : MonoBehaviour
 		public bool nightmareVision = false;
 		private GameObject[] walls;
 		private GameObject[] footsteps;
+        private CharacterMotor motor;
+        private float[] speed;
 
 		// Use this for initialization
 		void Start ()
 		{
 				walls = GameObject.FindGameObjectsWithTag ("Wall");
+                motor = this.GetComponent<CharacterMotor>();
 		}
 	
 		// Update is called once per frame
@@ -51,6 +54,7 @@ public class DarkPrimControls : MonoBehaviour
             {
                 wall.renderer.material.shader = Shader.Find("Transparent/Diffuse");
                 wall.renderer.material.color = new Color(1, 0, 0, 0.2f);
+                
             }
 
 
@@ -60,7 +64,9 @@ public class DarkPrimControls : MonoBehaviour
             {
                 prim = prim.transform.FindChild("Graphics").gameObject;
                 (prim.GetComponent("Halo") as Behaviour).enabled = true;
-            }        
+            }
+
+            SlowDown();
 
             nightmareVision = true;
         }
@@ -82,7 +88,24 @@ public class DarkPrimControls : MonoBehaviour
 
             }
 
+            RestoreSpeed();
+
             nightmareVision = false;
+        }
+
+        private void SlowDown()
+        {
+            speed = new float[]{motor.movement.maxForwardSpeed, motor.movement.maxSidewaysSpeed, motor.movement.maxBackwardsSpeed};
+            motor.movement.maxForwardSpeed = 0.5f;
+            motor.movement.maxSidewaysSpeed = 0.5f;
+            motor.movement.maxBackwardsSpeed = 0.5f;
+        }
+
+        private void RestoreSpeed()
+        {
+            motor.movement.maxForwardSpeed = speed[0];
+            motor.movement.maxSidewaysSpeed = speed[1];
+            motor.movement.maxBackwardsSpeed = speed[2];
         }
 
 }
