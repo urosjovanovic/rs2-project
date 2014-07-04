@@ -4,7 +4,7 @@ using System;
 
 public class FlashlightFire : MonoBehaviour {
 
-    public float fireRate = 0.5f;
+    public float fireRate = 0.1f;
     float coolDown = 0;
     private PhotonView view;
     private bool freezeActive = false;

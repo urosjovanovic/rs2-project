@@ -37,6 +37,12 @@ public class InitializeWorld : MonoBehaviour
         /// </summary>
         public string SpawnAs = "Prim";
 
+        /// <summary>
+        /// Prefabs to be instantiated. Must be set from Scene Inspector.
+        /// </summary>
+        public Transform WallPrefab;
+        public Transform FloorPrefab; //TODO
+
     #endregion
 
 
@@ -281,10 +287,11 @@ public class InitializeWorld : MonoBehaviour
 								kocka.gameObject.AddComponent<PathColor> ();
 								kocka.transform.parent = Floor.transform;
 						} else {
+                                kocka = (GameObject)GameObject.Instantiate((GameObject)Resources.Load("WallPrefab"));
 								pos = new Vector3 (i, 0, width - rowIndex);
 								kocka.gameObject.name = pos.ToString ();
 								kocka.transform.position = pos;
-								kocka.gameObject.tag = "Wall";
+								//kocka.gameObject.tag = "Wall";
 								kocka.transform.parent = Walls.transform;
 						}
 				}
@@ -348,6 +355,7 @@ public class InitializeWorld : MonoBehaviour
 						}*/
 
                         ((MonoBehaviour)player.GetComponent("EndGameDarkPrim")).enabled = true;
+                        player.transform.FindChild("MainCamera").GetComponent<UIDarkPrim>().enabled = true;
 
                         GameObject.Find("Skylight").light.enabled = true;
 				}
