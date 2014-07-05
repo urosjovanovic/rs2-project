@@ -273,17 +273,17 @@ public class InitializeWorld : MonoBehaviour
 
 				for (int i = 0; i < width; i++) {
 
-						GameObject kocka = GameObject.CreatePrimitive (PrimitiveType.Cube);
-						kocka.isStatic = true;
+                        GameObject kocka = null;
 
 						int c = row [i];
 
 						Vector3 pos;
 						if (c == 0) {
+                                kocka = (GameObject)GameObject.Instantiate((GameObject)Resources.Load("FloorPrefab"));
 								pos = new Vector3 (i, -1, width - rowIndex);
 								kocka.gameObject.name = pos.ToString ();
 								kocka.transform.position = pos;
-								kocka.gameObject.tag = "Floor";
+								//kocka.gameObject.tag = "Floor";
 								kocka.gameObject.AddComponent<PathColor> ();
 								kocka.transform.parent = Floor.transform;
 						} else {
@@ -294,6 +294,8 @@ public class InitializeWorld : MonoBehaviour
 								//kocka.gameObject.tag = "Wall";
 								kocka.transform.parent = Walls.transform;
 						}
+
+                        kocka.isStatic = true;
 				}
 
 
