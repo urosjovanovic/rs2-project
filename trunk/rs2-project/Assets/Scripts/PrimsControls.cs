@@ -48,7 +48,7 @@ public class PrimsControls : MonoBehaviour {
                 GameObject marker = PhotonNetwork.Instantiate("Marker", this.transform.position, Quaternion.identity, 0);
                 if (marker)
                 {
-                    marker.transform.position = new Vector3(marker.transform.position.x, -0.499f, marker.transform.position.z);
+                    marker.transform.position = new Vector3(marker.transform.position.x, -0.495f, marker.transform.position.z);
                     marker.transform.Rotate(new Vector3(90, this.transform.localEulerAngles.y, 0));
                 }
             }

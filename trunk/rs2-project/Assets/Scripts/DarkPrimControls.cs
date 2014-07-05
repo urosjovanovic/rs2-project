@@ -8,13 +8,17 @@ public class DarkPrimControls : MonoBehaviour
 		private GameObject[] walls;
 		private GameObject[] footsteps;
         private CharacterMotor motor;
+        private Light darkPrimAura;
         private float[] speed;
+        private float intensity;
+        private Color auraColor;
 
 		// Use this for initialization
 		void Start ()
 		{
 				walls = GameObject.FindGameObjectsWithTag ("Wall");
                 motor = this.GetComponent<CharacterMotor>();
+                darkPrimAura = this.transform.FindChild("Point light").light;
 		}
 	
 		// Update is called once per frame
@@ -53,8 +57,8 @@ public class DarkPrimControls : MonoBehaviour
             foreach (var wall in walls)
             {
                 wall.renderer.material.shader = Shader.Find("Transparent/Diffuse");
-                wall.renderer.material.color = new Color(1, 0, 0, 0.2f);
-                
+                //wall.renderer.material.color = new Color(1, 0, 0, 0.05f);
+                wall.GetComponent<WallBehaviour>().FadeOutTo(0.05f);  
             }
 
 
@@ -67,6 +71,11 @@ public class DarkPrimControls : MonoBehaviour
             }
 
             SlowDown();
+            intensity = darkPrimAura.intensity;
+            auraColor = darkPrimAura.color;
+            darkPrimAura.intensity = 10;
+            //darkPrimAura.range = 30; <-- Utice lose na performanse
+            darkPrimAura.color = Color.white;
 
             nightmareVision = true;
         }
@@ -75,20 +84,24 @@ public class DarkPrimControls : MonoBehaviour
         {
             foreach (var wall in walls)
             {
-                wall.renderer.material.shader = Shader.Find("Diffuse");
-                wall.renderer.material.color = Color.gray;
-
-                GameObject prim = GameObject.FindGameObjectWithTag("Prim");
-
-                if (prim != null)
-                {
-                    prim = prim.transform.FindChild("Graphics").gameObject;
-                    (prim.GetComponent("Halo") as Behaviour).enabled = false;
-                }  
+                wall.GetComponent<WallBehaviour>().FadeIn();
+                //wall.renderer.material.shader = Shader.Find("Diffuse");
+                //wall.renderer.material.color = Color.gray; 
 
             }
 
+            GameObject prim = GameObject.FindGameObjectWithTag("Prim");
+
+            if (prim != null)
+            {
+                prim = prim.transform.FindChild("Graphics").gameObject;
+                (prim.GetComponent("Halo") as Behaviour).enabled = false;
+            } 
+
             RestoreSpeed();
+            darkPrimAura.intensity = intensity;
+            darkPrimAura.color = auraColor;
+            darkPrimAura.range = 10;
 
             nightmareVision = false;
         }

@@ -46,7 +46,8 @@ public class GenerateFootsteps : MonoBehaviour
 				GameObject footstep = PhotonNetwork.Instantiate (nextFoot, this.transform.position, Quaternion.identity, 0);
 				footstep.transform.Rotate (new Vector3 (90, this.transform.rotation.eulerAngles.y, 0));
 				//TODO: Namestiti malo bolje lociranje po Y osi
-				footstep.transform.position = new Vector3 (footstep.transform.position.x, -0.498f, footstep.transform.position.z);
+                float y = (nextFoot == "FootstepRight") ? -0.499f : -0.498f;
+				footstep.transform.position = new Vector3 (footstep.transform.position.x, y, footstep.transform.position.z);
 				footstep.transform.localScale = new Vector3 (0.22f, 0.22f, 0.22f);
             #endregion
 
