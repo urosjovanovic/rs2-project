@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dfbc99e2388b014ba3ac59acc60f154, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AlwaysSpawnAs: 1
+  AlwaysSpawnAs: 0
   SpawnAs: DarkPrim
   WallPrefab: {fileID: 400000, guid: bec6efe232203f547843ffa42cf3c65a, type: 2}
   FloorPrefab: {fileID: 0}

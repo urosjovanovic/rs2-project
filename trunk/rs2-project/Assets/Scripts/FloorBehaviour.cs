@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PathColor : MonoBehaviour
-{
-		public bool autoRefresh = false;
+public class FloorBehaviour : MonoBehaviour
+{		
+        public bool autoRefresh = false;
 		private bool walkedOnByPrim = false;
 		private bool walkedOnByDarkPrim = false;
 
@@ -12,12 +12,20 @@ public class PathColor : MonoBehaviour
 				//Debug.Log (other.gameObject.tag);
             if (other.gameObject.tag == "Prim")
             {
-                walkedOnByPrim = true;
+                if (!walkedOnByPrim)
+                {
+                    walkedOnByPrim = true;
+                    PathData.Instance.PrimPath.Enqueue(this.transform);
+                }
                 //Debug.Log(other.gameObject.transform.position.x + " " + other.gameObject.transform.position.z);
             }
             else if (other.gameObject.tag == "DarkPrim")
             {
-                walkedOnByDarkPrim = true;
+                if (!walkedOnByDarkPrim)
+                {
+                    walkedOnByDarkPrim = true;
+                    PathData.Instance.DarkPrimPath.Enqueue(this.transform);
+                }
                 //Debug.Log(other.gameObject.transform.position.x + " " + other.gameObject.transform.position.z);
             }
             else
@@ -29,11 +37,16 @@ public class PathColor : MonoBehaviour
 
 		public void Colorize ()
 		{
-				if (walkedOnByPrim)
-						this.gameObject.renderer.material.color = Color.red;
-				if (walkedOnByDarkPrim)
-						this.gameObject.renderer.material.color = Color.black;
+            if (walkedOnByPrim)
+                Colorize(Color.red);
+            if (walkedOnByDarkPrim)
+                Colorize(Color.black);
 		}
+
+        public void Colorize(Color c)
+        {
+            this.gameObject.renderer.material.color = c;
+        }
 
 		public void ResetColor ()
 		{

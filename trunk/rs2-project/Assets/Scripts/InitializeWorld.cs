@@ -284,7 +284,7 @@ public class InitializeWorld : MonoBehaviour
 								kocka.gameObject.name = pos.ToString ();
 								kocka.transform.position = pos;
 								//kocka.gameObject.tag = "Floor";
-								kocka.gameObject.AddComponent<PathColor> ();
+								kocka.gameObject.AddComponent<FloorBehaviour> ();
 								kocka.transform.parent = Floor.transform;
 						} else {
                                 kocka = (GameObject)GameObject.Instantiate((GameObject)Resources.Load("WallPrefab"));
