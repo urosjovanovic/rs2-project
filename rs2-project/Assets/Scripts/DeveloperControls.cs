@@ -35,14 +35,14 @@ public class DeveloperControls : MonoBehaviour
 
 						if (!pathColoring) {
 								foreach (var floor in floors) {
-										floor.GetComponent<PathColor> ().Colorize ();
-										floor.GetComponent<PathColor> ().autoRefresh = true;
+										floor.GetComponent<FloorBehaviour> ().Colorize ();
+										floor.GetComponent<FloorBehaviour> ().autoRefresh = true;
 								}
 								pathColoring = true;
 						} else {
 								foreach (var floor in floors) {
-										floor.GetComponent<PathColor> ().ResetColor ();
-										floor.GetComponent<PathColor> ().autoRefresh = false;
+										floor.GetComponent<FloorBehaviour> ().ResetColor ();
+										floor.GetComponent<FloorBehaviour> ().autoRefresh = false;
 								}
 								pathColoring = false;
 						}

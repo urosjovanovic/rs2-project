@@ -726,6 +726,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoRefresh: 0
+  walkedOnByPrim: 0
+  walkedOnByDarkPrim: 0
 --- !u!1 &1810351792
 GameObject:
   m_ObjectHideFlags: 0
@@ -808,6 +810,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoRefresh: 0
+  walkedOnByPrim: 0
+  walkedOnByDarkPrim: 0
 --- !u!1 &2120103660
 GameObject:
   m_ObjectHideFlags: 0
