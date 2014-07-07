@@ -71,22 +71,41 @@ public class FlashlightFire : MonoBehaviour {
     void FreezeDarkPrim()
     {
        GameObject darkprim =  GameObject.FindGameObjectWithTag("DarkPrim");
-       if (darkprim)
+       GameObject prim = GameObject.FindGameObjectWithTag("Prim");
+       if (darkprim && prim)
        {
            Debug.Log("Freeze motherfucker!");
            darkprim.GetComponent<CharacterMotor>().canControl = false;
+
+           var darkPrimCtrls = darkprim.GetComponent<DarkPrimControls>();
+
+           if (darkPrimCtrls.enabled)
+           {
+               darkPrimCtrls.DisableVision();
+               darkPrimCtrls.IsFrozen = true;
+           }
+
+           //Ignorisemo sudare izmedju likova
+           Physics.IgnoreCollision(darkprim.GetComponentInChildren<CharacterController>().collider, prim.GetComponentInChildren<CharacterController>().collider, true);
+           //Sprecavamo trigerovanje EndGameSkripte
            darkprim.GetComponentInChildren<CapsuleCollider>().enabled = false;
 
-           StartCoroutine(WaitAndUnfreeze(freezeTime,darkprim));
-          //darkprim.GetComponent<CharacterController>().enabled = true;
+           StartCoroutine(WaitAndUnfreeze(freezeTime,prim,darkprim));
        }
     }
 
-    IEnumerator WaitAndUnfreeze(float time,GameObject obj)
+    IEnumerator WaitAndUnfreeze(float time,GameObject prim, GameObject darkprim)
     {
         yield return new WaitForSeconds(time);
-        obj.GetComponentInChildren<CapsuleCollider>().enabled = true;
-        obj.GetComponent<CharacterMotor>().canControl = true;
+        //obj.GetComponentInChildren<CapsuleCollider>().enabled = true;
+        darkprim.GetComponent<CharacterMotor>().canControl = true;
+        Physics.IgnoreCollision(darkprim.GetComponentInChildren<CharacterController>().collider, prim.GetComponentInChildren<CharacterController>().collider, false);
+        darkprim.GetComponentInChildren<CapsuleCollider>().enabled = true;
+        var darkPrimCtrls = darkprim.GetComponent<DarkPrimControls>();
+        if(darkPrimCtrls.enabled)
+        {
+            darkPrimCtrls.IsFrozen = false;
+        }
         freezeActive = false;
     }
 }

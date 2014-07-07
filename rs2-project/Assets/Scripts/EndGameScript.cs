@@ -1,21 +1,27 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EndGameScript : MonoBehaviour
+public class EndGameScript : Photon.MonoBehaviour
 {
 		public bool PrimWin;
 		// Use this for initialization
 		void Start ()
 		{
 				GameObject[] cameras = GameObject.FindGameObjectsWithTag ("MainCamera");
-				foreach (var camera in cameras)
-						camera.camera.enabled = false;
-				GameObject.Find ("EndGameLight").light.enabled = true;
-				GameObject[] walls = GameObject.FindGameObjectsWithTag ("Wall");
-				foreach (var wall in walls) {
-						wall.renderer.material.color = Color.grey;
-						//wall.GetComponent<PathColor>().enabled = true;
-				}
+                foreach (var camera in cameras)
+                {
+                    camera.camera.enabled = false;
+                    camera.GetComponent<GUILayer>().enabled = false;
+                }
+
+                DisablePlayers();
+				
+                GameObject.Find ("EndGameLight").light.enabled = true;
+                
+                //GameObject[] walls = GameObject.FindGameObjectsWithTag ("Wall");
+                //foreach (var wall in walls) {
+                //        wall.renderer.material.color = Color.grey;
+                //}
         
 				//GameObject[] floors = GameObject.FindGameObjectsWithTag("Floor");
 				//foreach(var floor in floors)
@@ -26,6 +32,7 @@ public class EndGameScript : MonoBehaviour
 				//}
 
 				AnimatePaths ();
+                GameObject.Find("EndGameCamera").GetComponent<Animator>().enabled = true;
 
 				if (PrimWin) {
 						if (this.gameObject.tag == "Prim")
@@ -43,9 +50,16 @@ public class EndGameScript : MonoBehaviour
 		// Update is called once per frame
 		void Update ()
 		{
-				if (Input.GetKeyDown (KeyCode.Escape))
-						Application.LoadLevel ("MainMenu");
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                PhotonNetwork.Disconnect();
+            }
 		}
+        
+        void OnDisconnectedFromPhoton()
+        {
+            Application.LoadLevel("MainMenu");
+        }
 
 		private void AnimatePaths ()
 		{
@@ -56,16 +70,47 @@ public class EndGameScript : MonoBehaviour
 		private IEnumerator AnimatePrimPath ()
 		{
 				foreach (var block in PathData.Instance.PrimPath) {
-						block.GetComponent<FloorBehaviour> ().Colorize (Color.red);
-						yield return new WaitForSeconds (0.1f);
+                    if (block != null)
+                    {
+                        block.GetComponent<FloorBehaviour>().Colorize(Color.red);
+                        yield return new WaitForSeconds(0.1f);
+                    }
 				}
 		}
 
 		private IEnumerator AnimateDarkPrimPath ()
 		{
 				foreach (var block in PathData.Instance.DarkPrimPath) {
-						block.GetComponent<FloorBehaviour> ().Colorize (Color.black);
-						yield return new WaitForSeconds (0.1f);
+                    if (block != null)
+                    {
+                        block.GetComponent<FloorBehaviour>().Colorize(Color.black);
+                        yield return new WaitForSeconds(0.1f);
+                    }
 				}
 		}
+
+        private void DisablePlayers()
+        {
+            try
+            {
+                GameObject prim = GameObject.FindGameObjectWithTag("Prim");
+                prim.GetComponent<CharacterMotor>().canControl = false;
+                prim.GetComponent<PrimsControls>().enabled = false;
+                prim.GetComponentInChildren<UIPrim>().enabled = false;
+            }
+            catch
+            {
+            }
+
+            try
+            {
+                GameObject darkPrim = GameObject.FindGameObjectWithTag("DarkPrim");
+                darkPrim.GetComponent<CharacterMotor>().canControl = false;
+                darkPrim.GetComponent<DarkPrimControls>().enabled = false;
+                darkPrim.GetComponentInChildren<UIDarkPrim>().enabled = false;
+            }
+            catch
+            {
+            }
+        }
 }
