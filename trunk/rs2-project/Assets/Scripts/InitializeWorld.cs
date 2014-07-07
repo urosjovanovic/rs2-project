@@ -95,7 +95,7 @@ public class InitializeWorld : MonoBehaviour
 
                             var rotation = Quaternion.LookRotation((GetVectorFromNode(darkPrimSpawn.Edges[0], 0.1f) - darkPrimSpawnPosition).normalized);
 
-                            spawnPlayer("Prim", darkPrimSpawnPosition, rotation);
+                            spawnPlayer("DarkPrim", darkPrimSpawnPosition, rotation);
                             Debug.Log("DarkPrim spawned.");
                         }
                         else
@@ -312,13 +312,9 @@ public class InitializeWorld : MonoBehaviour
 		{
 				GameObject player = null;
 
-				if (AlwaysSpawnAs) {
-						player = (GameObject)PhotonNetwork.Instantiate (SpawnAs, where, rotation, 0);
-				} else {
+				player = (GameObject)PhotonNetwork.Instantiate (who, where, rotation, 0);
 
-						player = (GameObject)PhotonNetwork.Instantiate (who, where, rotation, 0);
-
-				}
+                PhotonNetwork.player.name = player.tag;
 
                 //global
     

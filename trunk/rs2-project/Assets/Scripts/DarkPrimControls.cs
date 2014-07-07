@@ -13,6 +13,12 @@ public class DarkPrimControls : MonoBehaviour
         private float intensity;
         private Color auraColor;
 
+        public bool IsFrozen
+        {
+            get;
+            set;
+        }
+
 		// Use this for initialization
 		void Start ()
 		{

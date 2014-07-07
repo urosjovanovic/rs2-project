@@ -635,6 +635,8 @@ MonoBehaviour:
   nvMeterOff: {fileID: 2800000, guid: 20addfaf705db4c429ca58f36d727ee4, type: 3}
   nvMeterOn: {fileID: 2800000, guid: c3eed2682ec83c0409512a1ea3ddcee5, type: 3}
   nvMeterFill: {fileID: 2800000, guid: 6449550b5a2d3a14b958d3245dd80f47, type: 3}
+  darkOverlay: {fileID: 2800000, guid: cf04b17dcec04574189f327502039ba1, type: 3}
+  frozenOverlay: {fileID: 2800000, guid: bb2c3d6283e83454e963c670cb194e0b, type: 3}
 --- !u!114 &11400020
 MonoBehaviour:
   m_ObjectHideFlags: 1
