@@ -4,6 +4,8 @@ using System;
 
 public class NetworkManager : Photon.MonoBehaviour
 {
+        private int numberOfTries = 5;
+        private bool canExit = true;
 
         GameObject god;
         bool initialized = false;
@@ -17,9 +19,32 @@ public class NetworkManager : Photon.MonoBehaviour
 
 		void Connect ()
 		{
-				PhotonNetwork.ConnectUsingSettings ("v0.1");
+            try
+            {
+                for (int i = 0; i < numberOfTries; i++)
+                {
+                    if (PhotonNetwork.ConnectUsingSettings("v0.1"))
+                    {
+                        canExit = false;
+                        break;
+                    }
+                    else
+                        StartCoroutine("WaitOneSecond");
+                }
+
+                if (canExit)
+                    Application.LoadLevel("MainMenu");
+            }
+            catch(Exception e)
+            {
+
+            }
 		}
 
+        private IEnumerator WaitOneSecond()
+        {
+            yield return new WaitForSeconds(1.0f);
+        }
 		void OnGUI ()
 		{
 				GUILayout.Label (PhotonNetwork.connectionStateDetailed.ToString ());
@@ -49,7 +74,9 @@ public class NetworkManager : Photon.MonoBehaviour
                 // AND THAT'S HOW A GOD IS BORN
 				god = (GameObject)PhotonNetwork.Instantiate ("TheCreator", Vector3.zero, Quaternion.identity, 0);
                 initialized = true;
-               
+
+                GameObject loadingGameCamera = GameObject.Find("LoadingGameCamera");
+                loadingGameCamera.GetComponent<LoadingScreenSettings>().waitingSecondPlayer = true;
 		}
 
         void Update()

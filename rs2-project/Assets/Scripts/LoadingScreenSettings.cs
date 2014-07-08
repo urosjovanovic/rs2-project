@@ -9,6 +9,10 @@ public class LoadingScreenSettings : MonoBehaviour
     private float timeDelay = 1.0f;
     private float timeRemaining;
     private int numberOfDots = 0;
+    private int numberOfDotsWaiting = 0;
+    public bool waitingSecondPlayer = false;
+    private string loading = "Loading";
+    private string waiting = "Waiting for second player";
 
 	// Use this for initialization
 	void Start () 
@@ -35,28 +39,53 @@ public class LoadingScreenSettings : MonoBehaviour
         }
         else if(timeRemaining < 0)
         {
+            timeRemaining = timeDelay;
+
             if (loadingText != null)
             {
-                numberOfDots = (numberOfDots + 1) % 4;
-
-                switch(numberOfDots)
+                if(waitingSecondPlayer)
                 {
-                    case 0:
-                        loadingText.text = "Loading";
-                        break;
-                    case 1:
-                        loadingText.text = "Loading .";
-                        break;
-                    case 2:
-                        loadingText.text = "Loading . .";
-                        break;
-                    case 3:
-                        loadingText.text = "Loading . . .";
-                        break;
+                    numberOfDotsWaiting = (numberOfDotsWaiting + 1) % 4;
+                    switch(numberOfDotsWaiting)
+                    {
+                        case 0:
+                            loadingText.text = waiting;
+                            break;
+                        case 1:
+                            loadingText.text = waiting + " .";
+                            break;
+                        case 2:
+                            loadingText.text = waiting + " . .";
+                            break;
+                        case 3:
+                            loadingText.text = waiting + " . . .";
+                            break;
+                    }
+
+                    
+                }
+                else
+                {
+                    numberOfDots = (numberOfDots + 1) % 4;
+                    switch(numberOfDots)
+                    {
+                        case 0:
+                            loadingText.text = loading;
+                            break;
+                        case 1:
+                            loadingText.text = loading + " .";
+                            break;
+                        case 2:
+                            loadingText.text = loading + " . .";
+                            break;
+                        case 3:
+                            loadingText.text = loading + " . . .";
+                            break;
+                    }
+
+                    
                 }
             }
-
-            timeRemaining = timeDelay;
         }
 	}
 }

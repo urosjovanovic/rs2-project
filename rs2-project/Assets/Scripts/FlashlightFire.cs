@@ -50,7 +50,6 @@ public class FlashlightFire : MonoBehaviour {
 
         if (Physics.Raycast(transform.position, fwd, out hit, 5))
         {
-            Debug.DrawLine(transform.position, hit.point, Color.green);
             if (hit.rigidbody != null && hit.rigidbody.gameObject.tag == "DarkPrim")
             {
                 Debug.Log("There is something in front of the object!");
@@ -79,7 +78,7 @@ public class FlashlightFire : MonoBehaviour {
 
            var darkPrimCtrls = darkprim.GetComponent<DarkPrimControls>();
 
-           if (darkPrimCtrls.enabled)
+           if (darkPrimCtrls.enabled && darkPrimCtrls.nightmareVision)
            {
                darkPrimCtrls.DisableVision();
                darkPrimCtrls.IsFrozen = true;

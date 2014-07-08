@@ -603,10 +603,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visionLifeTime: 10
-  visionReChargeTime: 5
-  visionTimeRemaining: 15
+  visionReChargeTime: 30
+  visionTimeRemaining: 10
   visionChargedPercent: 100
   visionEnabled: 1
+  canTurnOffVision: 0
 --- !u!114 &11400016
 MonoBehaviour:
   m_ObjectHideFlags: 1
