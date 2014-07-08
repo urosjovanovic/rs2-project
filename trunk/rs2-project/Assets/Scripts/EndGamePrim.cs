@@ -18,7 +18,23 @@ public class EndGamePrim : MonoBehaviour
         {
             view.RPC("LoseThisGame", PhotonTargets.Others, null);
             Lose();
-            //this.enabled = false;
+            this.enabled = false;
+            
+            /*GameObject[] cameras = GameObject.FindGameObjectsWithTag("MainCamera");
+
+            foreach (var camera in cameras)
+            {
+                camera.camera.enabled = false;
+                camera.GetComponent<GUILayer>().enabled = false;
+            }
+
+            GameObject endgGameCamera = GameObject.Find("EndGameCamera");
+            endgGameCamera.camera.enabled = false;
+
+            GameObject pauseCamera = GameObject.Find("PauseCamera");
+            pauseCamera.GetComponent<PauseScript>().enabled = true;
+            pauseCamera.GetComponent<Camera>().enabled = true;*/
+
         }
 
         if (this.gameObject.transform.position.y < -15.0)

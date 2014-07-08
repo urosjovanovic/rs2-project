@@ -8,6 +8,7 @@ public class LimitVision : MonoBehaviour
     public float visionTimeRemaining;
     public int visionChargedPercent = 100;
     public bool visionEnabled = true;
+    public bool canTurnOffVision = false;
 
 	// Use this for initialization
 	void Start () 

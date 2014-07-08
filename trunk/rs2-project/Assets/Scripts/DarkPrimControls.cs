@@ -53,7 +53,7 @@ public class DarkPrimControls : MonoBehaviour
                 {
                     if (!nightmareVision)
                         EnableVision();
-                    else
+                    else if(GetComponent<LimitVision>().canTurnOffVision)
                         DisableVision();
 				}
 		}
