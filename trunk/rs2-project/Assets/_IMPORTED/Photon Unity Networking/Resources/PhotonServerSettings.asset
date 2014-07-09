@@ -33,4 +33,6 @@ MonoBehaviour:
   - ReCharge
   - LoseThisGame
   - WinThisGame
+  - ActivatePlayerColliders
+  - DeactivatePlayerColliders
   DisableAutoOpenWizard: 0

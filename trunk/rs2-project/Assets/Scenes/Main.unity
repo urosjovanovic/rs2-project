@@ -96,7 +96,7 @@ Light:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 74214368}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Type: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -202,7 +202,7 @@ Light:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1040356193}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Type: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -415,6 +415,8 @@ GameObject:
   - 114: {fileID: 1343903570}
   - 114: {fileID: 1343903572}
   - 114: {fileID: 1343903573}
+  - 114: {fileID: 1343903574}
+  - 114: {fileID: 1343903575}
   m_Layer: 0
   m_Name: _SCRIPTS
   m_TagString: SCRIPTS
@@ -498,6 +500,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PrimWin: 0
+--- !u!114 &1343903574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1343903569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  subId: 1
+  ownerId: 0
+  group: 0
+  prefixBackup: -1
+  observed: {fileID: 0}
+  synchronization: 0
+  onSerializeTransformOption: 3
+  onSerializeRigidBodyOption: 2
+  instantiationId: 0
+--- !u!114 &1343903575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1343903569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb2e598b440737b4c8b899e7d7762723, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  view: {fileID: 1343903574}
 --- !u!1 &1606721908
 GameObject:
   m_ObjectHideFlags: 0

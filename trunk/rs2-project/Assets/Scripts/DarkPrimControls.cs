@@ -3,6 +3,7 @@ using System.Collections;
 
 public class DarkPrimControls : MonoBehaviour
 {
+        public PhotonView view;
 		public Texture opacityMap;
 		public bool nightmareVision = false;
 		private GameObject[] walls;
@@ -83,6 +84,8 @@ public class DarkPrimControls : MonoBehaviour
             //darkPrimAura.range = 30; <-- Utice lose na performanse
             darkPrimAura.color = Color.white;
 
+            view.RPC("ActivatePlayerColliders", PhotonTargets.All, null);
+
             nightmareVision = true;
         }
 
@@ -109,6 +112,8 @@ public class DarkPrimControls : MonoBehaviour
             darkPrimAura.color = auraColor;
             darkPrimAura.range = 10;
 
+            view.RPC("DeactivatePlayerColliders", PhotonTargets.All, null);
+
             nightmareVision = false;
         }
 
@@ -125,6 +130,36 @@ public class DarkPrimControls : MonoBehaviour
             motor.movement.maxForwardSpeed = speed[0];
             motor.movement.maxSidewaysSpeed = speed[1];
             motor.movement.maxBackwardsSpeed = speed[2];
+        }
+
+        [RPC]
+        private void ActivatePlayerColliders()
+        {
+            GameObject prim = GameObject.FindGameObjectWithTag("Prim");
+            GameObject darkPrim = GameObject.FindGameObjectWithTag("DarkPrim");
+
+            if (prim && darkPrim)
+            {
+                //Ignorisemo sudare izmedju likova
+                Physics.IgnoreCollision(darkPrim.GetComponentInChildren<CharacterController>().collider, prim.GetComponentInChildren<CharacterController>().collider, false);
+                //Sprecavamo trigerovanje EndGameSkripte
+                darkPrim.GetComponentInChildren<CapsuleCollider>().enabled = true;
+            }
+        }
+
+        [RPC]
+        private void DeactivatePlayerColliders()
+        {
+            GameObject prim = GameObject.FindGameObjectWithTag("Prim");
+            GameObject darkPrim = GameObject.FindGameObjectWithTag("DarkPrim");
+
+            if (prim && darkPrim)
+            {
+                //Ignorisemo sudare izmedju likova
+                Physics.IgnoreCollision(darkPrim.GetComponentInChildren<CharacterController>().collider, prim.GetComponentInChildren<CharacterController>().collider, true);
+                //Sprecavamo trigerovanje EndGameSkripte
+                darkPrim.GetComponentInChildren<CapsuleCollider>().enabled = false;
+            }
         }
 
 }

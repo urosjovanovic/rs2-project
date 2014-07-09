@@ -13,6 +13,12 @@ public class LimitVision : MonoBehaviour
 	// Use this for initialization
 	void Start () 
     {
+        if (ConfigManager.infiniteNightmareVision)
+        {
+            canTurnOffVision = true;
+            this.enabled = false;
+        }
+
         visionTimeRemaining = visionLifeTime;
 	}
 	
