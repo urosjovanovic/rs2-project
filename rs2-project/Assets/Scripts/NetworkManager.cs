@@ -6,6 +6,7 @@ public class NetworkManager : Photon.MonoBehaviour
 {
         private int numberOfTries = 5;
         private bool canExit = true;
+		private int connectionAttemptCount = 0;
 
         GameObject god;
         bool initialized = false;
@@ -19,32 +20,28 @@ public class NetworkManager : Photon.MonoBehaviour
 
 		void Connect ()
 		{
-            try
-            {
-                for (int i = 0; i < numberOfTries; i++)
-                {
-                    if (PhotonNetwork.ConnectUsingSettings("v0.1"))
-                    {
-                        canExit = false;
-                        break;
-                    }
-                    else
-                        StartCoroutine("WaitOneSecond");
-                }
 
-                if (canExit)
-                    Application.LoadLevel("MainMenu");
-            }
-            catch(Exception e)
-            {
+			PhotonNetwork.ConnectUsingSettings ("v0.1");
 
-            }
+		}
+		
+		void OnFailedToConnectToPhoton()
+		{
+			connectionAttemptCount++;
+			if(connectionAttemptCount > numberOfTries)
+			{
+				Application.LoadLevel("MainMenu");
+				return;
+			}
+			WaitAndTryAgain(10.0f);
+		}
+		
+		IEnumerator WaitAndTryAgain(float s)
+		{
+			yield return new WaitForSeconds (s);
+			Connect ();
 		}
 
-        private IEnumerator WaitOneSecond()
-        {
-            yield return new WaitForSeconds(1.0f);
-        }
 		void OnGUI ()
 		{
 				GUILayout.Label (PhotonNetwork.connectionStateDetailed.ToString ());
@@ -54,6 +51,8 @@ public class NetworkManager : Photon.MonoBehaviour
 		{
 				PhotonNetwork.JoinRandomRoom ();
 		}
+
+		
 
 		void OnPhotonRandomJoinFailed ()
 		{
@@ -99,7 +98,5 @@ public class NetworkManager : Photon.MonoBehaviour
             }
 
         }
-
-       
 
 }
