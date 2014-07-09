@@ -214,6 +214,38 @@ public class Maze
         return markers;
     }
 
+    public List<GridNode> GetWhisperSourceSpawnNodes(int howMany)
+    {
+        var whispers = new List<GridNode>();
+
+        List<GridNode> deadEnds = new List<GridNode>();
+
+        for (int i = 1; i < graphRows - 1; i++)
+        {
+            for (int j = 1; j < graphCols - 1; j++)
+            {
+                if (Graph[i, j].Edges.Count == 1)
+                {
+                    deadEnds.Add(Graph[i, j]);
+                }
+            }
+        }
+
+        System.Random rand = new System.Random();
+
+        for (int i = 0; i < howMany; i++)
+        {
+            int index = rand.Next(deadEnds.Count);
+
+            whispers.Add(deadEnds[index]);
+            deadEnds.RemoveAt(index);
+
+        }
+
+        return whispers;
+
+    }
+
 
     #endregion
 

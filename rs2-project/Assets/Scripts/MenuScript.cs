@@ -2,27 +2,40 @@
 using System.Collections;
 using System;
 
-public class MenuScript : MonoBehaviour {
+public class MenuScript : MonoBehaviour
+{
 
-	private GameObject back;
+    #region GameObjects
+
+    private GameObject back;
 	private GameObject menuItemPlay, menuItemControls, menuItemAbout, menuItemExit;
 	private GameObject camera;
 
-	private int currentScene = 0;
+    #endregion
+
+    #region Class fields
+
+    private int currentScene = 0;
 	public int currentMenuItem;
 	public bool isDarkControls = true;
 
-	// Use this for initialization
+    #endregion
+
+    #region Start and update
+
+    // Use this for initialization
 	void Start () 
 	{
         Screen.showCursor = true;
-		back = GameObject.Find ("Shadow");
-		menuItemPlay = GameObject.Find ("MenuItem0");
-		menuItemControls = GameObject.Find ("MenuItem1");
-		menuItemAbout = GameObject.Find ("MenuItem2");
-		menuItemExit = GameObject.Find ("MenuItem3");
 
-		camera = GameObject.FindGameObjectWithTag ("MainCamera");
+        if (!(back = GameObject.Find("Shadow"))) throw new NullReferenceException("Shadow object in MenuScript script cannot be found!");
+		if(!(menuItemPlay = GameObject.Find ("MenuItem0"))) throw new NullReferenceException("MenuItem0 object in MenuScript script cannot be found!");
+        if (!(menuItemControls = GameObject.Find("MenuItem1"))) throw new NullReferenceException("MenuItem1 object in MenuScript script cannot be found!");
+        if (!(menuItemAbout = GameObject.Find("MenuItem2"))) throw new NullReferenceException("MenuItem2 object in MenuScript script cannot be found!");
+        if (!(menuItemExit = GameObject.Find("MenuItem3"))) throw new NullReferenceException("MenuItem3 object in MenuScript script cannot be found!");
+
+        if (!(camera = GameObject.FindGameObjectWithTag("MainCamera"))) throw new NullReferenceException("MainCamera object in MenuScript script cannot be found!");
+
 		MoveCameraX(0.0f);
         MoveHighlightY(menuItemPlay.transform.position.y);
 
@@ -66,7 +79,10 @@ public class MenuScript : MonoBehaviour {
             switch (currentMenuItem)
 			{
 				case 1:
-					Application.LoadLevel("Main");
+                    camera.audio.Stop();
+                    camera.audio.PlayOneShot(SoundPool.MenuQuake);
+                    camera.GetComponent<CameraShake>().Shake(2f);
+                    StartCoroutine(LoadSceneWithDelay("Main", 2f));
 					break;
 				case 2:
 					MoveCameraX(-20.0f);
@@ -127,6 +143,21 @@ public class MenuScript : MonoBehaviour {
         }
 
         #endregion
+    }
+
+    #endregion
+
+
+    /// <summary>
+    /// Load a scene with a delay
+    /// </summary>
+    /// <param name="sceneName"> Scene name</param>
+    /// <param name="delay"> Delay </param>
+    /// <returns> IEnumerator</returns>
+    private IEnumerator LoadSceneWithDelay(string sceneName, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Application.LoadLevel(sceneName);
     }
 
 	void MoveCameraX(float value)

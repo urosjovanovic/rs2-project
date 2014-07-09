@@ -890,6 +890,56 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1105306181}
   m_RootOrder: 0
+--- !u!1 &1049351914
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1049351916}
+  - 114: {fileID: 1049351915}
+  m_Layer: 0
+  m_Name: _SCRIPTS
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1049351915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1049351914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 601d54ebafe03954b9d48d27b07ff654, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  publicForwardFootsteps: []
+  publicSprintFootsteps: []
+  publicSideStep: {fileID: 0}
+  publicFlashlightClick: {fileID: 0}
+  publicFlashlightBuzzes: []
+  publicDoorSound: {fileID: 0}
+  publicPickupSound: {fileID: 0}
+  publicScream: {fileID: 0}
+  publicWhispers: []
+  publicMenuQuake: {fileID: 8300000, guid: df89a7d1d9e870f4898c9b9f6a575270, type: 3}
+  publicMenuClick: {fileID: 8300000, guid: 0c5eb50ed23474845b135247287dc0c4, type: 3}
+--- !u!4 &1049351916
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1049351914}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.38294387, y: -4.31491089, z: 11.0585842}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
 --- !u!1 &1105306178
 GameObject:
   m_ObjectHideFlags: 0
@@ -1380,6 +1430,7 @@ GameObject:
   - 81: {fileID: 2007429316}
   - 108: {fileID: 2007429321}
   - 82: {fileID: 2007429322}
+  - 114: {fileID: 2007429323}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1495,9 +1546,9 @@ AudioSource:
   m_GameObject: {fileID: 2007429315}
   m_Enabled: 1
   serializedVersion: 3
-  m_audioClip: {fileID: 8300000, guid: 3c304513f465f364da12fd182237e8ca, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 77a2cb96bae41494cb4bbc66476b2382, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: .349999994
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1545,6 +1596,19 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+--- !u!114 &2007429323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2007429315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6d4ffa10a79fa34689c0a6467f82c6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shakeAmount: .300000012
+  decreaseFactor: 1
 --- !u!1 &2089716825
 GameObject:
   m_ObjectHideFlags: 0

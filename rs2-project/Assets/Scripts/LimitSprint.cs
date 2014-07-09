@@ -42,6 +42,8 @@ public class LimitSprint : MonoBehaviour
     private void RechargeVision()
     {
         sprintEnabled = false;
+        this.gameObject.audio.Stop();
+        this.gameObject.audio.PlayOneShot(SoundPool.HeavyBreathing);
         StartCoroutine(WaitAndUnfreeze());
     }
 
