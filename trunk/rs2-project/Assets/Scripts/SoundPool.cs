@@ -30,11 +30,25 @@ public class SoundPool : MonoBehaviour {
 
     public AudioClip publicScream;
 
+    public AudioClip[] publicWhispers;
+    public static AudioClip[] Whispers
+    {
+        get;
+        private set;
+    }
+
+    public AudioClip publicMenuQuake;
+    public AudioClip publicMenuClick;
+    public AudioClip publicHeavyBreathing;
+
     public static AudioClip Scream
     {
         get;
         private set;
     }
+
+    public AudioClip publicEndGameTheme;
+    public static AudioClip EndGameTheme { get; set; }
 
     public void Start()
     {
@@ -50,6 +64,12 @@ public class SoundPool : MonoBehaviour {
         pickupSound = publicPickupSound;
 
         Scream = publicScream;
+        Whispers = publicWhispers;
+        MenuQuake = publicMenuQuake;
+        MenuClick = publicMenuClick;
+
+        EndGameTheme = publicEndGameTheme;
+        HeavyBreathing = publicHeavyBreathing;
     }
 
     public static AudioClip FlashlightBuzz
@@ -110,4 +130,10 @@ public class SoundPool : MonoBehaviour {
         }
     }
 
+
+    public static AudioClip MenuQuake { get; set; }
+
+    public static AudioClip MenuClick { get; set; }
+
+    public static AudioClip HeavyBreathing { get; set; }
 }

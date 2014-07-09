@@ -11,6 +11,8 @@ public class EndGameScript : Photon.MonoBehaviour
                 foreach (var camera in cameras)
                 {
                     camera.camera.enabled = false;
+                    camera.audio.Stop();
+                    camera.audio.PlayOneShot(SoundPool.EndGameTheme);
                     camera.GetComponent<GUILayer>().enabled = false;
                 }
 
@@ -32,6 +34,7 @@ public class EndGameScript : Photon.MonoBehaviour
 				//}
 
 				AnimatePaths ();
+
                 GameObject.Find("EndGameCamera").GetComponent<Animator>().enabled = true;
 
 				if (PrimWin) {

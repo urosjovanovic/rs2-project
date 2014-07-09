@@ -472,6 +472,20 @@ MonoBehaviour:
   publicDoorSound: {fileID: 8300000, guid: 23bb831dc7448eb4a976a0aa3b72159f, type: 3}
   publicPickupSound: {fileID: 8300000, guid: 824682421d02af54496f06dc2b26a49a, type: 3}
   publicScream: {fileID: 8300000, guid: 3800857f648ea244fa6b283b8bcabaf1, type: 3}
+  publicWhispers:
+  - {fileID: 8300000, guid: 22a712922e57d664e945fd246ca944da, type: 3}
+  - {fileID: 8300000, guid: 07856d0abad3b2c4ea10845429e47bb4, type: 3}
+  - {fileID: 8300000, guid: 87c84abde6ed7c04ebb178c765d20c86, type: 3}
+  - {fileID: 8300000, guid: f0126f5fd0ba44d4e98369b1290a3af1, type: 3}
+  - {fileID: 8300000, guid: 4bc22015c3bfdc044b8591bec3cf9e6d, type: 3}
+  - {fileID: 8300000, guid: 36631968bf3924f42bfffd5677436719, type: 3}
+  - {fileID: 8300000, guid: 1cb5561b97a6439408f5934533453d4c, type: 3}
+  - {fileID: 8300000, guid: ca2d20133e1988246a15cba00bed77d3, type: 3}
+  publicMenuQuake: {fileID: 0}
+  publicMenuClick: {fileID: 0}
+  publicHeavyBreathing: {fileID: 8300000, guid: 57305f03e766e3346afda51427284546,
+    type: 3}
+  publicEndGameTheme: {fileID: 8300000, guid: b24557807d3bb2c4db23f23445322be3, type: 3}
 --- !u!114 &1343903573
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -2,7 +2,16 @@ fileFormatVersion: 2
 guid: 601d54ebafe03954b9d48d27b07ff654
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - publicSideStep: {instanceID: 0}
+  - publicFlashlightClick: {instanceID: 0}
+  - publicDoorSound: {instanceID: 0}
+  - publicPickupSound: {instanceID: 0}
+  - publicScream: {instanceID: 0}
+  - publicMenuQuake: {fileID: 8300000, guid: df89a7d1d9e870f4898c9b9f6a575270, type: 3}
+  - publicMenuClick: {fileID: 8300000, guid: 0c5eb50ed23474845b135247287dc0c4, type: 3}
+  - publicEndGameTheme: {fileID: 8300000, guid: b24557807d3bb2c4db23f23445322be3,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

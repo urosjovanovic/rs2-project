@@ -22,6 +22,9 @@ public class InitializeWorld : MonoBehaviour
         private UnityEngine.Object markerCollectible = Resources.Load("MarkerCollectible");
         private UnityEngine.Object exit = Resources.Load("Exit");
 
+        // WhisperObject
+        private UnityEngine.Object whisper = Resources.Load("WhisperObject");
+
     #endregion
 
 
@@ -82,6 +85,7 @@ public class InitializeWorld : MonoBehaviour
                         var exitSpawn = spawnNodes["Exit"];
                         var darkPrimSpawn = spawnNodes["DarkPrim"];
                         var markerCollectibleNodes = maze.GetMarkerCollectibleSpawnNodes();
+                        var whisperNodes = maze.GetWhisperSourceSpawnNodes(SoundPool.Whispers.Length);
 
                         // MAZE RENDERING 
                         for (int i = 0; i < mazeMatrix.GetLength(0); i++)
@@ -115,6 +119,9 @@ public class InitializeWorld : MonoBehaviour
                             // Instantiate exit
                             GameObject exitObj = (GameObject)Instantiate(exit, GetVectorFromNode(exitNode, -1), Quaternion.LookRotation((GetVectorFromNode(exitNode.Edges[0], 0) - GetVectorFromNode(exitNode, 0)).normalized)); // look toward a neighbour node
                             
+                            // Instantiate the whispers
+                            InstantiateWhisperObjects(whisperNodes);
+
                             // Instantiate the marker collectibles
                             InstantiateMarkerPrefabs(markerCollectibleNodes);
                         }
@@ -124,6 +131,14 @@ public class InitializeWorld : MonoBehaviour
 				}
         
 		}
+
+        private void InstantiateWhisperObjects(List<GridNode> whisperNodes)
+        {
+            foreach (var node in whisperNodes)
+            {
+                Instantiate(whisper, GetVectorFromNode(node, 0), Quaternion.identity);
+            }
+        }
 
         /// <summary>
         /// Calculates the vector position of a graph node in the world
