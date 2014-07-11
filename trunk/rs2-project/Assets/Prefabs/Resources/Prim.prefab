@@ -662,6 +662,19 @@ MonoBehaviour:
   lightOff: {fileID: 2800000, guid: 7d5e89fc3d8a89c4687059ceec3a80aa, type: 3}
   lightbar: {fileID: 2800000, guid: 638bea4eab2c27a4383785ff92c36965, type: 3}
   markerIcon: {fileID: 2800000, guid: 8607fba379f3d264bb05559a3cd43b39, type: 3}
+  deathAnimation:
+  - {fileID: 2800000, guid: 75ac9e756dd7b9a44bfb5b203307317b, type: 3}
+  - {fileID: 2800000, guid: f5452fb61b3873044a0fada1277beb3e, type: 3}
+  - {fileID: 2800000, guid: 747c6d7eedf0799499eb5efd958dd6c9, type: 3}
+  - {fileID: 2800000, guid: a8c957227a53f79459150fa93ee9d73a, type: 3}
+  - {fileID: 2800000, guid: 357113db5272cd3479113118847f5167, type: 3}
+  - {fileID: 2800000, guid: 251dfa2fbe554f14180f76204c890804, type: 3}
+  - {fileID: 2800000, guid: ff6384d5481af3d478e470014c00a3c3, type: 3}
+  - {fileID: 2800000, guid: 7d8f5d42a87aa7b46a927f641b7d9bfa, type: 3}
+  - {fileID: 2800000, guid: bdc3a079c1615514ea5e092b3123076c, type: 3}
+  - {fileID: 2800000, guid: c95404556dd4f9f429661ecdf7cc4ece, type: 3}
+  - {fileID: 2800000, guid: 9d0eeb0194e58d641aed74e4892c3e01, type: 3}
+  - {fileID: 2800000, guid: b01b4babdee60b443bf68b3cbbd4ffe4, type: 3}
 --- !u!114 &11400024
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -684,6 +697,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d99aa59a122ee44fa10ba9bccfaca7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mouseLookX: {fileID: 11400002}
+  mouseLookY: {fileID: 0}
 --- !u!122 &12200000
 Halo:
   m_ObjectHideFlags: 1

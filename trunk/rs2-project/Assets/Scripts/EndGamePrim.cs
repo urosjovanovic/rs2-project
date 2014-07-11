@@ -4,6 +4,15 @@ using System;
 
 public class EndGamePrim : MonoBehaviour 
 {
+    private bool isDead = false;
+    public bool IsDead
+    {
+        get
+        {
+            return isDead;
+        }
+    }
+
     private PhotonView view;
 
 	void Start ()
@@ -16,6 +25,8 @@ public class EndGamePrim : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            //isDead = true;
+
             view.RPC("LoseThisGame", PhotonTargets.Others, null);
             Lose();
             this.enabled = false;
@@ -40,7 +51,7 @@ public class EndGamePrim : MonoBehaviour
         if (this.gameObject.transform.position.y < -15.0)
         {
             view.RPC("LoseThisGame", PhotonTargets.Others, null);
-            Lose();
+            Lose(); 
             //this.enabled = false;
         }
 	}
@@ -50,8 +61,9 @@ public class EndGamePrim : MonoBehaviour
         //Prim salje preko mreze DarkPrim-u
         if (other.transform.parent.gameObject.tag == "DarkPrim")
         {
+            isDead = true;
             view.RPC("LoseThisGame", PhotonTargets.Others, null);
-            Lose();
+            //Lose(); <-- bice pozvano iz UIPrim nakon sto se zavrsi death animacija
         }
     }
 
@@ -73,7 +85,7 @@ public class EndGamePrim : MonoBehaviour
         otherEndScript.enabled = true;
     }
 
-    void Lose()
+    public void Lose()
     {
         EndGameScript myEndScript = this.gameObject.GetComponent<EndGameScript>();
         if (myEndScript == null)

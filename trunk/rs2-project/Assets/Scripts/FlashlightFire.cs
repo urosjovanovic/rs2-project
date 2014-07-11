@@ -80,14 +80,16 @@ public class FlashlightFire : MonoBehaviour {
 
            if (darkPrimCtrls.enabled && darkPrimCtrls.nightmareVision)
            {
-               darkPrimCtrls.DisableVision();
-               darkPrimCtrls.IsFrozen = true;
+               if(darkPrimCtrls.nightmareVision)
+                   darkPrimCtrls.DisableVision();
            }
 
-           //Ignorisemo sudare izmedju likova
-           Physics.IgnoreCollision(darkprim.GetComponentInChildren<CharacterController>().collider, prim.GetComponentInChildren<CharacterController>().collider, true);
-           //Sprecavamo trigerovanje EndGameSkripte
-           darkprim.GetComponentInChildren<CapsuleCollider>().enabled = false;
+           darkPrimCtrls.IsFrozen = true;
+
+           ////Ignorisemo sudare izmedju likova
+           //Physics.IgnoreCollision(darkprim.GetComponentInChildren<CharacterController>().collider, prim.GetComponentInChildren<CharacterController>().collider, true);
+           ////Sprecavamo trigerovanje EndGameSkripte
+           //darkprim.GetComponentInChildren<CapsuleCollider>().enabled = false;
 
            StartCoroutine(WaitAndUnfreeze(freezeTime,prim,darkprim));
        }
@@ -98,13 +100,12 @@ public class FlashlightFire : MonoBehaviour {
         yield return new WaitForSeconds(time);
         //obj.GetComponentInChildren<CapsuleCollider>().enabled = true;
         darkprim.GetComponent<CharacterMotor>().canControl = true;
-        Physics.IgnoreCollision(darkprim.GetComponentInChildren<CharacterController>().collider, prim.GetComponentInChildren<CharacterController>().collider, false);
-        darkprim.GetComponentInChildren<CapsuleCollider>().enabled = true;
+        //Physics.IgnoreCollision(darkprim.GetComponentInChildren<CharacterController>().collider, prim.GetComponentInChildren<CharacterController>().collider, false);
+        //darkprim.GetComponentInChildren<CapsuleCollider>().enabled = true;
         var darkPrimCtrls = darkprim.GetComponent<DarkPrimControls>();
-        if(darkPrimCtrls.enabled)
-        {
-            darkPrimCtrls.IsFrozen = false;
-        }
+
+        darkPrimCtrls.IsFrozen = false;
+
         freezeActive = false;
     }
 }

@@ -77,7 +77,7 @@ public class DarkPrimControls : MonoBehaviour
                 (prim.GetComponent("Halo") as Behaviour).enabled = true;
             }
 
-            SlowDown();
+            //SlowDown();
             intensity = darkPrimAura.intensity;
             auraColor = darkPrimAura.color;
             darkPrimAura.intensity = 10;
@@ -107,7 +107,7 @@ public class DarkPrimControls : MonoBehaviour
                 (prim.GetComponent("Halo") as Behaviour).enabled = false;
             } 
 
-            RestoreSpeed();
+            //RestoreSpeed();
             darkPrimAura.intensity = intensity;
             darkPrimAura.color = auraColor;
             darkPrimAura.range = 10;
