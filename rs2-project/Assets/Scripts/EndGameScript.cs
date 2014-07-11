@@ -109,6 +109,7 @@ public class EndGameScript : Photon.MonoBehaviour
             {
                 GameObject darkPrim = GameObject.FindGameObjectWithTag("DarkPrim");
                 darkPrim.GetComponent<CharacterMotor>().canControl = false;
+                darkPrim.GetComponent<DarkPrimControls>().DisableVision();
                 darkPrim.GetComponent<DarkPrimControls>().enabled = false;
                 darkPrim.GetComponentInChildren<UIDarkPrim>().enabled = false;
             }

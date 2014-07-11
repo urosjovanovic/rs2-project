@@ -38,5 +38,6 @@ public class DarkPrim2DSpriteBehaviour : MonoBehaviour {
             Color c = this.renderer.material.color;
             this.renderer.material.color = new Color(c.r, c.g, c.b, c.a - step);
         }
+        //GameObject.Destroy(this);
     }
 }
