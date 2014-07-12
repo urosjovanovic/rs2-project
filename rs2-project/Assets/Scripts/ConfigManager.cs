@@ -10,5 +10,6 @@ public class ConfigManager : MonoBehaviour
 		static public bool infiniteMarkers = false;
 		static public bool waitForOtherPlayer = false;
         static public bool infiniteNightmareVision = true;
+        static public bool developmentBuild = true;
 
 }

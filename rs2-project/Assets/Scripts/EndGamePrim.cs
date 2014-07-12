@@ -58,6 +58,9 @@ public class EndGamePrim : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        if (!CollisionControl.CollisionAllowed)
+            return;
+
         //Prim salje preko mreze DarkPrim-u
         if (other.transform.parent.gameObject.tag == "DarkPrim")
         {

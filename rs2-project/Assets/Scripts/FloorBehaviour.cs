@@ -10,7 +10,7 @@ public class FloorBehaviour : MonoBehaviour
 		void OnTriggerEnter (Collider other)
 		{
 				//Debug.Log (other.gameObject.tag);
-            if (other.gameObject.tag == "Prim")
+            if (other.transform.parent.gameObject.tag == "Prim")
             {
                 if (!walkedOnByPrim)
                 {
@@ -19,7 +19,7 @@ public class FloorBehaviour : MonoBehaviour
                 }
                 //Debug.Log(other.gameObject.transform.position.x + " " + other.gameObject.transform.position.z);
             }
-            else if (other.gameObject.tag == "DarkPrim")
+            else if (other.transform.parent.gameObject.tag == "DarkPrim")
             {
                 if (!walkedOnByDarkPrim)
                 {
@@ -28,8 +28,6 @@ public class FloorBehaviour : MonoBehaviour
                 }
                 //Debug.Log(other.gameObject.transform.position.x + " " + other.gameObject.transform.position.z);
             }
-            else
-                Debug.Log("There is someone here... He is not from this world...");
 
 				if (autoRefresh)
 						Colorize ();

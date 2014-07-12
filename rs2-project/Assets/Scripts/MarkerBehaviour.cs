@@ -5,7 +5,7 @@ public class MarkerBehaviour : MonoBehaviour
 {
     void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Prim")
+        if(other.transform.parent.gameObject.tag == "Prim")
         {
             other.gameObject.transform.parent.gameObject.GetComponent<PrimsControls>().MarkerCount++;
             other.gameObject.transform.parent.gameObject.audio.PlayOneShot(SoundPool.pickupSound);

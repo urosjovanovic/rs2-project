@@ -5,94 +5,103 @@ using System;
 public class NetworkManager : Photon.MonoBehaviour
 {
 
-		GameObject god;
-		bool initialized = false;
-        bool loadingDone = false;
+    GameObject god;
+    bool initialized = false;
+    bool loadingDone = false;
 
-		// Use this for initialization
-		void Start ()
-		{
-				Screen.showCursor = false;
-				Connect ();
-		}
+    // Use this for initialization
+    void Start()
+    {
+        Screen.showCursor = false;
+        Connect();
+    }
 
-		void Connect ()
-		{
+    void Connect()
+    {
 
-			PhotonNetwork.ConnectUsingSettings ("v0.1");
+        PhotonNetwork.ConnectUsingSettings("v0.1");
 
-		}
+    }
 
-        #region Photon Event Handlers
+    #region Photon Event Handlers
 
-        void OnFailedToConnectToPhoton ()
-		{
-			Debug.LogError("Failed to connect to Photon.");
-		}
+    void OnFailedToConnectToPhoton()
+    {
+        Debug.LogError("Failed to connect to Photon.");
+    }
 
-        void OnDisconnectedFromPhoton()
+    void OnDisconnectedFromPhoton()
+    {
+        Debug.Log("Connection to Photon lost.");
+    }
+
+    void OnJoinedLobby()
+    {
+        if (ConfigManager.developmentBuild)
         {
-            Debug.Log("Connection to Photon lost.");
+            RoomOptions roomOptions = new RoomOptions();
+            roomOptions.maxPlayers = 2;
+            PhotonNetwork.JoinOrCreateRoom("DevelopmentTestRoom",roomOptions,PhotonNetwork.lobby);
         }
-	 
-		void OnJoinedLobby ()
-		{
-				PhotonNetwork.JoinRandomRoom ();
-		}
-
-		void OnPhotonRandomJoinFailed ()
-		{
-				Debug.LogError("Failed to join random room, creating new room...");
-				PhotonNetwork.CreateRoom ("VeryScaryRoom");           
-		}
-
-		void OnJoinedRoom ()
-		{
-				Debug.Log ("Joined Room!");
-
-				InitializeWorld ();
-                
-		}
-        #endregion
-
-        void OnGUI()
+        else
         {
-            GUILayout.Label(PhotonNetwork.connectionStateDetailed.ToString());
+            PhotonNetwork.JoinRandomRoom();
         }
+    }
 
-		void Update ()
-		{
-            if (loadingDone)
-                return;
+    void OnPhotonRandomJoinFailed()
+    {
+        Debug.LogError("Failed to join random room, creating new room...");
+        PhotonNetwork.CreateRoom("SomeRandomRoom");
+    }
 
-				if (initialized && ((!ConfigManager.waitForOtherPlayer) || PhotonNetwork.room.playerCount == 2)) 
-                {
-						if (god != null) 
-                        {
-								// AND THIS IS HOW HE CREATED THE WORLD
-								var initScript = ((MonoBehaviour)god.GetComponent ("InitializeWorld"));
-								if (initScript == null)
-										throw new Exception ("Component initScript is null.");
-								initScript.enabled = true;
+    void OnJoinedRoom()
+    {
+        Debug.Log(String.Format("Joined Room {0}",PhotonNetwork.room));
 
-								GameObject loadingGameCamera = GameObject.Find ("LoadingGameCamera");
-								loadingGameCamera.GetComponent<GUIText> ().enabled = false;
-								loadingGameCamera.camera.enabled = false;
+        InitializeWorld();
 
-                                loadingDone = true;
-						}
-				}
+    }
+    #endregion
 
-		}
+    void OnGUI()
+    {
+        GUILayout.Label(PhotonNetwork.connectionStateDetailed.ToString());
+    }
 
-        public void InitializeWorld()
+    void Update()
+    {
+        if (loadingDone)
+            return;
+
+        if (initialized && ((!ConfigManager.waitForOtherPlayer) || PhotonNetwork.room.playerCount == 2))
         {
-            // AND THAT'S HOW A GOD IS BORN
-            god = (GameObject)PhotonNetwork.Instantiate("TheCreator", Vector3.zero, Quaternion.identity, 0);
-            initialized = true;
+            if (god != null)
+            {
+                // AND THIS IS HOW HE CREATED THE WORLD
+                var initScript = ((MonoBehaviour)god.GetComponent("InitializeWorld"));
+                if (initScript == null)
+                    throw new Exception("Component initScript is null.");
+                initScript.enabled = true;
 
-            GameObject loadingGameCamera = GameObject.Find("LoadingGameCamera");
-            loadingGameCamera.GetComponent<LoadingScreenSettings>().waitingSecondPlayer = true;
+                GameObject loadingGameCamera = GameObject.Find("LoadingGameCamera");
+                loadingGameCamera.GetComponent<GUIText>().enabled = false;
+                loadingGameCamera.camera.enabled = false;
+
+                loadingDone = true;
+            }
         }
+
+    }
+
+    public void InitializeWorld()
+    {
+        // AND THAT'S HOW A GOD IS BORN
+        god = (GameObject)PhotonNetwork.Instantiate("TheCreator", Vector3.zero, Quaternion.identity, 0);
+        initialized = true;
+
+        GameObject loadingGameCamera = GameObject.Find("LoadingGameCamera");
+        loadingGameCamera.GetComponent<LoadingScreenSettings>().waitingSecondPlayer = true;
+    }
 
 }
