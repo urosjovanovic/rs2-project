@@ -4,6 +4,7 @@ using System.Collections;
 public class CollisionControl : MonoBehaviour {
 
     public PhotonView view;
+    public static bool CollisionAllowed = false;
 
 	// Use this for initialization
 	void Start () {
@@ -34,8 +35,7 @@ public class CollisionControl : MonoBehaviour {
             Debug.Log("Disabling colliders.");
             //Ignorisemo sudare izmedju likova
             Physics.IgnoreCollision(darkPrim.GetComponentInChildren<CharacterController>().collider, prim.GetComponentInChildren<CharacterController>().collider, true);
-            //Sprecavamo trigerovanje EndGameSkripte
-            darkPrim.GetComponentInChildren<CapsuleCollider>().enabled = false;
+            CollisionControl.CollisionAllowed = false;
         }
     }
 }

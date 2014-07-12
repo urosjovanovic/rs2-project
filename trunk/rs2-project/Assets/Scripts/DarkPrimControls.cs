@@ -142,8 +142,7 @@ public class DarkPrimControls : MonoBehaviour
             {
                 //Ignorisemo sudare izmedju likova
                 Physics.IgnoreCollision(darkPrim.GetComponentInChildren<CharacterController>().collider, prim.GetComponentInChildren<CharacterController>().collider, false);
-                //Sprecavamo trigerovanje EndGameSkripte
-                darkPrim.GetComponentInChildren<CapsuleCollider>().enabled = true;
+                CollisionControl.CollisionAllowed = true;
             }
         }
 
@@ -157,8 +156,7 @@ public class DarkPrimControls : MonoBehaviour
             {
                 //Ignorisemo sudare izmedju likova
                 Physics.IgnoreCollision(darkPrim.GetComponentInChildren<CharacterController>().collider, prim.GetComponentInChildren<CharacterController>().collider, true);
-                //Sprecavamo trigerovanje EndGameSkripte
-                darkPrim.GetComponentInChildren<CapsuleCollider>().enabled = false;
+                CollisionControl.CollisionAllowed = false;
             }
         }
 

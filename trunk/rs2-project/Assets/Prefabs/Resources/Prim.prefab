@@ -73,7 +73,7 @@ GameObject:
   - 54: {fileID: 5400000}
   m_Layer: 0
   m_Name: Trigger
-  m_TagString: Prim
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -697,8 +697,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d99aa59a122ee44fa10ba9bccfaca7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseLookX: {fileID: 11400002}
-  mouseLookY: {fileID: 0}
 --- !u!122 &12200000
 Halo:
   m_ObjectHideFlags: 1
