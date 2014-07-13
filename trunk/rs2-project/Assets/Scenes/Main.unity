@@ -558,6 +558,10 @@ MonoBehaviour:
   publicHeavyBreathing: {fileID: 8300000, guid: 57305f03e766e3346afda51427284546,
     type: 3}
   publicEndGameTheme: {fileID: 8300000, guid: b24557807d3bb2c4db23f23445322be3, type: 3}
+  publicNightmareSound: {fileID: 8300000, guid: a34053f32fd704904974eed5ccd5c834,
+    type: 3}
+  publicDarkPrimTheme: {fileID: 8300000, guid: 3c304513f465f364da12fd182237e8ca, type: 3}
+  publicDeathEffect: {fileID: 8300000, guid: c75d2e41d7ef14b69bdb144857fa852d, type: 3}
 --- !u!114 &1343903573
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -50,6 +50,18 @@ public class SoundPool : MonoBehaviour {
     public AudioClip publicEndGameTheme;
     public static AudioClip EndGameTheme { get; set; }
 
+	public AudioClip publicNightmareSound;
+	public static AudioClip NightmareSound {
+				get;
+				set;
+		}
+
+	public AudioClip publicDarkPrimTheme;
+	public static AudioClip DarkPrimTheme { get; set; }
+
+	public AudioClip publicDeathEffect;
+	public static AudioClip DeathEffect { get; set; }
+
     public void Start()
     {
         forwardFootsteps = publicForwardFootsteps;
@@ -70,6 +82,11 @@ public class SoundPool : MonoBehaviour {
 
         EndGameTheme = publicEndGameTheme;
         HeavyBreathing = publicHeavyBreathing;
+
+		NightmareSound = publicNightmareSound;
+		DarkPrimTheme = publicDarkPrimTheme;
+
+		DeathEffect = publicDeathEffect;
     }
 
     public static AudioClip FlashlightBuzz

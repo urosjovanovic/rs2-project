@@ -54,6 +54,12 @@ public class UIPrim : MonoBehaviour
         if(endGameScript.IsDead && !inAnimation)
         {
             this.transform.parent.gameObject.GetComponent<CharacterMotor>().canControl = false;
+
+			var deathSoundSource = new GameObject();
+			deathSoundSource.transform.position = this.gameObject.transform.position;
+			deathSoundSource.AddComponent<AudioSource>();
+			deathSoundSource.audio.PlayOneShot(SoundPool.DeathEffect);
+
             StartCoroutine(Animate(0.1f));
             inAnimation = true;
         }
@@ -85,6 +91,7 @@ public class UIPrim : MonoBehaviour
 
         if(endGameScript.IsDead)
         {
+
             GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), deathAnimation[0], ScaleMode.ScaleAndCrop);
             GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), deathAnimation[currentAnimationSprite], ScaleMode.ScaleAndCrop);
         }
@@ -93,6 +100,7 @@ public class UIPrim : MonoBehaviour
 
     private IEnumerator Animate(float s)
     {
+
         while(currentAnimationSprite < 11)
         {
             if (currentAnimationSprite == 0)

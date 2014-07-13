@@ -116,8 +116,15 @@ public class InitializeWorld : MonoBehaviour
 
                             var exitNode = spawnNodes["Exit"];
 
+							var exitNeighbour = exitNode.Edges[0];
+							var exitNeighbourPosition = GetVectorFromNode(exitNeighbour,-1);
+							var exitPosition = GetVectorFromNode(exitNode,-1);
+							
+							// place the exit between the center of the exit node and the center of the neighbour node
+							var newExitPosition = (exitPosition + exitNeighbourPosition)/2;
+
                             // Instantiate exit
-                            GameObject exitObj = (GameObject)Instantiate(exit, GetVectorFromNode(exitNode, -1), Quaternion.LookRotation((GetVectorFromNode(exitNode.Edges[0], 0) - GetVectorFromNode(exitNode, 0)).normalized)); // look toward a neighbour node
+                            GameObject exitObj = (GameObject)Instantiate(exit, newExitPosition, Quaternion.LookRotation((GetVectorFromNode(exitNode.Edges[0], 0) - GetVectorFromNode(exitNode, 0)).normalized)); // look toward a neighbour node
                             
                             // Instantiate the whispers
                             InstantiateWhisperObjects(whisperNodes);
