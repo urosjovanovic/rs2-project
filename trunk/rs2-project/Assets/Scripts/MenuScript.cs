@@ -37,9 +37,8 @@ public class MenuScript : MonoBehaviour
         if (!(camera = GameObject.FindGameObjectWithTag("MainCamera"))) throw new NullReferenceException("MainCamera object in MenuScript script cannot be found!");
 
 		MoveCameraX(0.0f);
-        MoveHighlightY(menuItemPlay.transform.position.y);
 
-		currentMenuItem = 1;
+		currentMenuItem = 0;
 	}
 	
 	// Update is called once per frame
@@ -73,34 +72,49 @@ public class MenuScript : MonoBehaviour
         #region Input
         
         //select menu item
-        if(Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Return))
+        if(currentScene == 0)
         {
             #region Menu Item Selected
-            switch (currentMenuItem)
-			{
-				case 1:
-                    camera.audio.Stop();
-                    camera.audio.PlayOneShot(SoundPool.MenuQuake);
-                    camera.GetComponent<CameraShake>().Shake(2f);
-                    StartCoroutine(LoadSceneWithDelay("Main", 2f));
-					break;
-				case 2:
-					MoveCameraX(-20.0f);
-					currentScene = 2;
-					break;
-				case 3:
-					MoveCameraX(20.0f);
-					currentScene = 3;
-					break;
-				case 4:
-					Application.Quit();
-					break;
+
+            if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Return))
+            {
+                switch (currentMenuItem)
+                {
+                    case 1:
+                        camera.audio.Stop();
+                        camera.audio.PlayOneShot(SoundPool.MenuQuake);
+                        camera.GetComponent<CameraShake>().Shake(2f);
+                        StartCoroutine(LoadSceneWithDelay("Main", 2f));
+                        break;
+                    case 2:
+                        MoveCameraX(-20.0f);
+                        currentScene = 2;
+                        break;
+                    case 3:
+                        MoveCameraX(20.0f);
+                        currentScene = 3;
+                        break;
+                    case 4:
+                        Application.Quit();
+                        break;
+                }
             }
 
             #endregion
+
+            else if (Input.GetKeyDown(KeyCode.DownArrow) && currentMenuItem < 4)
+            {
+                currentMenuItem++;
+                this.transform.audio.PlayOneShot(SoundPool.MenuClick);
+            }
+            else if (Input.GetKeyDown(KeyCode.UpArrow) && currentMenuItem > 1)
+            {
+                currentMenuItem--;
+                this.transform.audio.PlayOneShot(SoundPool.MenuClick);
+            }
         }
         //return to MainMenu
-		else if(Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Backspace))
+		else if(currentScene != 0 && (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Backspace)))
 		{
 			MoveCameraX(0.0f);
 			currentScene = 0;
@@ -173,6 +187,5 @@ public class MenuScript : MonoBehaviour
 		                                      value, 
 		                                      back.transform.position.z);
 	}
-
 
 }
