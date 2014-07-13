@@ -110,6 +110,15 @@ public class EndGameScript : Photon.MonoBehaviour
                 GameObject darkPrim = GameObject.FindGameObjectWithTag("DarkPrim");
                 darkPrim.GetComponent<CharacterMotor>().canControl = false;
                 darkPrim.GetComponent<DarkPrimControls>().DisableVision();
+
+				//zato sto ce u DisableVision da se upali tema za DarkPrima a to ne zelimo QUICK FIX
+				var cam = darkPrim.transform.FindChild("MainCamera");
+				cam.audio.Stop();
+				cam.audio.PlayOneShot(SoundPool.EndGameTheme);
+				// Ovo iznad je jako lose programiranje i tako nesto nikad ne treba raditi,
+				// sem u nedelju uvece, dva dana pre roka.
+				// Spagete.
+
                 darkPrim.GetComponent<DarkPrimControls>().enabled = false;
                 darkPrim.GetComponentInChildren<UIDarkPrim>().enabled = false;
             }

@@ -9,7 +9,7 @@ public class MenuScript : MonoBehaviour
 
     private GameObject back;
 	private GameObject menuItemPlay, menuItemControls, menuItemAbout, menuItemExit;
-	private GameObject camera;
+	private GameObject cameraObject;
 
     #endregion
 
@@ -34,7 +34,7 @@ public class MenuScript : MonoBehaviour
         if (!(menuItemAbout = GameObject.Find("MenuItem2"))) throw new NullReferenceException("MenuItem2 object in MenuScript script cannot be found!");
         if (!(menuItemExit = GameObject.Find("MenuItem3"))) throw new NullReferenceException("MenuItem3 object in MenuScript script cannot be found!");
 
-        if (!(camera = GameObject.FindGameObjectWithTag("MainCamera"))) throw new NullReferenceException("MainCamera object in MenuScript script cannot be found!");
+        if (!(cameraObject = GameObject.FindGameObjectWithTag("MainCamera"))) throw new NullReferenceException("MainCamera object in MenuScript script cannot be found!");
 
 		MoveCameraX(0.0f);
 
@@ -59,8 +59,7 @@ public class MenuScript : MonoBehaviour
 				MoveHighlightY(menuItemControls.transform.position.y);
 				break;
 			case 3:
-				back.SetActive(true);
-				MoveHighlightY(menuItemAbout.transform.position.y);
+				back.SetActive(true); MoveHighlightY(menuItemAbout.transform.position.y);
 				break;
 			case 4:
 				back.SetActive(true);
@@ -81,9 +80,9 @@ public class MenuScript : MonoBehaviour
                 switch (currentMenuItem)
                 {
                     case 1:
-                        camera.audio.Stop();
-                        camera.audio.PlayOneShot(SoundPool.MenuQuake);
-                        camera.GetComponent<CameraShake>().Shake(2f);
+                        cameraObject.audio.Stop();
+                        cameraObject.audio.PlayOneShot(SoundPool.MenuQuake);
+                        cameraObject.GetComponent<CameraShake>().Shake(2f);
                         StartCoroutine(LoadSceneWithDelay("Main", 2f));
                         break;
                     case 2:
@@ -176,9 +175,9 @@ public class MenuScript : MonoBehaviour
 
 	void MoveCameraX(float value)
 	{
-		camera.transform.position = new Vector3(value, 
-		                                        camera.transform.position.y, 
-		                                        camera.transform.position.z);
+		cameraObject.transform.position = new Vector3(value, 
+		                                        cameraObject.transform.position.y, 
+		                                        cameraObject.transform.position.z);
 	}
 
 	void MoveHighlightY(float value)

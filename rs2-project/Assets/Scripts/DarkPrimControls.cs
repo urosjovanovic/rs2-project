@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class DarkPrimControls : MonoBehaviour
 {
@@ -14,6 +15,10 @@ public class DarkPrimControls : MonoBehaviour
         private float intensity;
         private Color auraColor;
 
+	    private GameObject myCamera;
+		float startingVolume;
+	
+
         public bool IsFrozen
         {
             get;
@@ -26,6 +31,10 @@ public class DarkPrimControls : MonoBehaviour
 				walls = GameObject.FindGameObjectsWithTag ("Wall");
                 motor = this.GetComponent<CharacterMotor>();
                 darkPrimAura = this.transform.FindChild("Point light").light;
+
+				if(!(myCamera = this.gameObject.transform.FindChild ("MainCamera").gameObject)) throw new NullReferenceException("MainCamera in DarkPrimControls is null");
+
+				startingVolume = this.gameObject.audio.volume;
 		}
 	
 		// Update is called once per frame
@@ -61,6 +70,11 @@ public class DarkPrimControls : MonoBehaviour
 
         public void EnableVision()
         {
+			myCamera.audio.Stop ();
+			myCamera.audio.clip = SoundPool.NightmareSound;
+			myCamera.audio.Play ();
+			this.gameObject.audio.volume = 0;
+
             foreach (var wall in walls)
             {
                 wall.renderer.material.shader = Shader.Find("Transparent/Diffuse");
@@ -91,6 +105,11 @@ public class DarkPrimControls : MonoBehaviour
 
         public void DisableVision()
         {
+			myCamera.audio.Stop ();
+			myCamera.audio.clip = SoundPool.DarkPrimTheme;
+			this.gameObject.audio.volume = startingVolume;
+			myCamera.audio.Play ();
+
             foreach (var wall in walls)
             {
                 wall.GetComponent<WallBehaviour>().FadeIn();

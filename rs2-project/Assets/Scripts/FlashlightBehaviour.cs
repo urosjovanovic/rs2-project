@@ -10,7 +10,7 @@ public class FlashlightBehaviour : MonoBehaviour
       
         #region Components
 
-        private Transform camera;
+        private Transform cameraTransform;
         public Transform parent;
         Light flashlight;
         FlashlightRecharge flashlightRecharge;
@@ -55,7 +55,7 @@ public class FlashlightBehaviour : MonoBehaviour
 
 		void Start ()
         {
-            if (!(camera = parent.FindChild ("MainCamera"))) throw new NullReferenceException("MainCamera in FlashlightBehaviour script is null!");
+            if (!(cameraTransform = parent.FindChild ("MainCamera"))) throw new NullReferenceException("MainCamera in FlashlightBehaviour script is null!");
             if (!(flashlight = this.GetComponent<Light>())) throw new NullReferenceException("flashlight in FlashliightBehaviour script is null!");
             if (!(flashlightRecharge = flashlight.gameObject.GetComponent<FlashlightRecharge>())) throw new NullReferenceException("flaslightRecharge component in FlashlightBehaviour script is null!");
 
@@ -64,7 +64,7 @@ public class FlashlightBehaviour : MonoBehaviour
             isBlinking = false;
         }
 	
-		// Update is called once per frame
+		// Update is ccameraTransformonce per frame
 		void Update ()
 		{
                 // update the flashlight state
@@ -74,7 +74,7 @@ public class FlashlightBehaviour : MonoBehaviour
 				this.transform.position = parent.transform.position;
 
 				//sway with camera
-				this.transform.rotation = Quaternion.Slerp (this.transform.rotation, camera.transform.rotation, Time.deltaTime * flashlightLag);
+				this.transform.rotation = Quaternion.Slerp (this.transform.rotation, cameraTransform.transform.rotation, Time.deltaTime * flashlightLag);
 
                 if (currentBlinkCooldown >= 0)
                 {

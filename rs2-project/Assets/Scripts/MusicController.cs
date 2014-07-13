@@ -6,7 +6,7 @@ public class MusicController : MonoBehaviour {
     AudioSource music;
     GameObject DarkPrim;
 
-    float cutoffDistance;
+    public float cutoffDistance = 5;
     float baseVolume;
 
 	// Use this for initialization
