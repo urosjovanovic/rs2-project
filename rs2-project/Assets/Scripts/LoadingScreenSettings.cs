@@ -6,10 +6,9 @@ public class LoadingScreenSettings : MonoBehaviour
     private int screenWidth;
     private int screenHeight;
     private GUIText loadingText;
+    private GameObject loadingArrows;
     private float timeDelay = 1.0f;
     private float timeRemaining;
-    private int numberOfDots = 0;
-    private int numberOfDotsWaiting = 0;
     public bool waitingSecondPlayer = false;
     private string loading = "Loading";
     private string waiting = "Waiting for second player";
@@ -23,8 +22,14 @@ public class LoadingScreenSettings : MonoBehaviour
         screenHeight = Screen.width;
         
         loadingText = GetComponentInParent<GUIText>();
+        loadingArrows = GameObject.Find("LoadingArrows");
+
         if (loadingText != null)
-            transform.position = new Vector2(0.5f, 0.5f);
+            loadingText.transform.position = new Vector2(0.5f, 0.5f);
+
+        if (loadingArrows != null)
+            loadingArrows.transform.Translate(new Vector3(0.0f, -1.0f, 0.0f));
+
 	}
 	
 	// Update is called once per frame
@@ -32,12 +37,16 @@ public class LoadingScreenSettings : MonoBehaviour
     {
         timeRemaining -= Time.deltaTime;
 
+        if (loadingArrows != null)
+            loadingArrows.transform.Rotate(new Vector3(0.0f, 0.0f, 0.5f));
+
         if(screenWidth != Screen.height || screenHeight != Screen.width)
         {
             if (loadingText != null)
                 transform.position = new Vector2(0.5f, 0.5f);
         }
-        else if(timeRemaining < 0)
+        
+        if(timeRemaining < 0)
         {
             timeRemaining = timeDelay;
 
@@ -45,45 +54,13 @@ public class LoadingScreenSettings : MonoBehaviour
             {
                 if(waitingSecondPlayer)
                 {
-                    numberOfDotsWaiting = (numberOfDotsWaiting + 1) % 4;
-                    switch(numberOfDotsWaiting)
-                    {
-                        case 0:
-                            loadingText.text = waiting;
-                            break;
-                        case 1:
-                            loadingText.text = waiting + " .";
-                            break;
-                        case 2:
-                            loadingText.text = waiting + " . .";
-                            break;
-                        case 3:
-                            loadingText.text = waiting + " . . .";
-                            break;
-                    }
-
-                    
+                    loadingText.text = waiting;
+                    loadingText.fontSize = 40;
                 }
                 else
                 {
-                    numberOfDots = (numberOfDots + 1) % 4;
-                    switch(numberOfDots)
-                    {
-                        case 0:
-                            loadingText.text = loading;
-                            break;
-                        case 1:
-                            loadingText.text = loading + " .";
-                            break;
-                        case 2:
-                            loadingText.text = loading + " . .";
-                            break;
-                        case 3:
-                            loadingText.text = loading + " . . .";
-                            break;
-                    }
-
-                    
+                    loadingText.text = loading;
+                    loadingText.fontSize = 50;
                 }
             }
         }

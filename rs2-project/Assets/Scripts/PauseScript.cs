@@ -1,115 +1,146 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
-public class PauseScript : MonoBehaviour 
+public class PauseScript : MonoBehaviour
 {
+    #region GameObjects
 
-    private GameObject back;
+    private GameObject back, pauseCamera;
     private GameObject menuItemPause, menuItemControls, menuItemAbout, menuItemQuit;
-    private GameObject camera;
     private GameObject pauseScene, aboutScene, controlsScene;
+    private GameObject prim, darkPrim;
+    #endregion
+
+    #region Class fields
 
     private int currentScene = 0;
     public int currentMenuItem;
     public bool isDarkControls = true;
+    public bool calledByPrim;
 
+    #endregion
+
+    #region Start and update
     // Use this for initialization
     void Start()
     {
         Screen.showCursor = true;
-        back = GameObject.Find("Shadow");
-        menuItemPause = GameObject.Find("MenuItem0");
-        menuItemControls = GameObject.Find("MenuItem1");
-        menuItemAbout = GameObject.Find("MenuItem2");
-        menuItemQuit = GameObject.Find("MenuItem3");
+        
+        if (!(back = GameObject.Find("Shadow"))) throw new NullReferenceException("Shadow object in PauseScript script cannot be found!");
+        if (!(pauseCamera = GameObject.FindGameObjectWithTag("PauseCamera"))) throw new NullReferenceException("PauseCamera object in PauseScript script cannot be found!");
 
-        pauseScene = GameObject.Find("PauseScene");
-        aboutScene = GameObject.Find("AboutScene");
-        controlsScene = GameObject.Find("ControlsScene");
+        if (!(menuItemPause = GameObject.Find("MenuItem0"))) throw new NullReferenceException("MenuItem0 object in PauseScript script cannot be found!");
+        if (!(menuItemControls = GameObject.Find("MenuItem1"))) throw new NullReferenceException("MenuItem1 object in PauseScript script cannot be found!");
+        if (!(menuItemAbout = GameObject.Find("MenuItem2"))) throw new NullReferenceException("MenuItem2 object in PauseScript script cannot be found!");
+        if (!(menuItemQuit = GameObject.Find("MenuItem3"))) throw new NullReferenceException("MenuItem3 object in PauseScript script cannot be found!");
+
+        if (!(pauseScene = GameObject.Find("PauseScene"))) throw new NullReferenceException("PauseScene object in PauseScript script cannot be found!");
+        if (!(aboutScene = GameObject.Find("AboutScene"))) throw new NullReferenceException("AboutScene object in PauseScript script cannot be found!");
+        if (!(controlsScene = GameObject.Find("ControlsScene"))) throw new NullReferenceException("ControlsScene object in PauseScript script cannot be found!");
+
+        prim = GameObject.FindGameObjectWithTag("Prim");
+        darkPrim = GameObject.FindGameObjectWithTag("DarkPrim");
 
         SetInvisible(pauseScene, true);
         SetInvisible(aboutScene, false);
         SetInvisible(controlsScene, false);
 
-        camera = GameObject.Find("PauseCamera");
-        MoveHighlightY(menuItemPause.transform.position.y);
-
-        currentMenuItem = 1;
+        currentMenuItem = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
         #region Highlight
-        switch (currentMenuItem)
+
+        if (currentScene != 0)
+            back.SetActive(false);
+        else
         {
-            case 0:
-                back.SetActive(false);
-                break;
-            case 1:
-                back.SetActive(true);
-                MoveHighlightY(menuItemPause.transform.position.y);
-                break;
-            case 2:
-                back.SetActive(true);
-                MoveHighlightY(menuItemControls.transform.position.y);
-                break;
-            case 3:
-                back.SetActive(true);
-                MoveHighlightY(menuItemAbout.transform.position.y);
-                break;
-            case 4:
-                back.SetActive(true);
-                MoveHighlightY(menuItemQuit.transform.position.y);
-                break;
+            switch (currentMenuItem)
+            {
+                case 0:
+                    back.SetActive(false);
+                    break;
+                case 1:
+                    back.SetActive(true);
+                    MoveHighlightY(menuItemPause.transform.position.y);
+                    break;
+                case 2:
+                    back.SetActive(true);
+                    MoveHighlightY(menuItemControls.transform.position.y);
+                    break;
+                case 3:
+                    back.SetActive(true);
+                    MoveHighlightY(menuItemAbout.transform.position.y);
+                    break;
+                case 4:
+                    back.SetActive(true);
+                    MoveHighlightY(menuItemQuit.transform.position.y);
+                    break;
+            }
         }
         #endregion
 
         #region Input
 
-        //select menu item
-        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Return))
+        if (currentScene == 0)
         {
-            #region Menu Item Selected
-            switch (currentMenuItem)
-            {
-                case 1:
-                    ReturnToGame();
-                    break;
-                case 2:
-                    SetInvisible(pauseScene, false);
-                    SetInvisible(aboutScene, false);
-                    SetInvisible(controlsScene, true);
-                    currentScene = 2;
-                    break;
-                case 3:
-                    SetInvisible(pauseScene, false);
-                    SetInvisible(aboutScene, true);
-                    SetInvisible(controlsScene, false);
-                    currentScene = 3;
-                    break;
-                case 4:
-                    PhotonNetwork.Disconnect();
-                    break;
-            }
 
+            #region Menu Item Selected
+            //select menu item
+            if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Return))
+            {
+
+                switch (currentMenuItem)
+                {
+                    case 1:
+                        ReturnToGame();
+                        break;
+                    case 2:
+                        SetInvisible(pauseScene, false);
+                        SetInvisible(aboutScene, false);
+                        SetInvisible(controlsScene, true);
+                        currentScene = 2;
+                        break;
+                    case 3:
+                        SetInvisible(pauseScene, false);
+                        SetInvisible(aboutScene, true);
+                        SetInvisible(controlsScene, false);
+                        currentScene = 3;
+                        break;
+                    case 4:
+                        QuitToMainMenu();
+                        break;
+                }
+
+
+            }
             #endregion
+
+            else if (Input.GetKeyDown(KeyCode.DownArrow) && currentMenuItem < 4)
+            {
+                currentMenuItem++;
+                //this.transform.audio.PlayOneShot(SoundPool.MenuClick);
+            }
+            else if (Input.GetKeyDown(KeyCode.UpArrow) && currentMenuItem > 1)
+            {
+                currentMenuItem--;
+                //this.transform.audio.PlayOneShot(SoundPool.MenuClick);
+            }
+            else if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Backspace))
+            {
+                ReturnToGame();
+            }
         }
         //return to MainMenu
         else if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Backspace))
         {
-            if (currentScene != 0)
-            {
                 SetInvisible(pauseScene, true);
                 SetInvisible(aboutScene, false);
                 SetInvisible(controlsScene, false);
                 currentScene = 0;
-            }
-            else
-            {
-                currentScene = 0;
-                ReturnToGame();
-            }
         }
         //switch DarkPrim's and Prim's controls
         else if (currentScene == 2 && (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow)))
@@ -151,23 +182,13 @@ public class PauseScript : MonoBehaviour
         #endregion
     }
 
-    void MoveCameraX(float value)
-    {
-        camera.transform.position = new Vector3(value,
-                                                camera.transform.position.y,
-                                                camera.transform.position.z);
-    }
+    #endregion
 
     void MoveHighlightY(float value)
     {
         back.transform.position = new Vector3(back.transform.position.x,
                                               value,
                                               back.transform.position.z);
-    }
-
-    void OnDisconnectedFromPhoton()
-    {
-        Application.LoadLevel("MainMenu");
     }
 
     void SetInvisible(GameObject target, bool isEnabled)
@@ -183,7 +204,7 @@ public class PauseScript : MonoBehaviour
 
         target.transform.position = new Vector3(target.transform.position.x,
                                                 target.transform.position.y,
-                                                target.transform.position.z + (isEnabled ? -10.0f : 10.0f));
+                                                pauseCamera.transform.position.z + (isEnabled ? -7.0f : -20.0f));
     }
 
     void ReturnToGame()
@@ -191,16 +212,43 @@ public class PauseScript : MonoBehaviour
         GameObject[] cameras = GameObject.FindGameObjectsWithTag("MainCamera");
         foreach (var camera in cameras)
         {
-            camera.camera.enabled = true;
+            if(calledByPrim && camera.transform.parent.gameObject.tag == "Prim")
+                camera.camera.enabled = true;
+            else if (!calledByPrim && camera.transform.parent.gameObject.tag == "DarkPrim")
+                camera.camera.enabled = true;
+
             camera.GetComponent<GUILayer>().enabled = true;
         }
 
         GameObject endgGameCamera = GameObject.Find("EndGameCamera");
         endgGameCamera.camera.enabled = true;
 
-        GameObject pauseCamera = GameObject.Find("PauseCamera");
-        pauseCamera.GetComponent<PauseScript>().enabled = false;
-        pauseCamera.GetComponent<Camera>().enabled = false;
+        Destroy(GameObject.FindGameObjectWithTag("PauseCamera"));
+
+        if (calledByPrim)
+        {
+            prim.GetComponent<CharacterMotor>().canControl = true;
+            prim.GetComponent<PrimsControls>().enabled = true;
+            prim.GetComponentInChildren<UIPrim>().enabled = true;
+            prim.GetComponent<EndGamePrim>().IsPause = false;
+        }
+        else
+        {
+            darkPrim.GetComponent<CharacterMotor>().canControl = true;
+            darkPrim.GetComponent<DarkPrimControls>().enabled = true;
+            darkPrim.GetComponentInChildren<UIDarkPrim>().enabled = true;
+            darkPrim.GetComponent<EndGameDarkPrim>().IsPause = false;
+        }
+    }
+
+    void QuitToMainMenu()
+    {
+        if (calledByPrim)
+            prim.GetComponent<EndGamePrim>().CanExitGame = true;
+        else
+            darkPrim.GetComponent<EndGameDarkPrim>().CanExitGame = true;
+
+        ReturnToGame();
     }
 
 }

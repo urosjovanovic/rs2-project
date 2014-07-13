@@ -86,6 +86,7 @@ public class NetworkManager : Photon.MonoBehaviour
 
                 GameObject loadingGameCamera = GameObject.Find("LoadingGameCamera");
                 loadingGameCamera.GetComponent<GUIText>().enabled = false;
+                loadingGameCamera.GetComponentInChildren<MeshRenderer>().enabled = false;
                 loadingGameCamera.camera.enabled = false;
 
                 loadingDone = true;

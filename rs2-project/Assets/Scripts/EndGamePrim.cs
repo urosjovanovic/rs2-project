@@ -2,9 +2,13 @@
 using System.Collections;
 using System;
 
-public class EndGamePrim : MonoBehaviour 
+public class EndGamePrim : MonoBehaviour
 {
+    #region Class fields
     private bool isDead = false;
+    private bool isPause = false;
+    private bool canExitGame = false;
+
     public bool IsDead
     {
         get
@@ -13,25 +17,53 @@ public class EndGamePrim : MonoBehaviour
         }
     }
 
-    private PhotonView view;
+    public bool IsPause
+    {
+        get
+        {
+            return isPause;
+        }
 
-	void Start ()
+        set
+        {
+            isPause = value;
+        }
+    }
+
+    public bool CanExitGame
+    {
+        get
+        {
+            return canExitGame;
+        }
+
+        set
+        {
+            canExitGame = value;
+        }
+    }
+
+    UnityEngine.Object pauseObject;
+
+    private PhotonView view;
+    #endregion
+
+    void Start ()
     {
         if (!(view = this.gameObject.GetComponent<PhotonView>())) throw new NullReferenceException("PhotonView component in the script is null.");
+
+        pauseObject = Resources.Load("PauseCamera");
 	}
 	
 	// Update is called once per frame
 	void Update () 
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        //activate PauseMenu
+        if (!IsPause && Input.GetKeyDown(KeyCode.Escape))
         {
-            //isDead = true;
+            isPause = true;
 
-            view.RPC("LoseThisGame", PhotonTargets.Others, null);
-            Lose();
-            this.enabled = false;
-            
-            /*GameObject[] cameras = GameObject.FindGameObjectsWithTag("MainCamera");
+            GameObject[] cameras = GameObject.FindGameObjectsWithTag("MainCamera");
 
             foreach (var camera in cameras)
             {
@@ -39,13 +71,22 @@ public class EndGamePrim : MonoBehaviour
                 camera.GetComponent<GUILayer>().enabled = false;
             }
 
+            this.gameObject.GetComponent<CharacterMotor>().canControl = false;
+            this.gameObject.GetComponent<PrimsControls>().enabled = false;
+            this.gameObject.GetComponentInChildren<UIPrim>().enabled = false;
+
             GameObject endgGameCamera = GameObject.Find("EndGameCamera");
             endgGameCamera.camera.enabled = false;
 
-            GameObject pauseCamera = GameObject.Find("PauseCamera");
-            pauseCamera.GetComponent<PauseScript>().enabled = true;
-            pauseCamera.GetComponent<Camera>().enabled = true;*/
+            GameObject pauseCamera = (GameObject)Instantiate(pauseObject);
+            pauseCamera.GetComponent<PauseScript>().calledByPrim = true;
+        }
 
+        if(CanExitGame)
+        {
+            view.RPC("LoseThisGame", PhotonTargets.Others, null);
+            Lose();
+            this.enabled = false;
         }
 
         if (this.gameObject.transform.position.y < -15.0)
