@@ -603,7 +603,7 @@ TextMesh:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 528716703}
-  m_Text: 'Two red eyes in the shadow wait,
+  m_Text: 'Two red eyes in the shadow wait
 
 '
   m_OffsetZ: 0
@@ -914,7 +914,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 579905107}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.118264012, y: -.276769757, z: 0}
+  m_LocalPosition: {x: -.118264012, y: -.315732151, z: 0}
   m_LocalScale: {x: .00400000019, y: .00800000038, z: 1}
   m_Children: []
   m_Father: {fileID: 189636792}
@@ -926,7 +926,7 @@ TextMesh:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 579905107}
-  m_Text: and now it's his time,
+  m_Text: 'this is his world. '
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -1374,7 +1374,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1115695587}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.118264012, y: -.276769817, z: 0}
+  m_LocalPosition: {x: -.118264012, y: -.273218155, z: 0}
   m_LocalScale: {x: .00400000019, y: .00800000038, z: 1}
   m_Children: []
   m_Father: {fileID: 189636792}
@@ -1386,7 +1386,7 @@ TextMesh:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1115695587}
-  m_Text: and now it's his time,
+  m_Text: and now it's his time
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -1760,7 +1760,7 @@ TextMesh:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1694875102}
-  m_Text: 'A bite of warm flesh, if only he could,
+  m_Text: 'A bite of warm flesh, if only he could
 
 '
   m_OffsetZ: 0
