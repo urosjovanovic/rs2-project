@@ -35,6 +35,11 @@ public class NetworkManager : Photon.MonoBehaviour
         Debug.Log("Connection to Photon lost.");
     }
 
+    void OnPhotonPlayerDisconnected()
+    {
+        Application.LoadLevel("MainMenu");
+    }
+
     void OnJoinedLobby()
     {
         if (ConfigManager.developmentBuild)

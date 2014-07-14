@@ -50,8 +50,7 @@ public class FlashlightFire : MonoBehaviour {
 
         if (Physics.Raycast(transform.position, fwd, out hit, 5))
         {
-            //Debug.Log(hit.collider.gameObject.name);
-            if (hit.collider.gameObject.tag == "DarkPrim")
+            if (hit.collider.transform.parent.gameObject.tag == "DarkPrim")
             {
                 Debug.Log("There is something in front of the object!");
                 this.audio.PlayOneShot(SoundPool.Scream);
