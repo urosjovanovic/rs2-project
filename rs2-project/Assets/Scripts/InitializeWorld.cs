@@ -389,6 +389,7 @@ public class InitializeWorld : MonoBehaviour
                         player.transform.FindChild("MainCamera").GetComponent<UIDarkPrim>().enabled = true;
 
                         GameObject.Find("Skylight").light.enabled = true;
+                        player.transform.FindChild("Point light").GetComponent<Light>().enabled = true;
 				}
 
                 GameObject[] walls = GameObject.FindGameObjectsWithTag("Wall");
