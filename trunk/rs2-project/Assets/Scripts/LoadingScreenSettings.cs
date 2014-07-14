@@ -38,7 +38,7 @@ public class LoadingScreenSettings : MonoBehaviour
         timeRemaining -= Time.deltaTime;
 
         if (loadingArrows != null)
-            loadingArrows.transform.Rotate(new Vector3(0.0f, 0.0f, 0.5f));
+            loadingArrows.transform.Rotate(new Vector3(0.0f, 0.0f, -4.0f));
 
         if(screenWidth != Screen.height || screenHeight != Screen.width)
         {
