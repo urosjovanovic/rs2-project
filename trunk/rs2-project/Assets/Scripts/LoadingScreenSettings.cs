@@ -35,6 +35,11 @@ public class LoadingScreenSettings : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            PhotonNetwork.Disconnect();
+        }
+
         timeRemaining -= Time.deltaTime;
 
         if (loadingArrows != null)
