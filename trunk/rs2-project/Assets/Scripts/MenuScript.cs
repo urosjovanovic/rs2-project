@@ -91,7 +91,12 @@ public class MenuScript : MonoBehaviour
                         break;
                     case 3:
                         MoveCameraX(20.0f);
-                        currentScene = 3;
+                        currentScene = 3; //about
+                        foreach(var verse in GameObject.FindGameObjectsWithTag("Verse"))
+                        {
+                            verse.GetComponent<VerseBehaviour>().Hide();
+                        }
+                        StartCoroutine(LoadVerses());
                         break;
                     case 4:
                         Application.Quit();
@@ -160,6 +165,15 @@ public class MenuScript : MonoBehaviour
 
     #endregion
 
+    private IEnumerator LoadVerses()
+    {
+        for(int i = 1; i <= 9; i++)
+        {
+            var verse = GameObject.Find("Verse" + i.ToString());
+            verse.GetComponent<VerseBehaviour>().FadeIn();
+            yield return new WaitForSeconds(1.0f);
+        }
+    }
 
     /// <summary>
     /// Load a scene with a delay

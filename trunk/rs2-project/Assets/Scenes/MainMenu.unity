@@ -307,6 +307,15 @@ Transform:
   m_LocalScale: {x: 20, y: 10, z: 1}
   m_Children:
   - {fileID: 265499061}
+  - {fileID: 1147075485}
+  - {fileID: 2103154145}
+  - {fileID: 1959926155}
+  - {fileID: 799806505}
+  - {fileID: 528716704}
+  - {fileID: 535560814}
+  - {fileID: 1694875103}
+  - {fileID: 1115695588}
+  - {fileID: 579905108}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!1 &211444336
@@ -557,6 +566,174 @@ Transform:
   m_Children: []
   m_Father: {fileID: 189636792}
   m_RootOrder: 0
+--- !u!1 &528716703
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 528716704}
+  - 23: {fileID: 528716706}
+  - 102: {fileID: 528716705}
+  - 114: {fileID: 528716707}
+  m_Layer: 0
+  m_Name: Verse5
+  m_TagString: Verse
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &528716704
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 528716703}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -.118264012, y: -.144396558, z: 0}
+  m_LocalScale: {x: .00400000019, y: .00800000038, z: 1}
+  m_Children: []
+  m_Father: {fileID: 189636792}
+  m_RootOrder: 5
+--- !u!102 &528716705
+TextMesh:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 528716703}
+  m_Text: 'Two red eyes in the shadow wait,
+
+'
+  m_OffsetZ: 0
+  m_CharacterSize: 1
+  m_LineSpacing: 1
+  m_Anchor: 0
+  m_Alignment: 0
+  m_TabSize: 4
+  m_FontSize: 36
+  m_FontStyle: 0
+  m_RichText: 1
+  m_Font: {fileID: 12800000, guid: 1acf3c7b74018bf4685dc9f9e6d0cac8, type: 3}
+  m_Color:
+    serializedVersion: 2
+    rgba: 4294901502
+--- !u!23 &528716706
+Renderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 528716703}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 2100000, guid: 1acf3c7b74018bf4685dc9f9e6d0cac8, type: 3}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+--- !u!114 &528716707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 528716703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0917656a62e8ca1479f2033d41e3fe21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &535560813
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 535560814}
+  - 23: {fileID: 535560816}
+  - 102: {fileID: 535560815}
+  - 114: {fileID: 535560817}
+  m_Layer: 0
+  m_Name: Verse6
+  m_TagString: Verse
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &535560814
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 535560813}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -.118264012, y: -.188001916, z: 0}
+  m_LocalScale: {x: .00400000019, y: .00800000038, z: 1}
+  m_Children: []
+  m_Father: {fileID: 189636792}
+  m_RootOrder: 6
+--- !u!102 &535560815
+TextMesh:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 535560813}
+  m_Text: 'a lonely soul, a grim faith.
+
+'
+  m_OffsetZ: 0
+  m_CharacterSize: 1
+  m_LineSpacing: 1
+  m_Anchor: 0
+  m_Alignment: 0
+  m_TabSize: 4
+  m_FontSize: 36
+  m_FontStyle: 0
+  m_RichText: 1
+  m_Font: {fileID: 12800000, guid: 1acf3c7b74018bf4685dc9f9e6d0cac8, type: 3}
+  m_Color:
+    serializedVersion: 2
+    rgba: 4294901502
+--- !u!23 &535560816
+Renderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 535560813}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 2100000, guid: 1acf3c7b74018bf4685dc9f9e6d0cac8, type: 3}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+--- !u!114 &535560817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 535560813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0917656a62e8ca1479f2033d41e3fe21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &545809424
 GameObject:
   m_ObjectHideFlags: 0
@@ -712,6 +889,88 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 3
+--- !u!1 &579905107
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 579905108}
+  - 23: {fileID: 579905110}
+  - 102: {fileID: 579905109}
+  - 114: {fileID: 579905111}
+  m_Layer: 0
+  m_Name: Verse9
+  m_TagString: Verse
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &579905108
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 579905107}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -.118264012, y: -.276769757, z: 0}
+  m_LocalScale: {x: .00400000019, y: .00800000038, z: 1}
+  m_Children: []
+  m_Father: {fileID: 189636792}
+  m_RootOrder: 9
+--- !u!102 &579905109
+TextMesh:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 579905107}
+  m_Text: and now it's his time,
+  m_OffsetZ: 0
+  m_CharacterSize: 1
+  m_LineSpacing: 1
+  m_Anchor: 0
+  m_Alignment: 0
+  m_TabSize: 4
+  m_FontSize: 36
+  m_FontStyle: 0
+  m_RichText: 1
+  m_Font: {fileID: 12800000, guid: 1acf3c7b74018bf4685dc9f9e6d0cac8, type: 3}
+  m_Color:
+    serializedVersion: 2
+    rgba: 4294901502
+--- !u!23 &579905110
+Renderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 579905107}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 2100000, guid: 1acf3c7b74018bf4685dc9f9e6d0cac8, type: 3}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+--- !u!114 &579905111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 579905107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0917656a62e8ca1479f2033d41e3fe21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &659196640
 GameObject:
   m_ObjectHideFlags: 0
@@ -890,6 +1149,88 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1105306181}
   m_RootOrder: 0
+--- !u!1 &799806502
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 799806505}
+  - 23: {fileID: 799806504}
+  - 102: {fileID: 799806503}
+  - 114: {fileID: 799806506}
+  m_Layer: 0
+  m_Name: Verse4
+  m_TagString: Verse
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!102 &799806503
+TextMesh:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 799806502}
+  m_Text: "in the darkness he was not alone.\r\n"
+  m_OffsetZ: 0
+  m_CharacterSize: 1
+  m_LineSpacing: 1
+  m_Anchor: 0
+  m_Alignment: 0
+  m_TabSize: 4
+  m_FontSize: 36
+  m_FontStyle: 0
+  m_RichText: 1
+  m_Font: {fileID: 12800000, guid: 1acf3c7b74018bf4685dc9f9e6d0cac8, type: 3}
+  m_Color:
+    serializedVersion: 2
+    rgba: 4294901502
+--- !u!23 &799806504
+Renderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 799806502}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 2100000, guid: 1acf3c7b74018bf4685dc9f9e6d0cac8, type: 3}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+--- !u!4 &799806505
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 799806502}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -.118264012, y: -.0680871233, z: 0}
+  m_LocalScale: {x: .00400000019, y: .00800000038, z: 1}
+  m_Children: []
+  m_Father: {fileID: 189636792}
+  m_RootOrder: 4
+--- !u!114 &799806506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 799806502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0917656a62e8ca1479f2033d41e3fe21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1049351914
 GameObject:
   m_ObjectHideFlags: 0
@@ -930,6 +1271,9 @@ MonoBehaviour:
   publicMenuClick: {fileID: 8300000, guid: 0c5eb50ed23474845b135247287dc0c4, type: 3}
   publicHeavyBreathing: {fileID: 0}
   publicEndGameTheme: {fileID: 0}
+  publicNightmareSound: {fileID: 0}
+  publicDarkPrimTheme: {fileID: 0}
+  publicDeathEffect: {fileID: 0}
 --- !u!4 &1049351916
 Transform:
   m_ObjectHideFlags: 0
@@ -1005,6 +1349,170 @@ Transform:
   - {fileID: 211444337}
   m_Father: {fileID: 0}
   m_RootOrder: 1
+--- !u!1 &1115695587
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1115695588}
+  - 23: {fileID: 1115695590}
+  - 102: {fileID: 1115695589}
+  - 114: {fileID: 1115695591}
+  m_Layer: 0
+  m_Name: Verse8
+  m_TagString: Verse
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1115695588
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1115695587}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -.118264012, y: -.276769817, z: 0}
+  m_LocalScale: {x: .00400000019, y: .00800000038, z: 1}
+  m_Children: []
+  m_Father: {fileID: 189636792}
+  m_RootOrder: 8
+--- !u!102 &1115695589
+TextMesh:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1115695587}
+  m_Text: and now it's his time,
+  m_OffsetZ: 0
+  m_CharacterSize: 1
+  m_LineSpacing: 1
+  m_Anchor: 0
+  m_Alignment: 0
+  m_TabSize: 4
+  m_FontSize: 36
+  m_FontStyle: 0
+  m_RichText: 1
+  m_Font: {fileID: 12800000, guid: 1acf3c7b74018bf4685dc9f9e6d0cac8, type: 3}
+  m_Color:
+    serializedVersion: 2
+    rgba: 4294901502
+--- !u!23 &1115695590
+Renderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1115695587}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 2100000, guid: 1acf3c7b74018bf4685dc9f9e6d0cac8, type: 3}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+--- !u!114 &1115695591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1115695587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0917656a62e8ca1479f2033d41e3fe21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1147075484
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1147075485}
+  - 23: {fileID: 1147075487}
+  - 102: {fileID: 1147075486}
+  - 114: {fileID: 1147075488}
+  m_Layer: 0
+  m_Name: Verse1
+  m_TagString: Verse
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1147075485
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1147075484}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -.118264012, y: .0742763504, z: 0}
+  m_LocalScale: {x: .00400000019, y: .00800000038, z: 1}
+  m_Children: []
+  m_Father: {fileID: 189636792}
+  m_RootOrder: 1
+--- !u!102 &1147075486
+TextMesh:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1147075484}
+  m_Text: One quiet night little Prim fell asleep,
+  m_OffsetZ: 0
+  m_CharacterSize: 1
+  m_LineSpacing: 1
+  m_Anchor: 0
+  m_Alignment: 0
+  m_TabSize: 4
+  m_FontSize: 36
+  m_FontStyle: 0
+  m_RichText: 1
+  m_Font: {fileID: 12800000, guid: 1acf3c7b74018bf4685dc9f9e6d0cac8, type: 3}
+  m_Color:
+    serializedVersion: 2
+    rgba: 4294901502
+--- !u!23 &1147075487
+Renderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1147075484}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 2100000, guid: 1acf3c7b74018bf4685dc9f9e6d0cac8, type: 3}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+--- !u!114 &1147075488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1147075484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0917656a62e8ca1479f2033d41e3fe21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1388955103
 GameObject:
   m_ObjectHideFlags: 0
@@ -1215,6 +1723,90 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1105306181}
   m_RootOrder: 4
+--- !u!1 &1694875102
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1694875103}
+  - 23: {fileID: 1694875105}
+  - 102: {fileID: 1694875104}
+  - 114: {fileID: 1694875106}
+  m_Layer: 0
+  m_Name: Verse7
+  m_TagString: Verse
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1694875103
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1694875102}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -.118264012, y: -.230049849, z: 0}
+  m_LocalScale: {x: .00400000019, y: .00800000038, z: 1}
+  m_Children: []
+  m_Father: {fileID: 189636792}
+  m_RootOrder: 7
+--- !u!102 &1694875104
+TextMesh:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1694875102}
+  m_Text: 'A bite of warm flesh, if only he could,
+
+'
+  m_OffsetZ: 0
+  m_CharacterSize: 1
+  m_LineSpacing: 1
+  m_Anchor: 0
+  m_Alignment: 0
+  m_TabSize: 4
+  m_FontSize: 36
+  m_FontStyle: 0
+  m_RichText: 1
+  m_Font: {fileID: 12800000, guid: 1acf3c7b74018bf4685dc9f9e6d0cac8, type: 3}
+  m_Color:
+    serializedVersion: 2
+    rgba: 4294901502
+--- !u!23 &1694875105
+Renderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1694875102}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 2100000, guid: 1acf3c7b74018bf4685dc9f9e6d0cac8, type: 3}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+--- !u!114 &1694875106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1694875102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0917656a62e8ca1479f2033d41e3fe21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1925527169
 GameObject:
   m_ObjectHideFlags: 0
@@ -1418,6 +2010,88 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
+--- !u!1 &1959926154
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1959926155}
+  - 23: {fileID: 1959926157}
+  - 102: {fileID: 1959926156}
+  - 114: {fileID: 1959926158}
+  m_Layer: 0
+  m_Name: Verse3
+  m_TagString: Verse
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1959926155
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1959926154}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -.118264012, y: -.0209427234, z: 0}
+  m_LocalScale: {x: .00400000019, y: .00800000038, z: 1}
+  m_Children: []
+  m_Father: {fileID: 189636792}
+  m_RootOrder: 3
+--- !u!102 &1959926156
+TextMesh:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1959926154}
+  m_Text: he dreamt a dream, he heard a song,
+  m_OffsetZ: 0
+  m_CharacterSize: 1
+  m_LineSpacing: 1
+  m_Anchor: 0
+  m_Alignment: 0
+  m_TabSize: 4
+  m_FontSize: 36
+  m_FontStyle: 0
+  m_RichText: 1
+  m_Font: {fileID: 12800000, guid: 1acf3c7b74018bf4685dc9f9e6d0cac8, type: 3}
+  m_Color:
+    serializedVersion: 2
+    rgba: 4294901502
+--- !u!23 &1959926157
+Renderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1959926154}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 2100000, guid: 1acf3c7b74018bf4685dc9f9e6d0cac8, type: 3}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+--- !u!114 &1959926158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1959926154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0917656a62e8ca1479f2033d41e3fe21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2007429315
 GameObject:
   m_ObjectHideFlags: 0
@@ -1681,3 +2355,85 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1105306181}
   m_RootOrder: 2
+--- !u!1 &2103154144
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 2103154145}
+  - 23: {fileID: 2103154147}
+  - 102: {fileID: 2103154146}
+  - 114: {fileID: 2103154148}
+  m_Layer: 0
+  m_Name: Verse2
+  m_TagString: Verse
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2103154145
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2103154144}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -.118264012, y: .0262016784, z: 0}
+  m_LocalScale: {x: .00400000019, y: .00800000038, z: 1}
+  m_Children: []
+  m_Father: {fileID: 189636792}
+  m_RootOrder: 2
+--- !u!102 &2103154146
+TextMesh:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2103154144}
+  m_Text: 'on a soft pillow, under warm sheets, '
+  m_OffsetZ: 0
+  m_CharacterSize: 1
+  m_LineSpacing: 1
+  m_Anchor: 0
+  m_Alignment: 0
+  m_TabSize: 4
+  m_FontSize: 36
+  m_FontStyle: 0
+  m_RichText: 1
+  m_Font: {fileID: 12800000, guid: 1acf3c7b74018bf4685dc9f9e6d0cac8, type: 3}
+  m_Color:
+    serializedVersion: 2
+    rgba: 4294901502
+--- !u!23 &2103154147
+Renderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2103154144}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 2100000, guid: 1acf3c7b74018bf4685dc9f9e6d0cac8, type: 3}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+--- !u!114 &2103154148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2103154144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0917656a62e8ca1479f2033d41e3fe21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

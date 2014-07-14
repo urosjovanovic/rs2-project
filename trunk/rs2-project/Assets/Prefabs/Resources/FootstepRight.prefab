@@ -70,7 +70,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isOwner: 0
-  lifetime: 5
+  lifetime: 3
   fadeoutTime: 2
   fadeinTime: 1
 --- !u!114 &11400002

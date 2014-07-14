@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 
 public class InitializeWorld : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class InitializeWorld : MonoBehaviour
         // MarkerCollectible prefab
         private UnityEngine.Object markerCollectible = Resources.Load("MarkerCollectible");
         private UnityEngine.Object exit = Resources.Load("Exit");
+        private UnityEngine.Object easterEgg = Resources.Load("EasterEgg");
 
         // WhisperObject
         private UnityEngine.Object whisper = Resources.Load("WhisperObject");
@@ -86,6 +88,7 @@ public class InitializeWorld : MonoBehaviour
                         var darkPrimSpawn = spawnNodes["DarkPrim"];
                         var markerCollectibleNodes = maze.GetMarkerCollectibleSpawnNodes();
                         var whisperNodes = maze.GetWhisperSourceSpawnNodes(SoundPool.Whispers.Length);
+                        var easterEggNode = maze.GetEasterEggNode();
 
                         // MAZE RENDERING 
                         for (int i = 0; i < mazeMatrix.GetLength(0); i++)
@@ -131,6 +134,11 @@ public class InitializeWorld : MonoBehaviour
 
                             // Instantiate the marker collectibles
                             InstantiateMarkerPrefabs(markerCollectibleNodes);
+
+                            var easterEggObject = (GameObject)Instantiate(easterEgg, GetVectorFromNode(easterEggNode, -0.497f), Quaternion.identity);
+                            easterEggObject.transform.Rotate(new Vector3(90, 90, 0));
+                            easterEggObject.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+
                         }
 
 				} else {
@@ -138,6 +146,8 @@ public class InitializeWorld : MonoBehaviour
 				}
         
 		}
+
+        
 
         private void InstantiateWhisperObjects(List<GridNode> whisperNodes)
         {
@@ -175,6 +185,7 @@ public class InitializeWorld : MonoBehaviour
                 ins.transform.Translate(new Vector3(0, -0.6f, 0));
             }
         }
+
 
 
     
