@@ -10,6 +10,7 @@ public class PauseScript : MonoBehaviour
     private GameObject menuItemPause, menuItemControls, menuItemAbout, menuItemQuit;
     private GameObject pauseScene, aboutScene, controlsScene;
     private GameObject prim, darkPrim;
+    private GameObject helpText;
     #endregion
 
     #region Class fields
@@ -36,8 +37,9 @@ public class PauseScript : MonoBehaviour
         if (!(menuItemQuit = GameObject.Find("MenuItem3"))) throw new NullReferenceException("MenuItem3 object in PauseScript script cannot be found!");
 
         if (!(pauseScene = GameObject.Find("PauseScene"))) throw new NullReferenceException("PauseScene object in PauseScript script cannot be found!");
-        if (!(aboutScene = GameObject.Find("AboutScene"))) throw new NullReferenceException("AboutScene object in PauseScript script cannot be found!");
+        if (!(aboutScene = GameObject.Find("HelpScene"))) throw new NullReferenceException("HelpScene object in PauseScript script cannot be found!");
         if (!(controlsScene = GameObject.Find("ControlsScene"))) throw new NullReferenceException("ControlsScene object in PauseScript script cannot be found!");
+        helpText = GameObject.Find("HelpText");
 
         prim = GameObject.FindGameObjectWithTag("Prim");
         darkPrim = GameObject.FindGameObjectWithTag("DarkPrim");
@@ -109,6 +111,14 @@ public class PauseScript : MonoBehaviour
                         SetInvisible(aboutScene, true);
                         SetInvisible(controlsScene, false);
                         currentScene = 3;
+                        if (calledByPrim)
+                        {
+                            helpText.GetComponent<TextMesh>().text = "Find the exit. Don't get eaten. Wake up.";
+                        }
+                        else
+                        {
+                            helpText.GetComponent<TextMesh>().text = "He is here. Find him. Don't let him run away.";
+                        }
                         break;
                     case 4:
                         QuitToMainMenu();

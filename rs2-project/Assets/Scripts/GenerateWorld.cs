@@ -214,6 +214,18 @@ public class Maze
         return markers;
     }
 
+    /// <summary>
+    /// Get spawnNode for Easter egg
+    /// </summary>
+    /// <returns> GridNode for Easter egg </returns>
+    public GridNode GetEasterEggNode()
+    {
+        System.Random rand = new System.Random();
+
+        return Graph[rand.Next(graphRows), rand.Next(graphCols)];
+
+    }
+
     public List<GridNode> GetWhisperSourceSpawnNodes(int howMany)
     {
         var whispers = new List<GridNode>();

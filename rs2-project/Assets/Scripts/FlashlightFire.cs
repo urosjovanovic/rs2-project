@@ -50,15 +50,21 @@ public class FlashlightFire : MonoBehaviour {
 
         if (Physics.Raycast(transform.position, fwd, out hit, 5))
         {
-            if (hit.collider.transform.parent.gameObject.tag == "DarkPrim")
+            try
             {
-                Debug.Log("There is something in front of the object!");
-                this.audio.PlayOneShot(SoundPool.Scream);
-                darkPrimSprite = Instantiate(Resources.Load("DarkPrim2DSprite")) as GameObject;
-                darkPrimSprite.transform.position = hit.collider.gameObject.transform.position;
-                view.RPC("FreezeDarkPrim", PhotonTargets.All, null);
-                freezeActive = true;
-                flashlightRecharge.flashLightTimeRemaining = 0;
+                if (hit.collider.transform.parent.gameObject.tag == "DarkPrim")
+                {
+                    Debug.Log("There is something in front of the object!");
+                    this.audio.PlayOneShot(SoundPool.Scream);
+                    darkPrimSprite = Instantiate(Resources.Load("DarkPrim2DSprite")) as GameObject;
+                    darkPrimSprite.transform.position = hit.collider.gameObject.transform.position;
+                    view.RPC("FreezeDarkPrim", PhotonTargets.All, null);
+                    freezeActive = true;
+                    flashlightRecharge.flashLightTimeRemaining = 0;
+                }
+            }
+            catch(Exception)
+            {
 
             }
         }

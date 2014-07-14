@@ -32,6 +32,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 0
 --- !u!82 &8200000
 AudioSource:
   m_ObjectHideFlags: 1
@@ -179,7 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b2ef56af9e30304a9bad8dfea05c7f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireRate: .5
+  fireRate: .100000001
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -191,9 +192,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fae3c3e114a33e04999d466693a47ab5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flashLightLifeTime: 15
-  flashLightReChargeTime: 5
-  flashLightTimeRemaining: 0
+  flashLightLifeTime: 20
+  flashLightReChargeTime: 10
+  flashLightTimeRemaining: 20
   flashLightChargedPercent: 100
   flashLightEnabled: 1
 --- !u!1001 &100100000
