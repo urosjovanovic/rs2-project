@@ -41,7 +41,7 @@ public class NetworkManager : Photon.MonoBehaviour
         {
             RoomOptions roomOptions = new RoomOptions();
             roomOptions.maxPlayers = 2;
-            PhotonNetwork.JoinOrCreateRoom("DevelopmentTestRoom",roomOptions,PhotonNetwork.lobby);
+            PhotonNetwork.JoinOrCreateRoom("DevelopmentTestRoom1",roomOptions,PhotonNetwork.lobby);
         }
         else
         {

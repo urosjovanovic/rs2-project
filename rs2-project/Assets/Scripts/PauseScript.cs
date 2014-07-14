@@ -202,9 +202,9 @@ public class PauseScript : MonoBehaviour
             c.enabled = isEnabled;
         }
 
-        target.transform.position = new Vector3(target.transform.position.x,
-                                                target.transform.position.y,
-                                                pauseCamera.transform.position.z + (isEnabled ? -7.0f : -20.0f));
+        //target.transform.position = new Vector3(target.transform.position.x,
+        //                                        target.transform.position.y,
+        //                                        pauseCamera.transform.position.z + (isEnabled ? -7.0f : -20.0f));
     }
 
     void ReturnToGame()
@@ -230,14 +230,14 @@ public class PauseScript : MonoBehaviour
             prim.GetComponent<CharacterMotor>().canControl = true;
             prim.GetComponent<PrimsControls>().enabled = true;
             prim.GetComponentInChildren<UIPrim>().enabled = true;
-            prim.GetComponent<EndGamePrim>().IsPause = false;
+            prim.GetComponent<PrimsControls>().IsPause = false;
         }
         else
         {
             darkPrim.GetComponent<CharacterMotor>().canControl = true;
             darkPrim.GetComponent<DarkPrimControls>().enabled = true;
             darkPrim.GetComponentInChildren<UIDarkPrim>().enabled = true;
-            darkPrim.GetComponent<EndGameDarkPrim>().IsPause = false;
+            darkPrim.GetComponent<DarkPrimControls>().IsPause = false;
         }
     }
 

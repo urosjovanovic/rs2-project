@@ -6,7 +6,7 @@ public class EndGamePrim : MonoBehaviour
 {
     #region Class fields
     private bool isDead = false;
-    private bool isPause = false;
+    
     private bool canExitGame = false;
 
     public bool IsDead
@@ -14,19 +14,6 @@ public class EndGamePrim : MonoBehaviour
         get
         {
             return isDead;
-        }
-    }
-
-    public bool IsPause
-    {
-        get
-        {
-            return isPause;
-        }
-
-        set
-        {
-            isPause = value;
         }
     }
 
@@ -43,45 +30,17 @@ public class EndGamePrim : MonoBehaviour
         }
     }
 
-    UnityEngine.Object pauseObject;
-
     private PhotonView view;
     #endregion
 
     void Start ()
     {
         if (!(view = this.gameObject.GetComponent<PhotonView>())) throw new NullReferenceException("PhotonView component in the script is null.");
-
-        pauseObject = Resources.Load("PauseCamera");
 	}
 	
 	// Update is called once per frame
 	void Update () 
     {
-        //activate PauseMenu
-        if (!IsPause && Input.GetKeyDown(KeyCode.Escape))
-        {
-            isPause = true;
-
-            GameObject[] cameras = GameObject.FindGameObjectsWithTag("MainCamera");
-
-            foreach (var camera in cameras)
-            {
-                camera.camera.enabled = false;
-                camera.GetComponent<GUILayer>().enabled = false;
-            }
-
-            this.gameObject.GetComponent<CharacterMotor>().canControl = false;
-            this.gameObject.GetComponent<PrimsControls>().enabled = false;
-            this.gameObject.GetComponentInChildren<UIPrim>().enabled = false;
-
-            GameObject endgGameCamera = GameObject.Find("EndGameCamera");
-            endgGameCamera.camera.enabled = false;
-
-            GameObject pauseCamera = (GameObject)Instantiate(pauseObject);
-            pauseCamera.GetComponent<PauseScript>().calledByPrim = true;
-        }
-
         if(CanExitGame)
         {
             view.RPC("LoseThisGame", PhotonTargets.Others, null);
