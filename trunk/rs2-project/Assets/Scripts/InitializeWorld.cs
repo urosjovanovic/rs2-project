@@ -350,8 +350,8 @@ public class InitializeWorld : MonoBehaviour
                 PhotonNetwork.player.name = player.tag;
 
                 //global
-    
-                ((MonoBehaviour)player.GetComponent("FPSInputController")).enabled = true;
+
+                player.GetComponent<FPSInputController>().enabled = true;
                 //((MonoBehaviour)player.GetComponent ("MouseLook")).enabled = true;
                 player.transform.FindChild("MainCamera").GetComponent<AudioSource>().enabled = true;
                 player.transform.FindChild("MainCamera").gameObject.camera.enabled = true;
